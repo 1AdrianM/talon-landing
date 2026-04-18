@@ -219,8 +219,9 @@ const data = await response.json();
 </footer>
 
 <script>
-// Demo uses internal backend without auth
+// Demo uses internal backend
 const DEMO_URL = 'https://api-talon.fly.dev/demo';
+const DEMO_API_KEY = 'demo_test_2024'; // Could use import.meta.env.PUBLIC_DEMO_KEY
 
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('extract-btn');
@@ -247,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(`${DEMO_URL}/track-product`, {
         method: 'POST',
         headers: {
-          'X-Api-Key': 'demo_test_2024',
+          'x-api-key': DEMO_API_KEY,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
