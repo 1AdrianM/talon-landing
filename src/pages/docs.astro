@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const authExample = `fetch("https://api-talon.fly.dev/products/track-product", {
+const authExample = `fetch("https://price-tracking-api.p.rapidapi.com/track-product", {
   method: "POST",
   headers: {
-    "Authorization": "Bearer YOUR_API_KEY",
+    "X-RapidAPI-Key": "YOUR_API_KEY",
+    "X-RapidAPI-Host": "price-tracking-api.p.rapidapi.com",
     "Content-Type": "application/json"
   },
   body: JSON.stringify({
@@ -124,7 +125,7 @@ const notFoundError = `{
         
         <div class="base-url">
           <h3>Base URL</h3>
-          <code>https://api-talon.fly.dev</code>
+          <code>https://price-tracking-api.p.rapidapi.com</code>
         </div>
       </section>
 
