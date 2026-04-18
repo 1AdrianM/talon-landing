@@ -241,11 +241,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     btn.disabled = true;
-    btn.textContent = 'Testing...';
-    output.innerHTML = '<code class="loading">Testing price extraction...</code>';
+    btn.textContent = 'Creating tracker...';
+    output.innerHTML = '<code class="loading">Creating product tracker...</code>';
     
     try {
-      const response = await fetch(`${DEMO_URL}/track-product`, {
+      // Step 1: Create product tracker
+      const trackResponse = await fetch(`${DEMO_URL}/track-product`, {
         method: 'POST',
         headers: {
           'x-api-key': DEMO_API_KEY,
@@ -257,12 +258,34 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       });
       
-      const data = await response.json();
+      const trackData = await trackResponse.json();
       
-      if (response.ok) {
-        output.innerHTML = '<code>' + JSON.stringify(data, null, 2) + '</code>';
+      if (!trackResponse.ok) {
+        output.innerHTML = '<code class="error">' + JSON.stringify(trackData, null, 2) + '</code>';
+        btn.disabled = false;
+        btn.textContent = 'Test Price Extraction';
+        return;
+      }
+      
+      const productId = trackData.id;
+      
+      // Step 2: Get product price data
+      btn.textContent = 'Fetching price...';
+      output.innerHTML = '<code class="loading">Fetching price data...</code>';
+      
+      const productResponse = await fetch(`${DEMO_URL}/product/${productId}`, {
+        method: 'GET',
+        headers: {
+          'x-api-key': DEMO_API_KEY
+        }
+      });
+      
+      const productData = await productResponse.json();
+      
+      if (productResponse.ok) {
+        output.innerHTML = '<code>' + JSON.stringify(productData, null, 2) + '</code>';
       } else {
-        output.innerHTML = '<code class="error">' + JSON.stringify(data, null, 2) + '</code>';
+        output.innerHTML = '<code class="error">' + JSON.stringify(productData, null, 2) + '</code>';
       }
     } catch (err) {
       output.innerHTML = '<code class="error">Could not connect to API: ' + err.message + '</code>';
