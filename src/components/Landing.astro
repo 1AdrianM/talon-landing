@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.textContent = 'Fetching price...';
       output.innerHTML = '<code class="loading">Fetching price data...</code>';
       
-      const productResponse = await fetch(`${API_URL}/product/${productId}`, {
+      const productResponse = await fetch(`${API_URL}/products/product/${productId}`, {
         method: 'GET',
         headers: {
           'x-api-key': DEMO_API_KEY
