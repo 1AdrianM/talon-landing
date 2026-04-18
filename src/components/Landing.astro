@@ -219,8 +219,8 @@ const data = await response.json();
 </footer>
 
 <script>
-const API_KEY = 'demo_test_2024';
-const API_URL = 'https://api-talon.fly.dev/demo'; // Internal demo endpoint
+// Demo uses internal backend without auth
+const DEMO_URL = 'https://api-talon.fly.dev/demo';
 
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('extract-btn');
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
     output.innerHTML = '<code class="loading">Testing price extraction...</code>';
     
     try {
-      const response = await fetch(`${API_URL}/track-product`, {
+      const response = await fetch(`${DEMO_URL}/track-product`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
