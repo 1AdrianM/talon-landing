@@ -221,6 +221,7 @@ const data = await response.json();
 <script>
 // Demo uses internal backend
 const DEMO_URL = 'https://api-talon.fly.dev/demo';
+const API_URL="https://api-talon.fly.dev";
 const DEMO_API_KEY = 'demo_test_2024'; // Could use import.meta.env.PUBLIC_DEMO_KEY
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -273,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.textContent = 'Fetching price...';
       output.innerHTML = '<code class="loading">Fetching price data...</code>';
       
-      const productResponse = await fetch(`${DEMO_URL}/product/${productId}`, {
+      const productResponse = await fetch(`${API_URL}/product/${productId}`, {
         method: 'GET',
         headers: {
           'x-api-key': DEMO_API_KEY
