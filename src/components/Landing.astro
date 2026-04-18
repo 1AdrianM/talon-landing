@@ -247,6 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(`${DEMO_URL}/track-product`, {
         method: 'POST',
         headers: {
+          'X-Api-Key': 'demo_test_2024',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
