@@ -33,7 +33,8 @@ const jsCodePreview = `const response = await fetch("https://price-tracking-api.
   method: "POST",
   headers: {
     "X-RapidAPI-Key": "YOUR_API_KEY",
-    "X-RapidAPI-Host": "price-tracking-api.p.rapidapi.com"
+    "X-RapidAPI-Host": "price-tracking-api.p.rapidapi.com",
+    "Content-Type": "application/json"
   },
   body: JSON.stringify({
     "url": "https://competitor.com/product/123",
@@ -219,7 +220,7 @@ const data = await response.json();
 
 <script>
 const API_KEY = 'demo_test_2024';
-const API_URL = 'https://price-tracking-api.p.rapidapi.com';
+const API_URL = 'https://api-talon.fly.dev/demo'; // Internal demo endpoint
 
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('extract-btn');
@@ -246,8 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(`${API_URL}/track-product`, {
         method: 'POST',
         headers: {
-          'X-RapidAPI-Key': API_KEY,
-          'X-RapidAPI-Host': 'price-tracking-api.p.rapidapi.com',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
