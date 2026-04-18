@@ -1,0 +1,344 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const authExample = `fetch("https://api-talon.fly.dev/products/track-product", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    "url": "https://example.com/product/123",
+    "selector": ".price"
+  })
+})`;
+
+const trackRequest = `{
+  "url": "https://example.com/product/123", // required
+  "selector": ".price",           // required
+  "webhook_url": "https://example.com/webhook" // optional
+}`;
+
+const trackResponse = `{
+  "id": "550e8400-e29b-41d4-a716-446655440000"
+}`;
+
+const getProductResponse = `{
+  "price": 1299.00,
+  "previous": 1399.00,
+  "changed": true,
+  "changeType": "price_drop",
+  "lastChecked": "2026-04-13T10:00:00Z",
+  "firstScrape": false,
+  "message": null
+}`;
+
+const updateRequest = `{
+  "selector": ".new-price-selector" // optional
+}`;
+
+const updateResponse = `{
+  "success": true
+}`;
+
+const historyResponse = `{
+  "history": [
+    { "price": 1299.00, "checkedAt": "2026-04-13T10:00:00Z" },
+    { "price": 1399.00, "checkedAt": "2026-04-13T09:00:00Z" },
+    { "price": 1499.00, "checkedAt": "2026-04-13T08:00:00Z" }
+  ]
+}`;
+
+const webhookPayload = `{
+  "event": "price_change",
+  "productId": "550e8400-e29b-41d4-a716-446655440000",
+  "url": "https://example.com/product/123",
+  "price": 1199.00,
+  "previous": 1299.00,
+  "changeType": "price_drop",
+  "timestamp": "2026-04-13T10:00:00Z"
+}`;
+
+const validationError = `{
+  "statusCode": 400,
+  "message": ["url must be a URL", "selector should not be empty"],
+  "error": "Bad Request"
+}`;
+
+const notFoundError = `{
+  "statusCode": 404,
+  "message": "Product not found",
+  "error": "Not Found"
+}`;
+---
+
+<Layout title="Talon - API Docs">
+  <nav>
+    <div class="container">
+      <a href="/" class="logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M4 14L14 4L24 14L14 24L4 14Z" fill="url(#grad)" />
+          <path d="M9 14L14 9L19 14L14 19L9 14Z" fill="#0a0e27" />
+          <defs>
+            <linearGradient id="grad" x1="4" y1="4" x2="24" y2="24">
+              <stop stop-color="#06b6d4" />
+              <stop offset="1" stop-color="#7c3aed" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>TALON</span>
+      </a>
+      <div class="nav-right">
+        <a href="/" class="nav-link">Home</a>
+        <a href="#introduction" class="nav-link">Docs</a>
+        <a href="#" class="btn-primary">Get API Key</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Getting Started</h3>
+        <a href="#introduction">Introduction</a>
+        <a href="#authentication">Authentication</a>
+      </div>
+      <div class="sidebar-section">
+        <h3>Endpoints</h3>
+        <a href="#track-product">POST /products/track-product</a>
+        <a href="#get-product">GET /products/product/:id</a>
+        <a href="#update-product">PATCH /products/product/:id</a>
+        <a href="#product-history">GET /products/product/:id/history</a>
+      </div>
+      <div class="sidebar-section">
+        <h3>Extras</h3>
+        <a href="#webhooks">Webhooks</a>
+        <a href="#errors">Errors</a>
+      </div>
+    </aside>
+
+    <main class="docs-content">
+      <section id="introduction" class="docs-section">
+        <h1>API Reference</h1>
+        <p class="intro">Talon provides a simple REST API for tracking competitor product prices. All responses are returned in JSON format.</p>
+        
+        <div class="base-url">
+          <h3>Base URL</h3>
+          <code>https://api-talon.fly.dev</code>
+        </div>
+      </section>
+
+      <section id="authentication" class="docs-section">
+        <h2>Authentication</h2>
+        <p>All API requests require an API key passed in the Authorization header:</p>
+        <div class="code-example">
+          <div class="code-header">Example Request</div>
+          <pre><code>{authExample}</code></pre>
+        </div>
+      </section>
+
+      <section id="track-product" class="docs-section">
+        <div class="endpoint-header">
+          <span class="method post">POST</span>
+          <span class="path">/products/track-product</span>
+        </div>
+        <h3>Track a new product</h3>
+        <p>Add a new product URL and CSS selector to the tracking system. Returns a product ID that can be used to query price data.</p>
+        
+        <div class="request-body">
+          <h4>Request Body</h4>
+          <div class="code-example">
+            <pre><code>{trackRequest}</code></pre>
+          </div>
+        </div>
+
+        <div class="response">
+          <h4>Response</h4>
+          <div class="code-example">
+            <pre><code>{trackResponse}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="get-product" class="docs-section">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <span class="path">/products/product/:id</span>
+        </div>
+        <h3>Get product price and change status</h3>
+        <p>Retrieve the current price, previous price, and change detection for a tracked product.</p>
+        
+        <div class="parameters">
+          <h4>Parameters</h4>
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>id</code></td><td>string</td><td>Product ID (UUID) — path required</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="response">
+          <h4>Response</h4>
+          <div class="code-example">
+            <pre><code>{getProductResponse}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="update-product" class="docs-section">
+        <div class="endpoint-header">
+          <span class="method patch">PATCH</span>
+          <span class="path">/products/product/:id</span>
+        </div>
+        <h3>Update product configuration</h3>
+        <p>Update the selector or webhook_url for an existing tracked product.</p>
+        
+        <div class="request-body">
+          <h4>Request Body</h4>
+          <div class="code-example">
+            <pre><code>{updateRequest}</code></pre>
+          </div>
+        </div>
+
+        <div class="response">
+          <h4>Response</h4>
+          <div class="code-example">
+            <pre><code>{updateResponse}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="product-history" class="docs-section">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <span class="path">/products/product/:id/history</span>
+        </div>
+        <h3>Get product price history</h3>
+        <p>Retrieve the price change history for a tracked product. Returns up to 50 of the most recent price records.</p>
+        
+        <div class="parameters">
+          <h4>Parameters</h4>
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Type</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>id</code></td><td>string</td><td>Product ID (UUID) — path required</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="response">
+          <h4>Response</h4>
+          <div class="code-example">
+            <pre><code>{historyResponse}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="webhooks" class="docs-section">
+        <h2>Webhooks</h2>
+        <p>Configure a webhook URL when tracking a product to receive real-time notifications when prices change.</p>
+        
+        <div class="code-example">
+          <h4>Webhook Payload</h4>
+          <pre><code>{webhookPayload}</code></pre>
+        </div>
+      </section>
+
+      <section id="errors" class="docs-section">
+        <h2>Error Responses</h2>
+        
+        <div class="error-card">
+          <div class="error-header">
+            <span class="status">400</span>
+            <span class="name">ValidationError</span>
+          </div>
+          <p>Invalid input - validation error</p>
+          <div class="code-example">
+            <pre><code>{validationError}</code></pre>
+          </div>
+        </div>
+
+        <div class="error-card">
+          <div class="error-header">
+            <span class="status">404</span>
+            <span class="name">NotFoundError</span>
+          </div>
+          <p>Product not found</p>
+          <div class="code-example">
+            <pre><code>{notFoundError}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style>
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; background: rgba(10, 14, 39, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(148, 163, 184, 0.08); }
+.container { max-width: 1400px; margin: 0 auto; }
+nav .container { display: flex; justify-content: space-between; align-items: center; }
+
+.logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.1rem; color: #f1f5f9; text-decoration: none; }
+.logo span { background: linear-gradient(135deg, #06b6d4, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.nav-link { color: #94a3b8; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+.nav-link:hover { color: #f1f5f9; }
+
+.btn-primary { background: linear-gradient(135deg, #06b6d4, #7c3aed); color: #fff; text-decoration: none; padding: 0.6rem 1.25rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; }
+
+.docs-layout { display: flex; padding-top: 5rem; min-height: 100vh; }
+.sidebar { width: 240px; flex-shrink: 0; padding: 2rem; position: sticky; top: 5rem; height: fit-content; }
+.sidebar-section { margin-bottom: 2rem; }
+.sidebar-section h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-bottom: 0.75rem; }
+.sidebar-section a { display: block; color: #94a3b8; text-decoration: none; font-size: 0.875rem; padding: 0.4rem 0; transition: color 0.2s; }
+.sidebar-section a:hover { color: #f1f5f9; }
+
+.docs-content { flex: 1; padding: 2rem 4rem 4rem; max-width: 900px; }
+.docs-section { margin-bottom: 4rem; scroll-margin-top: 6rem; }
+
+.docs-section h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+.docs-section h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; padding-top: 2rem; border-top: 1px solid rgba(148, 163, 184, 0.1); }
+.docs-section h2:first-of-type { border-top: none; padding-top: 0; }
+.docs-section h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; }
+.docs-section h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin: 1.5rem 0 0.75rem; }
+
+.intro { color: #94a3b8; font-size: 1.1rem; line-height: 1.7; }
+.base-url { background: rgba(255,255,255,0.02); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 8px; padding: 1rem 1.25rem; }
+.base-url h3 { font-size: 0.8rem; color: #64748b; margin-bottom: 0.5rem; }
+.base-url code { font-family: 'Space Mono', monospace; color: #06b6d4; }
+
+.endpoint-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+.method { padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; font-family: 'Space Mono', monospace; text-transform: uppercase; }
+.method.post { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+.method.get { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.method.patch { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.path { font-family: 'Space Mono', monospace; font-size: 0.9rem; color: #e2e8f0; }
+
+.code-example { background: #0d1117; border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 8px; overflow: hidden; margin-top: 1rem; }
+.code-header { display: flex; align-items: center; padding: 0.6rem 1rem; background: rgba(148, 163, 184, 0.05); border-bottom: 1px solid rgba(148, 163, 184, 0.08); font-size: 0.8rem; color: #64748b; }
+.code-example pre { padding: 1rem 1.25rem; margin: 0; overflow-x: auto; }
+.code-example code { font-family: 'Space Mono', monospace; font-size: 0.8rem; line-height: 1.7; color: #e2e8f0; white-space: pre-wrap; }
+
+.parameters table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.parameters th, .parameters td { text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(148, 163, 184, 0.1); }
+.parameters th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; }
+.parameters td { font-size: 0.9rem; }
+.parameters code { font-family: 'Space Mono', monospace; background: rgba(148, 163, 184, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; }
+
+.error-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(148, 163, 184, 0.1); border-radius: 8px; padding: 1.25rem; margin-top: 1rem; }
+.error-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+.error-header .status { background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+.error-header .name { font-weight: 600; }
+.error-card p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 0.75rem; }
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .docs-content { padding: 2rem; }
+}
+</style>
