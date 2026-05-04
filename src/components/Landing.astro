@@ -5,21 +5,42 @@
     </div>
     <span class="logo-name">Talon</span>
   </div>
-  <button class="nav-cta" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Analyze your product →</button>
+  <div class="nav-right">
+    <button class="nav-cta" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Analyze your product →</button>
+  </div>
 </nav>
+
+<div class="sticky-cta" id="sticky-cta">
+  <span class="sticky-text">Stop losing sales to competitors</span>
+  <button class="btn-primary btn-sm" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
+    Analyze now →
+  </button>
+</div>
 
 <section class="hero">
   <div class="hero-eyebrow">Real-time pricing intelligence</div>
   <h1>Know exactly why your competitors change prices — <em>and what to do about it.</em></h1>
   <p class="hero-sub">Talon analyzes competitor pricing in real time and tells you the best move — before you lose sales.</p>
+
   <p class="hero-icp"><span>Shopify stores</span><span>Amazon sellers</span><span>DTC brands</span></p>
+
   <div class="cta-group">
-    <button class="btn-primary" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
+    <button class="btn-primary btn-lg" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
       <span class="arr">→</span> Analyze your product
     </button>
     <span class="cta-note">No signup required · Get results in seconds</span>
   </div>
 </section>
+
+<div class="logos-bar">
+  <span class="logos-label">Works with your stack</span>
+  <div class="logos-track">
+    <span>Shopify</span>
+    <span>WooCommerce</span>
+    <span>BigCommerce</span>
+    <span>Magento</span>
+  </div>
+</div>
 
 <hr class="divider"/>
 
@@ -89,7 +110,7 @@
         </div>
         <div class="uc-suggestion">
           <div class="uc-sug-label">Talon suggests</div>
-          <div class="uc-sug-action">Match price to recover lost sales <span>→</span></div>
+          <div class="uc-sug-action" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Match price to recover lost sales <span>→</span></div>
         </div>
       </div>
     </div>
@@ -112,7 +133,7 @@
         </div>
         <div class="uc-suggestion">
           <div class="uc-sug-label">Talon suggests</div>
-          <div class="uc-sug-action">Adjust price to regain competitiveness <span>→</span></div>
+          <div class="uc-sug-action" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Adjust price to regain competitiveness <span>→</span></div>
         </div>
       </div>
     </div>
@@ -135,7 +156,7 @@
         </div>
         <div class="uc-suggestion">
           <div class="uc-sug-label">Talon suggests</div>
-          <div class="uc-sug-action">Increase price while staying competitive <span>→</span></div>
+          <div class="uc-sug-action" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Increase price while staying competitive <span>→</span></div>
         </div>
       </div>
     </div>
@@ -311,15 +332,63 @@
 
 <hr class="divider"/>
 
+<section class="faq-section">
+  <div class="sec-header">
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-title">Questions?<br/><em>We've got answers.</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Is this really free?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Yes, the basic analysis is completely free with no signup required. We offer premium features for stores that need continuous monitoring and alerts.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>How accurate is the analysis?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Our AI model achieves 98% accuracy on price change detection and 91% confidence on pricing recommendations based on market position analysis.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Which platforms do you support?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        We support all major e-commerce platforms including Shopify, Amazon, WooCommerce, BigCommerce, Magento, and any custom store with a product URL.
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>How often do you check competitor prices?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Free users get on-demand analysis. Premium users get real-time monitoring with alerts within 15 minutes of any competitor price change.
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
 <section class="final">
   <p class="final-kicker">Right now, while you're reading this — <span>your competitors are moving.</span></p>
   <h2>Stop reacting late.<br/>Start pricing with context.</h2>
   <div class="cta-group">
-    <button class="btn-primary" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
+    <button class="btn-primary btn-lg" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
       <span class="arr">→</span> Analyze your product now
     </button>
     <span class="cta-note">No signup required · Get results in seconds</span>
   </div>
+  <p class="final-guarantee">🔒 Your data is secure. We don't store your product data.</p>
 </section>
 
 <footer>
@@ -330,6 +399,11 @@
     Talon
   </div>
   <span class="footer-tagline">Pricing Intelligence Engine · Built for real-time decisions</span>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+  </div>
 </footer>
 
 <script>
@@ -394,6 +468,37 @@ function submitCapture() {
   if (!email) { document.getElementById('capture-email').focus(); return; }
   block.innerHTML = '<p style="font-family:var(--mono);font-size:12px;color:var(--grn);text-align:center;padding:16px 0">✓ Saved — we\'ll alert you when this changes.</p>';
 }
+
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  item.classList.toggle('open');
+  const icon = btn.querySelector('.faq-icon');
+  icon.textContent = item.classList.contains('open') ? '−' : '+';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.what-item, .how-step, .testimonial, .faq-item, .pillar, .uc-card').forEach(el => {
+    el.classList.add('fade-in');
+    observer.observe(el);
+  });
+
+  const stickyCta = document.getElementById('sticky-cta');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      stickyCta.classList.add('show');
+    } else {
+      stickyCta.classList.remove('show');
+    }
+  });
+});
 </script>
 
 <style>
@@ -401,8 +506,14 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .nav-logo{display:flex;align-items:center;gap:9px}
 .logo-mark{width:26px;height:26px;background:var(--t1);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .logo-name{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.3px}
-.nav-cta{font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s;letter-spacing:-0.1px}
-.nav-cta:hover{opacity:0.88}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-cta{font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.1px}
+.nav-cta:hover{opacity:0.88;transform:translateY(-1px)}
+
+.sticky-cta{position:fixed;bottom:-80px;left:0;right:0;z-index:99;display:flex;align-items:center;justify-content:center;gap:20px;padding:16px 20px;background:var(--bg2);border-top:1px solid var(--border);transition:bottom .3s ease}
+.sticky-cta.show{bottom:0}
+.sticky-text{font-size:14px;color:var(--t2)}
+.btn-sm{font-size:13px;padding:8px 16px}
 
 section{padding:96px 40px;max-width:860px;margin:0 auto}
 section.full{max-width:100%;padding-left:0;padding-right:0}
@@ -413,17 +524,30 @@ section.full{max-width:100%;padding-left:0;padding-right:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
 h1{font-family:var(--display);font-size:clamp(36px,5.5vw,60px);font-weight:800;letter-spacing:-1.5px;line-height:1.08;color:var(--t1);margin-bottom:22px;max-width:720px;margin-left:auto;margin-right:auto}
 h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.25)}
-.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--t2);max-width:520px;margin:0 auto 40px;line-height:1.65;font-weight:400}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--t2);max-width:520px;margin:0 auto 32px;line-height:1.65;font-weight:400}
+
+.hero-badges{display:flex;justify-content:center;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+.hero-badge{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 20px;background:var(--bg1);border:1px solid var(--border);border-radius:10px}
+.badge-num{font-family:var(--display);font-size:20px;font-weight:700;color:var(--t1)}
+.badge-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px}
+
 .cta-group{display:flex;flex-direction:column;align-items:center;gap:12px}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.2px}
 .btn-primary:hover{opacity:0.88;transform:translateY(-1px)}
 .btn-primary .arr{font-size:16px;transition:transform .15s}
 .btn-primary:hover .arr{transform:translateX(3px)}
+.btn-lg{padding:16px 32px;font-size:16px}
 .cta-note{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px}
-.hero-icp{display:flex;align-items:center;justify-content:center;gap:16px;font-family:var(--mono);font-size:11.5px;color:var(--t3);letter-spacing:0.2px;margin-bottom:36px;flex-wrap:wrap}
+.hero-icp{display:flex;align-items:center;justify-content:center;gap:16px;font-family:var(--mono);font-size:11.5px;color:var(--t3);letter-spacing:0.2px;margin-bottom:24px;flex-wrap:wrap}
 .hero-icp span{display:inline-flex;align-items:center;gap:6px;color:var(--t2)}
 .hero-icp span::before{content:'·';color:var(--t3)}
 .hero-icp span:first-child::before{display:none}
+.hero-Trust{font-family:var(--mono);font-size:12px;color:var(--t3);margin-top:32px}
+
+.logos-bar{display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px 20px;background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.logos-label{font-family:var(--mono);font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.logos-track{display:flex;gap:32px;flex-wrap:wrap;justify-content:center}
+.logos-track span{font-family:var(--display);font-size:16px;font-weight:600;color:var(--t2);letter-spacing:-0.5px}
 
 .problem-block{border:1px solid var(--border);border-radius:12px;background:var(--bg1);padding:52px 56px;text-align:center}
 .problem-block p{font-size:clamp(17px,2.2vw,21px);line-height:1.7;color:var(--t2);max-width:560px;margin:0 auto}
@@ -431,14 +555,16 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(255,255,2
 .problem-block .punch{font-family:var(--display);font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--red);letter-spacing:-0.5px;margin-top:24px;text-shadow:0 0 32px var(--red-glow)}
 
 .what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.what-item{background:var(--bg1);padding:32px 28px;display:flex;flex-direction:column;gap:10px}
+.what-item{background:var(--bg1);padding:32px 28px;display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+.what-item.visible{opacity:1;transform:translateY(0)}
 .what-num{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:1px}
 .what-title{font-family:var(--display);font-size:20px;font-weight:600;color:var(--t1);letter-spacing:-0.3px}
 .what-desc{font-size:13.5px;color:var(--t2);line-height:1.6}
 
 .uc-heading{font-family:var(--display);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--t3);margin-bottom:40px}
 .uc-list{display:flex;flex-direction:column;gap:2px}
-.uc-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg1)}
+.uc-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg1);opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+.uc-card.visible{opacity:1;transform:translateY(0)}
 .uc-left{padding:36px 36px;border-right:1px solid var(--border)}
 .uc-right{padding:36px 36px;background:var(--bg2)}
 .uc-scenario{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px}
@@ -468,12 +594,27 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(255,255,2
 .tool-run:hover{opacity:0.88}
 
 .how-steps{display:flex;flex-direction:column;gap:0}
-.how-step{display:grid;grid-template-columns:52px 1fr;gap:20px;padding:28px 0;border-bottom:1px solid var(--border)}
+.how-step{display:grid;grid-template-columns:52px 1fr;gap:20px;padding:28px 0;border-bottom:1px solid var(--border);opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease}
+.how-step.visible{opacity:1;transform:translateX(0)}
 .how-step:last-child{border-bottom:none}
 .step-num{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--t3);padding-top:2px}
 .step-body{display:flex;flex-direction:column;gap:4px}
 .step-title{font-family:var(--display);font-size:18px;font-weight:600;color:var(--t1);letter-spacing:-0.3px}
 .step-desc{font-size:13.5px;color:var(--t2);line-height:1.6}
+
+.testimonials{text-align:center}
+.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.testimonial{background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:28px;text-align:left;display:flex;flex-direction:column;gap:16px;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+.testimonial.visible{opacity:1;transform:translateY(0)}
+.testimonial-quote{font-size:14px;color:var(--t2);line-height:1.65;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.author-avatar{width:40px;height:40px;background:var(--bg3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
+.author-info{}
+.author-name{font-size:14px;font-weight:600;color:var(--t1)}
+.author-role{font-family:var(--mono);font-size:11px;color:var(--t3)}
+.testimonial-stat{background:var(--bg2);border-radius:8px;padding:12px 16px;display:flex;align-items:baseline;gap:8px}
+.testimonial-stat .stat-value{font-family:var(--display);font-size:24px;font-weight:700;color:var(--grn)}
+.testimonial-stat .stat-label{font-family:var(--mono);font-size:11px;color:var(--t3)}
 
 .why-block{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .why-cell{background:var(--bg1);padding:36px 32px;display:flex;flex-direction:column;gap:10px}
@@ -483,19 +624,35 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(255,255,2
 .why-cell-title.bright{color:var(--t1)}
 
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.pillar{padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;display:flex;flex-direction:column;gap:8px}
+.pillar{padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;display:flex;flex-direction:column;gap:8px;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+.pillar.visible{opacity:1;transform:translateY(0)}
 .pillar-icon{font-size:18px}
 .pillar-title{font-size:14px;font-weight:500;color:var(--t1)}
 .pillar-desc{font-size:12.5px;color:var(--t2);line-height:1.55}
+
+.faq-section{}
+.faq-list{display:flex;flex-direction:column;gap:2px}
+.faq-item{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--bg1);opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease}
+.faq-item.visible{opacity:1;transform:translateY(0)}
+.faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:none;border:none;color:var(--t1);font-size:15px;font-weight:500;text-align:left;cursor:pointer;transition:background .2s}
+.faq-question:hover{background:var(--bg2)}
+.faq-icon{font-size:20px;color:var(--t2);transition:transform .2s}
+.faq-answer{display:none;padding:0 24px 20px;font-size:14px;color:var(--t2);line-height:1.65}
+.faq-item.open .faq-answer{display:block}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
 
 .final{text-align:center;padding-top:80px;padding-bottom:120px;border-top:1px solid var(--border)}
 .final-kicker{font-family:var(--mono);font-size:13px;color:var(--t2);margin-bottom:16px}
 .final-kicker span{color:var(--red)}
 .final h2{font-family:var(--display);font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin-bottom:36px;max-width:580px;margin-left:auto;margin-right:auto}
+.final-guarantee{font-family:var(--mono);font-size:12px;color:var(--t3);margin-top:24px}
 
-footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between}
+footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .footer-logo{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
-.footer-tagline{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px}
+.footer-tagline{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px;flex:1}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-family:var(--mono);font-size:11px;color:var(--t3);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--t2)}
 
 .sec-header{margin-bottom:48px}
 .sec-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--t3);margin-bottom:12px}
@@ -560,6 +717,12 @@ footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-i
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
 
+@media (max-width: 768px) {
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .hero-badges { gap: 12px; }
+  .logos-track { gap: 20px; }
+}
+
 @media (max-width: 640px) {
   nav { padding: 0 20px; }
   section { padding: 64px 20px; }
@@ -570,8 +733,11 @@ footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-i
   .tool-inputs { grid-template-columns: 1fr; }
   .why-block { grid-template-columns: 1fr; }
   .pillars { grid-template-columns: 1fr; }
-  footer { flex-direction: column; gap: 12px; text-align: center; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-links { justify-content: center; }
   .hero-icp { flex-direction: column; gap: 8px; }
   .hero-icp span::before { display: none; }
+  .sticky-cta { flex-direction: column; gap: 12px; }
+  .hero-badges { flex-direction: column; align-items: center; }
 }
 </style>
