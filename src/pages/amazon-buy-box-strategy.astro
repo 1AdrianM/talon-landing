@@ -1,0 +1,304 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogPost from '../components/BlogPost.astro';
+
+const title = "Amazon Buy Box Strategy: Price Monitoring Guide for Sellers";
+const description = "Learn how to win and keep the Amazon Buy Box. Monitor competitor prices in real time, protect your position, and stop losing sales to lower-priced rivals.";
+---
+
+<Layout title={`${title} — Talon`}>
+  <BlogPost
+    title={title}
+    description={description}
+    category="Amazon"
+    readTime="5 min read"
+    updated="Jan 2026"
+  >
+    <div class="prose">
+      <p class="lead">On Amazon, you don't just compete on product — you compete on price. The Buy Box is the battleground, and price is the weapon. A competitor undercutting you by $5 can cost you the entire sale — and Amazon's algorithm doesn't care about your margins.</p>
+
+      <div class="scenario-strip">
+        <div class="sc-item">
+          <span class="sc-tag">Scenario 1</span>
+          <div class="sc-title">New FBA seller undercuts</div>
+          <div class="sc-impact sc-impact-r">Buy Box lost</div>
+          <div class="sc-desc">They drop 18% below you. Amazon switches the buy button.</div>
+        </div>
+        <div class="sc-item">
+          <span class="sc-tag">Scenario 2</span>
+          <div class="sc-title">Competitor runs flash sale</div>
+          <div class="sc-impact sc-impact-r">−50% sales</div>
+          <div class="sc-desc">24-hour deal. You're still at full price. Buy box gone.</div>
+        </div>
+        <div class="sc-item">
+          <span class="sc-tag">Scenario 3</span>
+          <div class="sc-title">You raise price strategically</div>
+          <div class="sc-impact sc-impact-g">+8% margin</div>
+          <div class="sc-desc">Competitor is higher. You keep Buy Box and earn more.</div>
+        </div>
+      </div>
+
+      <h2 id="how-it-works">How the Amazon Buy Box works</h2>
+      <p>Amazon's Buy Box algorithm favors one seller at a time. Price is the biggest factor, but not the only one. Here's the hierarchy:</p>
+
+      <div class="comparison-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr><th>Factor</th><th>Weight</th><th>You can control</th></tr>
+          </thead>
+          <tbody>
+            <tr class="hl">
+              <td><strong>Price</strong></td>
+              <td><span class="chk-yes">✓ Highest</span></td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Delivery speed</td>
+              <td>High</td>
+              <td>Partially</td>
+            </tr>
+            <tr>
+              <td> seller rating</td>
+              <td>Medium</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Inventory availability</td>
+              <td>Medium</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr/>
+
+      <h2 id="what-happens">What losing the Buy Box costs you</h2>
+      <p>When you lose the Buy Box, your listing still shows — but another seller gets the buy button. Here's the impact:</p>
+
+      <div class="tool-card">
+        <div class="tc-head">
+          <div class="tc-head-left"><span class="tc-rank">Estimated Impact</span><div class="tc-name">Buy Box Loss → Revenue</div><div class="tc-tagline">Based on typical Buy Box share patterns</div></div>
+          <div class="tc-v"><span class="v-lbl">Sales Drop</span><span class="v-badge vb-lim">Direct impact</span></div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-pc">
+            <div class="pc-col">
+              <span class="pc-lbl" style="color:var(--red-txt)">Lost Buy Box entirely</span>
+              <div class="pc-item"><span class="dot-r">→</span>~70-80% of sales go to competitor</div>
+              <div class="pc-item"><span class="dot-r">→</span>You become "Other sellers on Amazon"</div>
+            </div>
+            <div class="pc-col">
+              <span class="pc-lbl" style="color:var(--red-txt)">Price-match recovery</span>
+              <div class="pc-item"><span class="dot-r">→</span>Often too late by the time you notice</div>
+              <div class="pc-item"><span class="dot-r">→</span>24+ hours to reclaim position</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="monitoring">How to monitor competitor prices on Amazon</h2>
+      <ol class="step-list">
+        <li><strong>Identify your direct competitors</strong> — Sellers offering the same product, same condition, similar fulfillment (FBA vs FBM matters).</li>
+        <li><strong>Track your hero ASINs</strong> — Your top 10-20 ASINs that drive most revenue. These need 24/7 monitoring.</li>
+        <li><strong>Set price-change alerts</strong> — Get notified within minutes when a competitor changes their price.</li>
+        <li><strong>Automate your response</strong> — Have a rule: if competitor drops below X%, you match within Y minutes.</li>
+      </ol>
+
+      <div class="callout">
+        <p><strong>The golden rule:</strong> If you're more than 5% above the lowest competitor on your hero ASINs, you're at high risk of losing the Buy Box.</p>
+      </div>
+
+      <hr/>
+
+      <h2 id="strategy">Three Buy Box protection strategies</h2>
+
+      <div class="who-grid">
+        <div class="who-card">
+          <span class="who-tag">Aggressive</span>
+          <div class="who-title">Always be $0.01 lower</div>
+          <div class="who-desc">Keep the Buy Box at any margin. Good for volume, bad for profit.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Defensive</span>
+          <div class="who-title">Match only when at risk</div>
+          <div class="you-desc">Only lower price when competitor drops within 5%. Protect margin.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Strategic</span>
+          <div class="who-title">Win on speed, not price</div>
+          <div class="you-desc">Use fast shipping and great ratings to offset small price differences.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Smart</span>
+          <div class="who-title who-tool-grn">Real-time monitoring</div>
+          <div class="you-desc">Know the moment a competitor moves. React in minutes, not hours.</div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="speed">Why speed is everything</h2>
+      <p>Amazon's algorithm updates in minutes. A competitor drops price at 10 AM, and by noon your Buy Box share is already falling. By the time you check manually (maybe tomorrow?), you've lost a full day of sales.</p>
+
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">10:00</div><div class="tl-content"><div class="tl-event">New FBA seller drops price by 15%</div><div class="tl-sub">They're now $8 below you</div></div></div>
+        <div class="tl-row tl-bad"><div class="tl-time">10-6 PM</div><div class="tl-content"><div class="tl-event">You don't check — Buy Box shifts</div><div class="tl-sub">8 hours of lost sales</div></div></div>
+        <div class="tl-row"><div class="tl-time">Next AM</div><div class="tl-content"><div class="tl-event">Manual check: you see the drop</div><div class="tl-sub">Need to analyze and decide</div></div></div>
+        <div class="tl-row"><div class="tl-time">12:00 PM</div><div class="tl-content"><div class="tl-event">You finally adjust price</div><div class="tl-sub">26 hours late</div></div></div>
+        <div class="tl-row tl-good"><div class="tl-time">10:01</div><div class="tl-content"><div class="tl-event">With real-time: instant alert + action</div><div class="tl-sub">"Match $29.99 — Buy Box at risk"</div></div></div>
+      </div>
+
+      <hr/>
+
+      <h2 id="takeaway">Final recommendation</h2>
+      <p>If you sell on Amazon, price monitoring isn't optional — it's infrastructure. Without it, you're either losing the Buy Box to faster competitors or leaving margin on the table because you didn't know you could raise prices.</p>
+      <p><strong>Real-time monitoring with instant alerts</strong> — that's the minimum to protect your Buy Box.</p>
+
+      <div class="article-cta">
+        <div class="cta-left">
+          <span class="cta-eyebrow">Free analysis — no signup</span>
+          <div class="cta-title">Check your Buy Box position now</div>
+          <div class="cta-sub">Paste your Amazon product and a competitor. Get instant gap analysis and Buy Box risk assessment.</div>
+        </div>
+        <div class="cta-right">
+          <a href="/#tool" class="cta-btn">→ Analyze now</a>
+          <span class="cta-note">No account · No credit card</span>
+        </div>
+      </div>
+    </div>
+
+    <div slot="sidebar">
+      <div class="sidebar-cta">
+        <span class="sb-title">Protect your Buy Box</span>
+        <div class="sb-desc">Paste your Amazon product and a competitor. Get real-time gap and Buy Box risk.</div>
+        <a href="/#tool" class="sb-btn">→ Analyze now</a>
+        <span class="sb-note">No signup · No credit card</span>
+      </div>
+
+      <div class="sidebar-toc">
+        <div class="sb-lbl">In this guide</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#how-it-works"><span class="toc-num">01</span>How Buy Box works</a></li>
+          <li class="toc-item"><a href="#what-happens"><span class="toc-num">02</span>Cost of losing</a></li>
+          <li class="toc-item"><a href="#monitoring"><span class="toc-num">03</span>How to monitor</a></li>
+          <li class="toc-item"><a href="#strategy"><span class="toc-num">04</span>Protection strategies</a></li>
+          <li class="toc-item"><a href="#speed"><span class="toc-num">05</span>Why speed matters</a></li>
+          <li class="toc-item"><a href="#takeaway"><span class="toc-num">06</span>Recommendation</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-related">
+        <div class="sb-lbl">Related articles</div>
+        <div class="rel-list">
+          <div class="rel-item"><span class="rel-cat">Tools</span><a href="/best-amazon-price-tracking-tools" class="rel-title">Best Amazon Price Tracking Tools</a></div>
+          <div class="rel-item"><span class="rel-cat">Strategy</span><a href="/best-competitor-price-tracking-tools" class="rel-title">Best Price Tracking Tools</a></div>
+          <div class="rel-item"><span class="rel-cat">Shopify</span><a href="/shopify-competitor-monitoring-guide" class="rel-title">Shopify Monitoring Guide</a></div>
+        </div>
+      </div>
+    </div>
+  </BlogPost>
+</Layout>
+
+<style>
+.prose{display:flex;flex-direction:column;gap:0}
+.prose h2{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:-0.4px;color:var(--t1);margin:48px 0 16px;line-height:1.25;scroll-margin-top:80px}
+.prose p{color:var(--t2);margin-bottom:18px;font-size:var(--body-size);line-height:var(--body-lh)}
+.prose strong{color:var(--t1);font-weight:600}
+.prose hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.prose ol{list-style:none;counter-reset:steps;display:flex;flex-direction:column;gap:16px;padding:0}
+
+.lead{font-size:19px;color:var(--t2);line-height:1.65;margin-bottom:24px}
+
+.scenario-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:0 0 40px}
+.sc-item{background:var(--bg1);padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.sc-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3)}
+.sc-title{font-size:15px;font-weight:600;color:var(--t1);letter-spacing:-0.1px}
+.sc-impact{font-family:var(--mono);font-size:13px;font-weight:500;padding:3px 9px;border-radius:4px;width:fit-content;margin-top:2px}
+.sc-impact-r{background:var(--red-lo);color:var(--red-txt);border:1px solid var(--red-bd)}
+.sc-impact-g{background:var(--grn-lo);color:var(--grn-txt);border:1px solid var(--grn-bd)}
+.sc-desc{font-size:13px;color:var(--t3);line-height:1.5}
+
+.comparison-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin:0 0 40px}
+.comparison-table{width:100%;border-collapse:collapse;font-size:14px}
+.comparison-table thead tr{background:var(--bg2)}
+.comparison-table th{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);padding:12px 18px;text-align:left}
+.comparison-table td{padding:13px 18px;color:var(--t2)}
+.comparison-table td:first-child{color:var(--t1);font-weight:500}
+.hl{background:var(--bg2)}
+.chk-yes{color:var(--grn-txt)}
+
+.tool-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:28px 0;background:var(--bg1)}
+.tc-head{padding:22px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:16px}
+.tc-head-left{display:flex;flex-direction:column;gap:5px}
+.tc-rank{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.tc-name{font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:-0.3px;color:var(--t1)}
+.tc-tagline{font-size:13.5px;color:var(--t2);margin-top:2px}
+.tc-v{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.v-lbl{font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.v-badge{font-family:var(--mono);font-size:12px;font-weight:500;padding:4px 11px;border-radius:5px;background:var(--bg3);color:var(--t3);border:1px solid var(--border)}
+.tc-body{padding:22px 24px;display:flex;flex-direction:column;gap:16px}
+.tc-pc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pc-col{display:flex;flex-direction:column;gap:8px}
+.pc-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px}
+.pc-item{display:flex;align-items:flex-start;gap:7px;font-size:13px;color:var(--t2);line-height:1.5}
+.dot-r{color:var(--red-txt);font-size:11px;margin-top:3px}
+
+.step-list{list-style:none;counter-reset:steps;display:flex;flex-direction:column;gap:18px;padding:0;margin:24px 0}
+.step-list li{counter-increment:steps;display:flex;align-items:flex-start;gap:14px;font-size:14.5px;color:var(--t2);line-height:1.6}
+.step-list li strong{color:var(--t1);font-weight:600}
+
+.callout{background:var(--bg2);border:1px solid var(--border-md);border-left:3px solid var(--amb-txt);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{color:var(--t2);font-size:15px;line-height:1.6;margin:0}
+.callout strong{color:var(--t1)}
+
+.who-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:24px 0}
+.who-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.who-tag{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.who-title{font-size:14px;font-weight:600;color:var(--t1)}
+.you-desc{font-size:12.5px;color:var(--t2);line-height:1.5}
+.who-tool-grn{color:var(--grn-txt);font-family:var(--mono);font-size:11px}
+
+.timeline{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:28px 0}
+.tl-row{display:grid;grid-template-columns:72px 1fr;gap:0;border-bottom:1px solid var(--border)}
+.tl-row:last-child{border-bottom:none}
+.tl-time{padding:16px 18px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--t3);border-right:1px solid var(--border);font-weight:500}
+.tl-content{padding:14px 20px;display:flex;flex-direction:column;gap:3px;background:var(--bg1)}
+.tl-event{font-size:14px;font-weight:500;color:var(--t1)}
+.tl-sub{font-size:12.5px;color:var(--t3)}
+.tl-bad .tl-content{background:var(--red-lo)}
+.tl-bad .tl-event{color:var(--red-txt)}
+.tl-good .tl-content{background:var(--grn-lo)}
+.tl-good .tl-event{color:var(--grn-txt)}
+
+.article-cta{background:var(--bg2);border:1px solid var(--border-md);border-radius:12px;padding:36px 40px;margin:48px 0 0;display:flex;justify-content:space-between;gap:32px}
+.cta-left{display:flex;flex-direction:column;gap:8px;flex:1}
+.cta-eyebrow{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.cta-title{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:-0.4px;color:var(--t1);line-height:1.2}
+.cta-sub{font-size:14px;color:var(--t2);line-height:1.5}
+.cta-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:var(--t1);color:var(--bg0);border:none;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.cta-note{font-family:var(--mono);font-size:10px;color:var(--t3)}
+
+.sidebar-cta{background:var(--bg2);border:1px solid var(--border-md);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.sb-title{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--t1)}
+.sb-desc{font-size:12.5px;color:var(--t2);line-height:1.55}
+.sb-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;background:var(--t1);color:var(--bg0);border:none;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none}
+.sb-note{font-family:var(--mono);font-size:10px;color:var(--t3);text-align:center}
+
+.sidebar-toc{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.sb-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:14px}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-item a{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--t3);text-decoration:none;padding:5px 0;line-height:1.45}
+.toc-item a:hover{color:var(--t2)}
+.toc-num{font-family:var(--mono);font-size:10px;flex-shrink:0;margin-top:2px}
+
+.sidebar-related{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.rel-list{display:flex;flex-direction:column}
+.rel-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.rel-cat{font-family:var(--mono);font-size:9.5px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.rel-title{font-size:13px;color:var(--t2);text-decoration:none;display:block;margin-top:4px}
+.rel-title:hover{color:var(--t1)}
+</style>

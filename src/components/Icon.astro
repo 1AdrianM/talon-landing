@@ -1,0 +1,20 @@
+---
+import { Package, ShoppingCart, Footprints, Search, Trophy, Lightbulb, TrendingUp, TrendingDown } from '@lucide/astro';
+
+const { name, size = 16, class: className } = Astro.props;
+
+const icons = {
+  'package': Package,
+  'cart': ShoppingCart,
+  'sneakers': Footprints,
+  'search': Search,
+  'trophy': Trophy,
+  'lightbulb': Lightbulb,
+  'trending-up': TrendingUp,
+  'trending-down': TrendingDown,
+};
+
+const IconComponent = icons[name];
+---
+
+{IconComponent && <IconComponent width={size} height={size} class={className} />}

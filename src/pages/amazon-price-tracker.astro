@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SeoPage from '../components/SeoPage.astro';
+
+const pageTitle = "Amazon Price Tracker for Sellers — Competitor Monitoring";
+const pageDescription = "Track Amazon competitor prices in real-time. Get alerts when sellers change prices and never lose the Buy Box again.";
+---
+
+<Layout title={pageTitle}>
+  <SeoPage
+    title={pageTitle}
+    description={pageDescription}
+    slug="amazon-price-tracker"
+    heroEyebrow="Amazon Seller Tool"
+    heroHeadline="Amazon sellers are undercutting you — and you're losing the Buy Box"
+    heroSubheadline="Track any Amazon product and its competitors in real-time. Get alerts within minutes of price changes. Protect your Buy Box share."
+    ctaPrimary="Start Tracking"
+    insightTitle="Live Analysis: Your Product vs. Amazon Competitors"
+    insightData={[
+      { label: "Lowest Competitor", value: "$24.99", sub: "FBA Seller · 1h ago" },
+      { label: "Your Price", value: "$29.99", sub: "+20% above" },
+      { label: "Buy Box Risk", value: "HIGH", sub: "Losing position" }
+    ]}
+    insightText="A new FBA seller just undercut you by 20%. Your product is now the most expensive option. Amazon's algorithm is likely favoring the lower price."
+    insightImpact="You're at risk of losing the Buy Box. This could cost you 30-50% of your sales on this listing."
+    actionTitle="What to do next"
+    actionText="Consider matching or beating the competitor price to secure the Buy Box. Once you lose it, it's hard to win back."
+  />
+</Layout>

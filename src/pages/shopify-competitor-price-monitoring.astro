@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SeoPage from '../components/SeoPage.astro';
+
+const pageTitle = "Shopify Competitor Price Monitoring — Track & Optimize";
+const pageDescription = "Monitor your Shopify store against competitors. Get real-time alerts when competitor prices change and optimize your pricing strategy.";
+---
+
+<Layout title={pageTitle}>
+  <SeoPage
+    title={pageTitle}
+    description={pageDescription}
+    slug="shopify-competitor-price-monitoring"
+    heroEyebrow="Shopify Price Intelligence"
+    heroHeadline="Your Shopify competitors are pricing smarter — are you?"
+    heroSubheadline="Monitor any Shopify store's product prices in real-time. Get alerts when competitors adjust pricing so you can react in minutes, not days."
+    ctaPrimary="Connect Your Store"
+    insightTitle="Live Analysis: Your Product vs. Shopify Competitors"
+    insightData={[
+      { label: "Competitor Price", value: "$49.99", sub: "Direct competitor · Now" },
+      { label: "Your Price", value: "$59.99", sub: "+20% higher" },
+      { label: "Price Gap", value: "+$10", sub: "Lost sales risk" }
+    ]}
+    insightText="Your direct Shopify competitor just dropped their price by 20%. At $49.99 vs your $59.99, customers are choosing them. You're now the most expensive option."
+    insightImpact="You could be losing 40%+ of potential sales to this competitor. That's $2,000-5,000/month in lost revenue depending on volume."
+    actionTitle="What to do next"
+    actionText="Adjust your price to stay competitive — at least within 5% of the competitor. You can always offer free shipping or bundle deals to differentiate."
+  />
+</Layout>

@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SeoPage from '../components/SeoPage.astro';
+
+const pageTitle = "Yeezy 350 Price Tracker — Real-Time Competitor Monitoring";
+const pageDescription = "Track Yeezy 350 prices across StockX, GOAT, eBay, and Amazon. Get alerts when prices change and never miss a selling opportunity.";
+---
+
+<Layout title={pageTitle}>
+  <SeoPage
+    title={pageTitle}
+    description={pageDescription}
+    slug="yeezy-350-price-tracker"
+    heroEyebrow="Sneaker Price Intelligence"
+    heroHeadline="Yeezy 350 prices are shifting — are you leaving money on the table?"
+    heroSubheadline="Monitor StockX, GOAT, eBay, and Adidas in real-time. Get instant alerts when competitor prices change so you never miss a sale."
+    ctaPrimary="Track Your Yeezy"
+    insightTitle="Live Analysis: Yeezy 350 Zebra"
+    insightData={[
+      { label: "Market Trend", value: "+8%", sub: "Last 7 days" },
+      { label: "Your Position", value: "#4 → #2", sub: "Gained 2 spots" },
+      { label: "Margin Opportunity", value: "+$45", sub: "Per sale" }
+    ]}
+    insightText="The Yeezy 350 market is trending upward. StockX and GOAT both increased prices by 8% this week. You're currently underpriced by $45 compared to market average."
+    insightImpact="You could be earning $45 more per sale — $1,350/month extra — by adjusting your price to market levels."
+    actionTitle="What to do next"
+    actionText="Increase your price to match the market trend. You're leaving $45 per sale on the table by being underpriced."
+  />
+</Layout>

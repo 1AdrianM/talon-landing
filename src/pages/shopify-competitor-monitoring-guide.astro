@@ -1,0 +1,285 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogPost from '../components/BlogPost.astro';
+
+const title = "How to Monitor Your Shopify Competitors (2026 Guide)";
+const description = "A practical guide to monitoring your Shopify competitors' prices. Learn how to track rival stores, react to price changes in real time, and protect your sales.";
+---
+
+<Layout title={`${title} — Talon`}>
+  <BlogPost
+    title={title}
+    description={description}
+    category="Shopify"
+    readTime="5 min read"
+    updated="Jan 2026"
+  >
+    <div class="prose">
+      <p class="lead">Your Shopify competitors are adjusting prices daily — flash sales, inventory clears, competitive undercutting. If you're not watching in real time, you're either overpriced and losing customers, or underpriced and leaving margin on the table.</p>
+
+      <div class="scenario-strip">
+        <div class="sc-item">
+          <span class="sc-tag">Scenario 1</span>
+          <div class="sc-title">Rival runs a flash sale</div>
+          <div class="sc-impact sc-impact-r">−$320/day</div>
+          <div class="sc-desc">They drop 15% on your hero SKU. You don't notice for 2 days.</div>
+        </div>
+        <div class="sc-item">
+          <span class="sc-tag">Scenario 2</span>
+          <div class="sc-title">New competitor enters underpriced</div>
+          <div class="sc-impact sc-impact-r">Position loss</div>
+          <div class="sc-desc">Unknown store undercuts you by 20%. Zero reviews but cheap.</div>
+        </div>
+        <div class="sc-item">
+          <span class="sc-tag">Scenario 3</span>
+          <div class="sc-title">Competitor raises prices — supply issue</div>
+          <div class="sc-impact sc-impact-g">+12% margin</div>
+          <div class="sc-desc">They went up. You stayed. You're now 12% below market.</div>
+        </div>
+      </div>
+
+      <h2 id="methods">Three ways to monitor Shopify competitors</h2>
+      <p>Not all monitoring methods are equal. Here's what actually works — and where most sellers waste time.</p>
+
+      <div class="comparison-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr><th>Method</th><th>Speed</th><th>Coverage</th><th>Effort</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Manual checks</strong></td>
+              <td>Days</td>
+              <td>1-2 stores</td>
+              <td>High</td>
+            </tr>
+            <tr>
+              <td><strong>Generic scrapers</strong></td>
+              <td>Hours</td>
+              <td>Limited</td>
+              <td>Medium</td>
+            </tr>
+            <tr class="hl">
+              <td><strong>Talon real-time</strong></td>
+              <td><span class="chk-yes">✓ Minutes</span></td>
+              <td><span class="chk-yes">✓ Any store</span></td>
+              <td><span class="chk-yes">✓ Low</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr/>
+
+      <h2 id="what-to-track">What you should actually be tracking</h2>
+      <p>Most Shopify sellers track the wrong things. Here's what matters:</p>
+
+      <div class="skip-grid">
+        <div class="skip-cell">
+          <div class="skip-lbl skip-lbl-r">Most track this</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Competitor's full catalog prices</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>General price ranges</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Weekly snapshots</div>
+        </div>
+        <div class="skip-cell">
+          <div class="skip-lbl skip-lbl-g">You need this</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>YOUR products specifically</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Who changed and when</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Revenue impact per change</div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="speed">Why reaction time matters more than you think</h2>
+      <p>A competitor's flash sale can shift buyer behavior within hours. By the time you manually check, you've already lost the day's traffic.</p>
+
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">9:00 AM</div><div class="tl-content"><div class="tl-event">Competitor drops price on your #1 SKU</div><div class="tl-sub">They're now $18 cheaper</div></div></div>
+        <div class="tl-row tl-bad"><div class="tl-time">9-5 PM</div><div class="tl-content"><div class="tl-event">Manual check: you don't notice</div><div class="tl-sub">8 hours of lost sales at higher price</div></div></div>
+        <div class="tl-row"><div class="tl-time">5:30 PM</div><div class="tl-content"><div class="tl-event">You finally see the change</div><div class="tl-sub">Need to analyze and decide</div></div></div>
+        <div class="tl-row"><div class="tl-time">Next AM</div><div class="tl-content"><div class="tl-event">Price adjusted</div><div class="tl-sub">24+ hours late — customers gone</div></div></div>
+        <div class="tl-row tl-good"><div class="tl-time">9:01 AM</div><div class="tl-content"><div class="tl-event">With real-time: instant alert</div><div class="tl-sub">"Drop to $89 — you're losing $300/day"</div></div></div>
+      </div>
+
+      <hr/>
+
+      <h2 id="setup">How to set up Shopify competitor monitoring</h2>
+      <ol class="step-list">
+        <li><strong>Identify your direct competitors</strong> — Stores selling the same products to the same audience. Check for stores in your niche with similar pricing tiers.</li>
+        <li><strong>Select your hero SKUs</strong> — Your top 5-20 products that drive most revenue. Focus on these first.</li>
+        <li><strong>Choose a monitoring method</strong> — Manual for 1-2 competitors, automated for scale.</li>
+        <li><strong>Set alert thresholds</strong> — Get notified when price gap exceeds 5-10%.</li>
+        <li><strong>Act on alerts within hours</strong> — A price alert without action is just data.</li>
+      </ol>
+
+      <hr/>
+
+      <h2 id="who">Who needs this</h2>
+
+      <div class="who-grid">
+        <div class="who-card">
+          <span class="who-tag">D2C brands</span>
+          <div class="who-title">Multiple competitors</div>
+          <div class="who-desc">You have 5+ rivals with overlapping catalogs.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Resellers</span>
+          <div class="who-title">Margin sensitive</div>
+          <div class="who-desc">Your profit depends on buying right and selling right.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Wholesalers</span>
+          <div class="who-title">B2B pricing</div>
+          <div class="who-desc">Retail partners compare your wholesale vs competitors.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Any Shopify store</span>
+          <div class="who-title who-tool-grn">Competitive market</div>
+          <div class="who-desc">If you have rivals, you're already in this game.</div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="takeaway">Final recommendation</h2>
+      <p>If you're serious about Shopify, you need to know when competitors move. Manual checks won't cut it. Generic tools give you data without decisions.</p>
+      <p><strong>Real-time monitoring with action-oriented alerts</strong> — that's what actually protects your sales and margin.</p>
+
+      <div class="article-cta">
+        <div class="cta-left">
+          <span class="cta-eyebrow">Free analysis — no signup</span>
+          <div class="cta-title">See your real-time competitive position</div>
+          <div class="cta-sub">Paste your Shopify product and a competitor. Get the gap and recommended action in seconds.</div>
+        </div>
+        <div class="cta-right">
+          <a href="/#tool" class="cta-btn">→ Analyze now</a>
+          <span class="cta-note">No account · No credit card</span>
+        </div>
+      </div>
+    </div>
+
+    <div slot="sidebar">
+      <div class="sidebar-cta">
+        <span class="sb-title">Know your position</span>
+        <div class="sb-desc">Paste your Shopify product and a competitor. Get real-time gap analysis.</div>
+        <a href="/#tool" class="sb-btn">→ Analyze now</a>
+        <span class="sb-note">No signup · No credit card</span>
+      </div>
+
+      <div class="sidebar-toc">
+        <div class="sb-lbl">In this guide</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#methods"><span class="toc-num">01</span>Three monitoring methods</a></li>
+          <li class="toc-item"><a href="#what-to-track"><span class="toc-num">02</span>What to track</a></li>
+          <li class="toc-item"><a href="#speed"><span class="toc-num">03</span>Why speed matters</a></li>
+          <li class="toc-item"><a href="#setup"><span class="toc-num">04</span>How to set up</a></li>
+          <li class="toc-item"><a href="#who"><span class="toc-num">05</span>Who needs this</a></li>
+          <li class="toc-item"><a href="#takeaway"><span class="toc-num">06</span>Recommendation</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-related">
+        <div class="sb-lbl">Related articles</div>
+        <div class="rel-list">
+          <div class="rel-item"><span class="rel-cat">Tools</span><a href="/best-shopify-competitor-price-monitoring-tools" class="rel-title">Best Shopify Price Monitoring Tools</a></div>
+          <div class="rel-item"><span class="rel-cat">Strategy</span><a href="/best-competitor-price-tracking-tools" class="rel-title">Best Competitor Price Tracking Tools</a></div>
+          <div class="rel-item"><span class="rel-cat">Amazon</span><a href="/best-amazon-price-tracking-tools" class="rel-title">Best Amazon Price Tracking Tools</a></div>
+        </div>
+      </div>
+    </div>
+  </BlogPost>
+</Layout>
+
+<style>
+.prose{display:flex;flex-direction:column;gap:0}
+.prose h2{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:-0.4px;color:var(--t1);margin:48px 0 16px;line-height:1.25;scroll-margin-top:80px}
+.prose p{color:var(--t2);margin-bottom:18px;font-size:var(--body-size);line-height:var(--body-lh)}
+.prose strong{color:var(--t1);font-weight:600}
+.prose hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.prose ol{list-style:none;counter-reset:steps;display:flex;flex-direction:column;gap:16px;padding:0}
+.prose li{counter-increment:steps;display:flex;align-items:flex-start;gap:12px}
+.prose li::before{content:counter(steps);font-family:var(--mono);font-size:11px;background:var(--bg3);color:var(--t3);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.prose li strong{color:var(--t1)}
+
+.lead{font-size:19px;color:var(--t2);line-height:1.65;margin-bottom:24px}
+
+.scenario-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:0 0 40px}
+.sc-item{background:var(--bg1);padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.sc-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3)}
+.sc-title{font-size:15px;font-weight:600;color:var(--t1);letter-spacing:-0.1px}
+.sc-impact{font-family:var(--mono);font-size:13px;font-weight:500;padding:3px 9px;border-radius:4px;width:fit-content;margin-top:2px}
+.sc-impact-r{background:var(--red-lo);color:var(--red-txt);border:1px solid var(--red-bd)}
+.sc-impact-g{background:var(--grn-lo);color:var(--grn-txt);border:1px solid var(--grn-bd)}
+.sc-desc{font-size:13px;color:var(--t3);line-height:1.5}
+
+.comparison-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin:0 0 40px}
+.comparison-table{width:100%;border-collapse:collapse;font-size:14px}
+.comparison-table thead tr{background:var(--bg2)}
+.comparison-table th{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);padding:12px 18px;text-align:left}
+.comparison-table td{padding:13px 18px;color:var(--t2)}
+.comparison-table td:first-child{color:var(--t1);font-weight:500}
+.hl{background:var(--bg2)}
+.chk-yes{color:var(--grn-txt)}
+
+.skip-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:24px 0}
+.skip-cell{background:var(--bg2);padding:26px 28px}
+.skip-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.skip-lbl-r{color:var(--red-txt)}
+.skip-lbl-g{color:var(--grn-txt)}
+.skip-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--t2);margin-bottom:10px}
+.skip-arrow{color:var(--t3);flex-shrink:0}
+
+.timeline{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:28px 0}
+.tl-row{display:grid;grid-template-columns:72px 1fr;gap:0;border-bottom:1px solid var(--border)}
+.tl-row:last-child{border-bottom:none}
+.tl-time{padding:16px 18px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--t3);border-right:1px solid var(--border);font-weight:500}
+.tl-content{padding:14px 20px;display:flex;flex-direction:column;gap:3px;background:var(--bg1)}
+.tl-event{font-size:14px;font-weight:500;color:var(--t1)}
+.tl-sub{font-size:12.5px;color:var(--t3)}
+.tl-bad .tl-content{background:var(--red-lo)}
+.tl-bad .tl-event{color:var(--red-txt)}
+.tl-good .tl-content{background:var(--grn-lo)}
+.tl-good .tl-event{color:var(--grn-txt)}
+
+.who-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:24px 0}
+.who-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.who-tag{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.who-title{font-size:14px;font-weight:600;color:var(--t1)}
+.who-tool-grn{color:var(--grn-txt);font-family:var(--mono);font-size:11px}
+.who-desc{font-size:12.5px;color:var(--t2);line-height:1.5}
+
+.step-list{list-style:none;counter-reset:steps;display:flex;flex-direction:column;gap:16px;padding:0;margin:24px 0}
+.step-list li{counter-increment:steps;display:flex;align-items:flex-start;gap:12px;font-size:14.5px;color:var(--t2);line-height:1.6}
+.step-list li::before{content:counter(steps);font-family:var(--mono);font-size:11px;background:var(--bg3);color:var(--t3);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-list li strong{color:var(--t1);font-weight:600}
+
+.article-cta{background:var(--bg2);border:1px solid var(--border-md);border-radius:12px;padding:36px 40px;margin:48px 0 0;display:flex;justify-content:space-between;gap:32px}
+.cta-left{display:flex;flex-direction:column;gap:8px;flex:1}
+.cta-eyebrow{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.cta-title{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:-0.4px;color:var(--t1);line-height:1.2}
+.cta-sub{font-size:14px;color:var(--t2);line-height:1.5}
+.cta-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:var(--t1);color:var(--bg0);border:none;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.cta-note{font-family:var(--mono);font-size:10px;color:var(--t3)}
+
+.sidebar-cta{background:var(--bg2);border:1px solid var(--border-md);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.sb-title{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--t1)}
+.sb-desc{font-size:12.5px;color:var(--t2);line-height:1.55}
+.sb-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;background:var(--t1);color:var(--bg0);border:none;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none}
+.sb-note{font-family:var(--mono);font-size:10px;color:var(--t3);text-align:center}
+
+.sidebar-toc{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.sb-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:14px}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-item a{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--t3);text-decoration:none;padding:5px 0;line-height:1.45}
+.toc-item a:hover{color:var(--t2)}
+.toc-num{font-family:var(--mono);font-size:10px;flex-shrink:0;margin-top:2px}
+
+.sidebar-related{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.rel-list{display:flex;flex-direction:column}
+.rel-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.rel-cat{font-family:var(--mono);font-size:9.5px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.rel-title{font-size:13px;color:var(--t2);text-decoration:none;display:block;margin-top:4px}
+.rel-title:hover{color:var(--t1)}
+</style>

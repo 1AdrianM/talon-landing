@@ -1,0 +1,321 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogPost from '../components/BlogPost.astro';
+
+const title = "What Is Repricing in eCommerce? (And Why Most Sellers Do It Wrong)";
+const description = "Learn what repricing actually means in eCommerce, why most sellers do it wrong, and how to move from reactive pricing to intelligent, impact-driven decisions.";
+---
+
+<Layout title={`${title} — Talon`}>
+  <BlogPost
+    title={title}
+    description={description}
+    category="Strategy"
+    readTime="6 min read"
+    updated="Jan 2026"
+  >
+    <div class="prose">
+      <p class="lead">Repricing in eCommerce is the process of adjusting your product prices in response to market conditions — primarily competitor pricing, demand, and platform dynamics. Sounds simple. But in reality, repricing is one of the most misunderstood — and poorly executed — strategies in online selling.</p>
+
+      <div class="scenario-strip">
+        <div class="sc-item">
+          <span class="sc-tag">Mistake 1</span>
+          <div class="sc-title">Blindly matching lowest price</div>
+          <div class="sc-impact sc-impact-r">Margin destroyed</div>
+          <div class="sc-desc">You drop price every time a competitor does. Your margin vanishes.</div>
+        </div>
+        <div class="sc-item">
+          <span class="sc-tag">Mistake 2</span>
+          <div class="sc-title">Reacting hours later</div>
+          <div class="sc-impact sc-impact-r">Lost sales</div>
+          <div class="sc-desc">Competitor drops at 9AM. You notice at 2PM. Traffic already moved.</div>
+        </div>
+        <div class="sc-item">
+          <span class="sc-tag">Mistake 3</span>
+          <div class="sc-title">No impact awareness</div>
+          <div class="sc-impact sc-impact-r">Guessing game</div>
+          <div class="sc-desc">You change price without knowing if it'll actually help or hurt.</div>
+        </div>
+      </div>
+
+      <h2 id="types">The three types of repricing</h2>
+      <p>Not all repricing is the same. Most sellers fall into one of these categories:</p>
+
+      <div class="comparison-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr><th>Type</th><th>Speed</th><th>Context</th><th>Outcome</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Manual</strong></td>
+              <td>Days</td>
+              <td>Intuition</td>
+              <td>Scale limits</td>
+            </tr>
+            <tr>
+              <td><strong>Rule-based</strong></td>
+              <td>Hours</td>
+              <td>Fixed rules</td>
+              <td>Rigid, can trigger wars</td>
+            </tr>
+            <tr class="hl">
+              <td><strong>Intelligent</strong></td>
+              <td><span class="chk-yes">Real-time</span></td>
+              <td><span class="chk-yes">Impact-driven</span></td>
+              <td><span class="chk-yes">Strategic</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr/>
+
+      <h2 id="manual">1. Manual repricing</h2>
+      <p>This is the most common approach. Checking competitor prices manually, updating prices by hand, making decisions based on intuition. It works at very small scale but breaks quickly when competition increases, price changes become frequent, or you manage multiple products.</p>
+      <p><strong>Biggest issue: It's slow.</strong></p>
+
+      <hr/>
+
+      <h2 id="rules">2. Rule-based repricing</h2>
+      <p>This is where most sellers upgrade. Examples: "Always be $1 cheaper than competitor X", "Match the lowest price", "Stay within Buy Box range". This introduces automation — but also rigidity.</p>
+      <div class="tool-card">
+        <div class="tc-head">
+          <div class="tc-head-left"><span class="tc-rank">The problem</span><div class="tc-name">Rules don't understand context</div></div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-cons-list">
+            <div class="con-item"><span class="con-dot">✗</span>They ignore profit impact</div>
+            <div class="con-item"><span class="con-dot">✗</span>They can trigger price wars</div>
+            <div class="con-item"><span class="con-dot">✗</span>They don't know when timing matters</div>
+            <div class="con-item"><span class="con-dot">✗</span>They automate reactions, not decisions</div>
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="intelligent">3. Intelligent (dynamic) repricing</h2>
+      <p>This is the most advanced layer. Instead of fixed rules, it evaluates market changes in real time, estimates impact (sales, margin, position), and suggests or applies the best price.</p>
+      <p><strong>This is where repricing becomes a strategy, not just a tactic.</strong></p>
+
+      <hr/>
+
+      <h2 id="platforms">Repricing on different platforms</h2>
+
+      <div class="who-grid">
+        <div class="who-card">
+          <span class="who-tag">Amazon</span>
+          <div class="you-title">Speed is everything</div>
+          <div class="you-desc">Critical for winning and maintaining the Buy Box. High-frequency changes require real-time response.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Shopify</span>
+          <div class="you-title">More strategic</div>
+          <div class="you-desc">Competitor monitoring across stores, positioning vs perceived value, margin optimization.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">WooCommerce</span>
+          <div class="you-title">Fragmented competition</div>
+          <div class="you-desc">Less standardized pricing behavior, harder monitoring, more important decisions.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">All platforms</span>
+          <div class="you-title you-tool-grn">Real-time awareness</div>
+          <div class="you-desc">Price is competing every minute, not every day. Speed matters everywhere.</div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="gap">The gap most tools don't solve</h2>
+      <p>Even when sellers use repricing tools, there's still a problem.</p>
+
+      <div class="skip-grid">
+        <div class="skip-cell">
+          <div class="skip-lbl skip-lbl-r">What most tools give you</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>"Competitor dropped price"</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Historical charts</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Alert that something changed</div>
+        </div>
+        <div class="skip-cell">
+          <div class="skip-lbl skip-lbl-g">What you actually need</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Should I react?</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>How urgent is it?</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>What exact price to set?</div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="speed">Why timing is everything</h2>
+      <p>A price change at the wrong time is as bad as no change. The market moves in minutes, not days.</p>
+
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">9:00 AM</div><div class="tl-content"><div class="tl-event">Competitor drops price by 15%</div><div class="tl-sub">They're now the cheapest option</div></div></div>
+        <div class="tl-row tl-bad"><div class="tl-time">9 AM - 2 PM</div><div class="tl-content"><div class="tl-event">Manual check: you don't notice</div><div class="tl-sub">5 hours of lost sales at higher price</div></div></div>
+        <div class="tl-row"><div class="tl-time">2:30 PM</div><div class="tl-content"><div class="tl-event">You react and lower price</div><div class="tl-sub">Peak traffic already passed</div></div></div>
+        <div class="tl-row tl-good"><div class="tl-time">9:01 AM</div><div class="tl-content"><div class="tl-event">Real-time: instant alert + action</div><div class="tl-sub">"Drop to $47.90 — you're losing $180/day"</div></div></div>
+      </div>
+
+      <hr/>
+
+      <h2 id="effective">What effective repricing looks like</h2>
+      <p>A strong repricing system does three things:</p>
+
+      <div class="step-list">
+        <div><strong>1. Detects changes instantly</strong><br/><span class="step-desc">Not hours later. Not in reports. Immediately.</span></div>
+        <div><strong>2. Translates data into impact</strong><br/><span class="step-desc">Instead of "Price dropped by 10%" you see "You're losing $220/day at current price".</span></div>
+        <div><strong>3. Recommends specific action</strong><br/><span class="step-desc">Not "Consider adjusting" but "Set price to $47.90 to regain position without killing margin".</span></div>
+      </div>
+
+      <hr/>
+
+      <h2 id="takeaway">Final takeaway</h2>
+      <p>Repricing is not about being cheaper. It's about being faster and smarter than the market. Manual repricing fails because it's slow. Rule-based repricing fails because it's rigid.</p>
+      <p><strong>The future of repricing is real-time, impact-driven decision making.</strong></p>
+
+      <div class="article-cta">
+        <div class="cta-left">
+          <span class="cta-eyebrow">Free analysis — no signup</span>
+          <div class="cta-title">See how your pricing performs right now</div>
+          <div class="cta-sub">Paste your product and a competitor. Get real-time impact + recommended price.</div>
+        </div>
+        <div class="cta-right">
+          <a href="/#tool" class="cta-btn">→ Analyze now</a>
+          <span class="cta-note">No account · No credit card</span>
+        </div>
+      </div>
+    </div>
+
+    <div slot="sidebar">
+      <div class="sidebar-cta">
+        <span class="sb-title">Test your pricing</span>
+        <div class="sb-desc">Paste your product and a competitor. Get instant impact analysis.</div>
+        <a href="/#tool" class="sb-btn">→ Analyze now</a>
+        <span class="sb-note">No signup · No credit card</span>
+      </div>
+
+      <div class="sidebar-toc">
+        <div class="sb-lbl">In this guide</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#types"><span class="toc-num">01</span>Three types of repricing</a></li>
+          <li class="toc-item"><a href="#manual"><span class="toc-num">02</span>Manual repricing</a></li>
+          <li class="toc-item"><a href="#rules"><span class="toc-num">03</span>Rule-based repricing</a></li>
+          <li class="toc-item"><a href="#intelligent"><span class="toc-num">04</span>Intelligent repricing</a></li>
+          <li class="toc-item"><a href="#platforms"><span class="toc-num">05</span>Platform differences</a></li>
+          <li class="toc-item"><a href="#gap"><span class="toc-num">06</span>Tool gap</a></li>
+          <li class="toc-item"><a href="#speed"><span class="toc-num">07</span>Why timing matters</a></li>
+          <li class="toc-item"><a href="#effective"><span class="toc-num">08</span>Effective repricing</a></li>
+          <li class="toc-item"><a href="#takeaway"><span class="toc-num">09</span>Takeaway</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-related">
+        <div class="sb-lbl">Related articles</div>
+        <div class="rel-list">
+          <div class="rel-item"><span class="rel-cat">Tools</span><a href="/best-competitor-price-tracking-tools" class="rel-title">Best Competitor Price Tracking Tools</a></div>
+          <div class="rel-item"><span class="rel-cat">Amazon</span><a href="/amazon-buy-box-strategy" class="rel-title">Amazon Buy Box Strategy</a></div>
+          <div class="rel-item"><span class="rel-cat">Shopify</span><a href="/shopify-competitor-monitoring-guide" class="rel-title">Shopify Monitoring Guide</a></div>
+        </div>
+      </div>
+    </div>
+  </BlogPost>
+</Layout>
+
+<style>
+.prose{display:flex;flex-direction:column;gap:0}
+.prose h2{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:-0.4px;color:var(--t1);margin:48px 0 16px;line-height:1.25;scroll-margin-top:80px}
+.prose p{color:var(--t2);margin-bottom:18px;font-size:var(--body-size);line-height:var(--body-lh)}
+.prose strong{color:var(--t1);font-weight:600}
+.prose hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+
+.lead{font-size:19px;color:var(--t2);line-height:1.65;margin-bottom:24px}
+
+.scenario-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:0 0 40px}
+.sc-item{background:var(--bg1);padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.sc-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3)}
+.sc-title{font-size:15px;font-weight:600;color:var(--t1);letter-spacing:-0.1px}
+.sc-impact{font-family:var(--mono);font-size:13px;font-weight:500;padding:3px 9px;border-radius:4px;width:fit-content;margin-top:2px}
+.sc-impact-r{background:var(--red-lo);color:var(--red-txt);border:1px solid var(--red-bd)}
+.sc-desc{font-size:13px;color:var(--t3);line-height:1.5}
+
+.comparison-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin:0 0 40px}
+.comparison-table{width:100%;border-collapse:collapse;font-size:14px}
+.comparison-table thead tr{background:var(--bg2)}
+.comparison-table th{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);padding:12px 18px;text-align:left}
+.comparison-table td{padding:13px 18px;color:var(--t2)}
+.comparison-table td:first-child{color:var(--t1);font-weight:500}
+.hl{background:var(--bg2)}
+.chk-yes{color:var(--grn-txt)}
+
+.tool-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:28px 0;background:var(--bg1)}
+.tc-head{padding:22px 24px;border-bottom:1px solid var(--border)}
+.tc-rank{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.tc-name{font-family:var(--display);font-size:18px;font-weight:600;letter-spacing:-0.2px;color:var(--t1);margin-top:4px}
+.tc-body{padding:22px 24px}
+.tc-cons-list{display:flex;flex-direction:column;gap:8px}
+.con-item{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;color:var(--t2)}
+.con-dot{color:var(--red-txt);font-size:11px;margin-top:3px}
+
+.who-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:24px 0}
+.who-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.who-tag{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.you-title{font-size:14px;font-weight:600;color:var(--t1)}
+.you-desc{font-size:12.5px;color:var(--t2);line-height:1.5}
+.you-tool-grn{color:var(--grn-txt);font-family:var(--mono);font-size:11px}
+
+.skip-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:24px 0}
+.skip-cell{background:var(--bg2);padding:26px 28px}
+.skip-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.skip-lbl-r{color:var(--red-txt)}
+.skip-lbl-g{color:var(--grn-txt)}
+.skip-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--t2);margin-bottom:10px}
+.skip-arrow{color:var(--t3);flex-shrink:0}
+
+.timeline{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:28px 0}
+.tl-row{display:grid;grid-template-columns:72px 1fr;gap:0;border-bottom:1px solid var(--border)}
+.tl-row:last-child{border-bottom:none}
+.tl-time{padding:16px 18px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--t3);border-right:1px solid var(--border);font-weight:500}
+.tl-content{padding:14px 20px;display:flex;flex-direction:column;gap:3px;background:var(--bg1)}
+.tl-event{font-size:14px;font-weight:500;color:var(--t1)}
+.tl-sub{font-size:12.5px;color:var(--t3)}
+.tl-bad .tl-content{background:var(--red-lo)}
+.tl-bad .tl-event{color:var(--red-txt)}
+.tl-good .tl-content{background:var(--grn-lo)}
+.tl-good .tl-event{color:var(--grn-txt)}
+
+.step-list{display:flex;flex-direction:column;gap:18px;margin:24px 0}
+.step-list div{font-size:14.5px;color:var(--t2);line-height:1.6}
+.step-list strong{color:var(--t1);font-weight:600}
+.step-desc{font-size:13.5px;color:var(--t3);margin-top:4px;display:block}
+
+.article-cta{background:var(--bg2);border:1px solid var(--border-md);border-radius:12px;padding:36px 40px;margin:48px 0 0;display:flex;justify-content:space-between;gap:32px}
+.cta-left{display:flex;flex-direction:column;gap:8px;flex:1}
+.cta-eyebrow{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.cta-title{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:-0.4px;color:var(--t1);line-height:1.2}
+.cta-sub{font-size:14px;color:var(--t2);line-height:1.5}
+.cta-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:var(--t1);color:var(--bg0);border:none;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.cta-note{font-family:var(--mono);font-size:10px;color:var(--t3)}
+
+.sidebar-cta{background:var(--bg2);border:1px solid var(--border-md);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.sb-title{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--t1)}
+.sb-desc{font-size:12.5px;color:var(--t2);line-height:1.55}
+.sb-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;background:var(--t1);color:var(--bg0);border:none;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none}
+.sb-note{font-family:var(--mono);font-size:10px;color:var(--t3);text-align:center}
+
+.sidebar-toc{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.sb-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:14px}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-item a{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--t3);text-decoration:none;padding:5px 0;line-height:1.45}
+.toc-item a:hover{color:var(--t2)}
+.toc-num{font-family:var(--mono);font-size:10px;flex-shrink:0;margin-top:2px}
+
+.sidebar-related{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.rel-list{display:flex;flex-direction:column}
+.rel-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.rel-cat{font-family:var(--mono);font-size:9.5px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.rel-title{font-size:13px;color:var(--t2);text-decoration:none;display:block;margin-top:4px}
+.rel-title:hover{color:var(--t1)}
+</style>

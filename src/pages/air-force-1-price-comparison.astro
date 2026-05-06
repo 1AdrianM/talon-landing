@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SeoPage from '../components/SeoPage.astro';
+
+const pageTitle = "Air Force 1 Price Comparison — Track Nike Competitors";
+const pageDescription = "See how your Air Force 1 pricing compares to competitors. Detect price drops, position changes, and get recommendations to stop losing sales.";
+---
+
+<Layout title={pageTitle}>
+  <SeoPage
+    title={pageTitle}
+    description={pageDescription}
+    slug="air-force-1-price-comparison"
+    heroEyebrow="Sneaker Price Tracker"
+    heroHeadline="You're losing sales on Air Force 1s — and you don't know why"
+    heroSubheadline="Track Nike, Foot Locker, Finish Line, and SNKRS in real-time. Get instant alerts when competitor prices change."
+    ctaPrimary="Analyze Your Listing"
+    insightTitle="Live Analysis: Air Force 1 '07"
+    insightData={[
+      { label: "Competitor Price Drop", value: "−12%", sub: "Nike.com · 2h ago" },
+      { label: "Your Market Position", value: "#3 → #6", sub: "Dropped 3 spots" },
+      { label: "Est. Daily Loss", value: "−$340/day", sub: "At current price" }
+    ]}
+    insightText="Nike.com just dropped AF1 prices by 12% for their clearance event. Your listing is now 15% above the market average."
+    insightImpact="You could be losing $340/day — $10,200/month — by not adjusting your price."
+    actionTitle="What to do next"
+    actionText="Match the competitor price to recover your position, or check if the price drop is temporary (seasonal clearance)."
+  />
+</Layout>

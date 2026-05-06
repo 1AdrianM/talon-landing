@@ -1,0 +1,426 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<nav>
+  <div class="nav-logo">
+    <a href="/">
+      <div class="logo-mark">
+        <svg width="13" height="14" viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
+      </div>
+      <span class="logo-name">Talon</span>
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/amazon-price-tracker" class="nav-link">Amazon Tool</a>
+    <button class="nav-cta" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Try Free →</button>
+  </div>
+</nav>
+
+<header class="seo-header">
+  <div class="breadcrumb">Amazon Seller Tools / Buy Box</div>
+  <h1>Buy Box Tracker — Never Lose Your Amazon Listing Again</h1>
+  <p class="seo-intro">
+    The Buy Box is worth 80% of Amazon sales. If you're not tracking it, you're losing money. Here's how to monitor and win your Buy Box back.
+  </p>
+  <div class="seo-meta">
+    <span>Updated: May 2024</span>
+    <span>·</span>
+    <span>8 min read</span>
+  </div>
+</header>
+
+<section class="tool-embed">
+  <div class="tool-embed-label">Try the free tool →</div>
+  <div class="analyzer-demo" id="tool">
+    <div class="demo-inputs">
+      <div class="demo-field">
+        <label>Your Amazon Product URL</label>
+        <input type="text" placeholder="https://amazon.com/dp/B089..." />
+      </div>
+      <div class="demo-field">
+        <label>Main Competitor</label>
+        <input type="text" placeholder="https://amazon.com/dp/B089..." />
+      </div>
+    </div>
+    <button class="demo-btn">Analyze Buy Box Risk →</button>
+    <p class="demo-note">Free · No signup required · Instant results</p>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>What is the Buy Box and Why Should You Care?</h2>
+  <p>
+    The <strong>Buy Box</strong> is the white box on the right side of an Amazon product detail page where customers click "Add to Cart" or "Buy Now." It appears on desktop and the top of the screen on mobile.
+  </p>
+  <p>
+    <strong>Here's the problem:</strong> Only one seller wins the Buy Box at a time. If you're not winning it, your product might be listed—but customers are buying from your competitor instead.
+  </p>
+  <div class="stat-box">
+    <div class="stat-number">82%</div>
+    <div class="stat-text">of Amazon sales go through the Buy Box. If you're not winning it, you're losing ~80% of potential sales.</div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Why Sellers Lose the Buy Box (Without Knowing)</h2>
+  <p>There are 5 main reasons you might be losing your Buy Box:</p>
+
+  <div class="reason-list">
+    <div class="reason-item">
+      <div class="reason-num">01</div>
+      <div class="reason-content">
+        <h3>Price Competitiveness</h3>
+        <p>If a competitor undercuts you—even by $0.01—Amazon often gives them the Buy Box. Price is the #1 factor.</p>
+      </div>
+    </div>
+    <div class="reason-item">
+      <div class="reason-num">02</div>
+      <div class="reason-content">
+        <h3>Account Health</h3>
+        <p>Amazon favors sellers with better metrics: lower ODR, fewer returns, faster shipping. If your metrics dip, your Buy Box share drops.</p>
+      </div>
+    </div>
+    <div class="reason-item">
+      <div class="reason-num">03</div>
+      <div class="reason-content">
+        <h3>Stock Availability</h3>
+        <p>Running out of stock? Amazon immediately gives the Buy Box to whoever has inventory. You come back—but lose position.</p>
+      </div>
+    </div>
+    <div class="reason-item">
+      <div class="reason-num">04</div>
+      <div class="reason-content">
+        <h3>FBA vs FBM</h3>
+        <p>FBA sellers generally win the Buy Box more often due to Prime eligibility. If you're FBM, you face an uphill battle.</p>
+      </div>
+    </div>
+    <div class="reason-item">
+      <div class="reason-num">05</div>
+      <div class="reason-content">
+        <h3>Competitor Strategy</h3>
+        <p>Sometimes a competitor deliberately undercuts you for a few hours to steal the Buy Box, then raises their price back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>How Most Sellers Track It (And Why That Fails)</h2>
+  <p>Here's what most Amazon sellers do—and why it doesn't work:</p>
+
+  <div class="fail-list">
+    <div class="fail-item">
+      <div class="fail-icon">❌</div>
+      <div class="fail-content">
+        <h3>Manual Checking</h3>
+        <p>They check their listing 2-3 times per day and notice when the Buy Box changes. Problem: by the time you notice, you've already lost hours or days of sales.</p>
+      </div>
+    </div>
+    <div class="fail-item">
+      <div class="fail-icon">❌</div>
+      <div class="fail-content">
+        <h3>Spreadsheet Tracking</h3>
+        <p>They write down prices in a spreadsheet every few hours. Problem: this is manual, time-consuming, and prone to human error.</p>
+      </div>
+    </div>
+    <div class="fail-item">
+      <div class="fail-icon">❌</div>
+      <div class="fail-content">
+        <h3>Helium10 / AMZ Scout</h3>
+        <p>These tools track some data but have slow refresh rates (often every 4-24 hours). By the time you get an alert, the opportunity is gone.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="money-impact">
+    <h3>💰 The Real Cost</h3>
+    <p>If you lose the Buy Box for just <strong>4 hours per day</strong> at $500/day in sales, that's <strong>$2,000/day</strong> — <strong>$60,000/month</strong> — in lost revenue.</p>
+    <p>Most sellers have no idea this is happening to them.</p>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>How to Track Your Buy Box (The Right Way)</h2>
+  <p>You need real-time monitoring that catches changes within minutes, not hours. Here's what to look for:</p>
+
+  <div class="solution-steps">
+    <div class="solution-step">
+      <div class="step-icon">🔄</div>
+      <div class="step-content">
+        <h3>1. Monitor Price Changes</h3>
+        <p>Track your price vs. competitors in real-time. Set alerts when anyone undercuts you by more than 2%.</p>
+      </div>
+    </div>
+    <div class="solution-step">
+      <div class="step-icon">📊</div>
+      <div class="step-content">
+        <h3>2. Track Buy Box Ownership</h3>
+        <p>Know exactly when you lose the Buy Box and to whom. The faster you know, the faster you can react.</p>
+      </div>
+    </div>
+    <div class="solution-step">
+      <div class="step-icon">⚡</div>
+      <div class="step-content">
+        <h3>3. Get Instant Alerts</h3>
+        <p>Push notifications, email, or Slack alerts when something changes. Don't check—get notified.</p>
+      </div>
+    </div>
+    <div class="solution-step">
+      <div class="step-icon">🎯</div>
+      <div class="step-content">
+        <h3>4. Take Action Fast</h3>
+        <p>Know exactly what to do: match price, raise price, or wait. Don't guess—get a clear recommendation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Talon vs. Other Amazon Seller Tools</h2>
+
+  <div class="comparison-table">
+    <div class="comparison-header">
+      <div class="col-feature">Feature</div>
+      <div class="col-talon">Talon</div>
+      <div class="col-other">Helium10</div>
+      <div class="col-other">AMZ Scout</div>
+    </div>
+    <div class="comparison-row">
+      <div class="col-feature">Refresh Rate</div>
+      <div class="col-talon">Real-time (min)</div>
+      <div class="col-other">4-24 hours</div>
+      <div class="col-other">4-24 hours</div>
+    </div>
+    <div class="comparison-row">
+      <div class="col-feature">Buy Box Alerts</div>
+      <div class="col-talon">✅ Instant</div>
+      <div class="col-other">❌</div>
+      <div class="col-other">❌</div>
+    </div>
+    <div class="comparison-row">
+      <div class="col-feature">Price Drop Detection</div>
+      <div class="col-talon">✅ Within min</div>
+      <div class="col-other">⚠️ Daily</div>
+      <div class="col-other">⚠️ Daily</div>
+    </div>
+    <div class="comparison-row">
+      <div class="col-feature">Actionable Recommendations</div>
+      <div class="col-talon">✅ Clear action</div>
+      <div class="col-other">❌ Dashboard only</div>
+      <div class="col-other">❌ Dashboard only</div>
+    </div>
+    <div class="comparison-row">
+      <div class="col-feature">Free Tier</div>
+      <div class="col-talon">✅ Unlimited</div>
+      <div class="col-other">❌ $0</div>
+      <div class="col-other">⚠️ Limited</div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Use Cases: When Talon Helps Amazon Sellers</h2>
+
+  <div class="use-cases">
+    <div class="use-case">
+      <h3>Resellers</h3>
+      <p>You're selling Nike shoes on Amazon. A new seller undercuts you by 15%. Talon alerts you within 10 minutes. You match their price and win the Buy Box back—before losing the day's sales.</p>
+    </div>
+    <div class="use-case">
+      <h3>Brand Owners</h3>
+      <p>You sell your own products but competitors are selling them cheaper. Talon shows you exactly who's undercutting and how much you're losing. You decide to adjust MAP or bundle.</p>
+    </div>
+    <div class="use-case">
+      <h3>Private Label Sellers</h3>
+      <p>You're competing against the same product from multiple sellers. Talon tracks all of them and tells you when to raise prices (when you're winning the Buy Box) or lower them.</p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq">
+    <div class="faq-item">
+      <button class="faq-question">Does Talon work on Amazon.com only?</button>
+      <div class="faq-answer">
+        <p>Currently we support Amazon.com, Amazon.co.uk, Amazon.de, Amazon.fr, and Amazon.ca. More marketplaces coming soon.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Do I need an Amazon seller account?</button>
+      <div class="faq-answer">
+        <p>No. You can track any product on Amazon, even if you're not a seller. Many users track products they're considering selling to see the competitive landscape.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">How does Talon detect Buy Box changes?</button>
+      <div class="faq-answer">
+        <p>We continuously check each product page and detect when the "Buy Box" seller changes. This happens within minutes of any change.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Can I track multiple products?</button>
+      <div class="faq-answer">
+        <p>Yes. Free tier allows up to 5 product tracks. Premium plans include unlimited tracking and more frequent refresh rates.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Is this against Amazon's terms?</button>
+      <div class="faq-answer">
+        <p>No. Talon only reads publicly available product data—prices, seller names, ratings. We don't access any private seller accounts or violate any terms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <h2>Start Tracking Your Buy Box Today</h2>
+  <p>Don't lose another sale to a competitor. Get real-time alerts and actionable recommendations.</p>
+  <div class="cta-group">
+    <button class="btn-primary btn-lg" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
+      <span class="arr">→</span> Analyze Your Product Now
+    </button>
+    <span class="cta-note">Free · No signup required</span>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <a href="/">
+      <div class="logo-mark">
+        <svg width="13" height="14" viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
+      </div>
+      Talon
+    </a>
+  </div>
+  <span class="footer-tagline">Pricing Intelligence for Amazon Sellers</span>
+</footer>
+
+<style>
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px;border-bottom:1px solid var(--border);background:rgba(9,9,11,0.85);backdrop-filter:blur(12px)}
+.nav-logo a{display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo-mark{width:26px;height:26px;background:var(--t1);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.logo-name{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-link{color:var(--t2);text-decoration:none;font-size:14px;transition:color .15s}
+.nav-link:hover{color:var(--t1)}
+.nav-cta{font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer}
+
+.seo-header{max-width:720px;margin:0 auto;padding:60px 40px 40px;text-align:center}
+.breadcrumb{font-family:var(--mono);font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+.seo-header h1{font-family:var(--display);font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.2;color:var(--t1);margin-bottom:20px}
+.seo-intro{font-size:18px;color:var(--t2);line-height:1.7;max-width:600px;margin:0 auto 20px}
+.seo-meta{font-family:var(--mono);font-size:12px;color:var(--t3)}
+
+.tool-embed{background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 40px;text-align:center}
+.tool-embed-label{font-family:var(--mono);font-size:11px;color:var(--amb);margin-bottom:16px}
+.analyzer-demo{max-width:500px;margin:0 auto;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px}
+.demo-inputs{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.demo-field{text-align:left}
+.demo-field label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:6px}
+.demo-field input{width:100%;padding:12px 14px;background:var(--bg3);border:1px solid var(--border-md);border-radius:var(--radius);color:var(--t1);font-size:13.5px}
+.demo-field input::placeholder{color:var(--t3)}
+.demo-btn{width:100%;padding:13px;background:var(--t1);color:var(--bg0);border:none;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer}
+.demo-note{font-family:var(--mono);font-size:11px;color:var(--t3);margin-top:12px}
+
+.content-section{max-width:700px;margin:0 auto;padding:64px 40px}
+.content-section h2{font-family:var(--display);font-size:clamp(22px,3vw,28px);font-weight:700;letter-spacing:-0.5px;color:var(--t1);margin-bottom:20px}
+.content-section p{font-size:16px;color:var(--t2);line-height:1.75;margin-bottom:16px}
+.content-section p strong{color:var(--t1)}
+
+.stat-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;margin:32px 0}
+.stat-number{font-family:var(--display);font-size:48px;font-weight:800;color:var(--red);margin-bottom:8px}
+.stat-text{font-size:16px;color:var(--t2);line-height:1.6}
+
+.reason-list{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+.reason-item{display:flex;gap:20px;padding:20px;background:var(--bg1);border:1px solid var(--border);border-radius:10px}
+.reason-num{font-family:var(--mono);font-size:14px;color:var(--t3);flex-shrink:0;width:32px}
+.reason-content h3{font-family:var(--display);font-size:16px;font-weight:600;color:var(--t1);margin-bottom:6px}
+.reason-content p{font-size:14px;color:var(--t2);line-height:1.6;margin:0}
+
+.fail-list{display:flex;flex-direction:column;gap:16px;margin:24px 0}
+.fail-item{display:flex;gap:16px;padding:20px;background:var(--bg1);border:1px solid var(--border);border-radius:10px}
+.fail-icon{font-size:24px;flex-shrink:0}
+.fail-content h3{font-family:var(--display);font-size:16px;font-weight:600;color:var(--t1);margin-bottom:6px}
+.fail-content p{font-size:14px;color:var(--t2);line-height:1.6;margin:0}
+
+.money-impact{background:var(--red-lo);border:1px solid var(--red-bd);border-radius:12px;padding:24px;margin-top:32px}
+.money-impact h3{font-family:var(--display);font-size:18px;font-weight:700;color:var(--red);margin-bottom:12px}
+.money-impact p{font-size:15px;color:var(--t1);line-height:1.7;margin:0}
+.money-impact strong{font-weight:700}
+
+.solution-steps{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+.solution-step{display:flex;gap:16px;padding:20px;background:var(--bg1);border:1px solid var(--border);border-radius:10px}
+.step-icon{font-size:28px;flex-shrink:0}
+.step-content h3{font-family:var(--display);font-size:16px;font-weight:600;color:var(--t1);margin-bottom:6px}
+.step-content p{font-size:14px;color:var(--t2);line-height:1.6;margin:0}
+
+.comparison-table{background:var(--bg1);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:24px}
+.comparison-header,.comparison-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1px}
+.comparison-header{background:var(--bg3);font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.comparison-header > div,.comparison-row > div{padding:14px 16px;background:var(--bg2)}
+.comparison-row{font-size:13px;color:var(--t2);border-top:1px solid var(--border)}
+.comparison-row > div:first-child{font-weight:500;color:var(--t1)}
+.col-talon{color:var(--grn) !important;font-weight:600}
+.col-other{color:var(--t2)}
+
+.use-cases{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+.use-case{background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:24px}
+.use-case h3{font-family:var(--display);font-size:18px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.use-case p{font-size:14px;color:var(--t2);line-height:1.65;margin:0}
+
+.faq{display:flex;flex-direction:column;gap:8px;margin-top:24px}
+.faq-item{background:var(--bg1);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.faq-question{width:100%;padding:18px 20px;background:none;border:none;color:var(--t1);font-size:15px;font-weight:500;text-align:left;cursor:pointer;transition:background .2s}
+.faq-question:hover{background:var(--bg2)}
+.faq-answer{display:none;padding:0 20px 18px;font-size:14px;color:var(--t2);line-height:1.65}
+.faq-item.open .faq-answer{display:block}
+
+.final-cta{text-align:center;padding:80px 40px;max-width:700px;margin:0 auto}
+.final-cta h2{font-family:var(--display);font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-1px;color:var(--t1);margin-bottom:16px}
+.final-cta p{font-size:16px;color:var(--t2);margin-bottom:32px}
+
+.cta-group{display:flex;flex-direction:column;align-items:center;gap:12px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:var(--t1);color:var(--bg0);border:none;cursor:pointer}
+.btn-primary:hover{opacity:0.88}
+.btn-lg{padding:16px 32px;font-size:16px}
+.cta-note{font-family:var(--mono);font-size:11px;color:var(--t3)}
+
+footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between}
+.footer-logo a{display:flex;align-items:center;gap:8px;text-decoration:none}
+.footer-logo{font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
+.footer-tagline{font-family:var(--mono);font-size:11px;color:var(--t3)}
+
+@media (max-width: 768px) {
+  .comparison-table { font-size: 12px; }
+  nav, .seo-header, .content-section, .final-cta, footer { padding-left: 20px; padding-right: 20px; }
+}
+</style>
+
+<script>
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.parentElement.classList.toggle('open');
+  });
+});
+</script>
+
+<style is:global>
+:root{
+  --bg0:#09090B;--bg1:#0F0F12;--bg2:#16161A;--bg3:#1C1C21;--bg4:#242429;
+  --border:rgba(255,255,255,0.05);--border-md:rgba(255,255,255,0.09);--border-hi:rgba(255,255,255,0.14);
+  --t1:#EDECEA;--t2:#72727A;--t3:#3F3F46;
+  --red:#B83232;--red-lo:rgba(184,50,50,0.11);--red-bd:rgba(184,50,50,0.26);--red-glow:rgba(184,50,50,0.3);
+  --grn:#1A9E68;--grn-lo:rgba(26,158,104,0.10);--grn-bd:rgba(26,158,104,0.24);--grn-glow:rgba(26,158,104,0.28);
+  --amb:#B87A1B;--amb-lo:rgba(184,122,26,0.11);--amb-bd:rgba(184,122,26,0.26);
+  --sans:'Instrument Sans',system-ui,sans-serif;
+  --mono:'DM Mono','Courier New',monospace;
+  --display:'Syne',sans-serif;
+  --radius:8px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--t1);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+</style>

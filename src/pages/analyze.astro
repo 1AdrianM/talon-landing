@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const urlParam = Astro.url.searchParams.get('url') || '';
+const decodedUrl = urlParam ? decodeURIComponent(urlParam) : '';
+---
+
+<Layout title="Analyzing... — Talon">
+  <div class="analyze-loading">
+    <div class="loader-wrap">
+      <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
+      <div class="loader-steps">
+        <span class="loader-step active" id="ls1">Fetching prices…</span>
+        <span class="loader-step" id="ls2">Detecting changes…</span>
+        <span class="loader-step" id="ls3">Generating recommendation…</span>
+      </div>
+    </div>
+    <p class="analyze-url">{decodedUrl || 'No product URL provided'}</p>
+  </div>
+
+  <script define:vars={{ urlParam }}>
+    // This page acts as a bridge to the React app
+    // In production, this would load the React analyzer
+    // For now, show the loading state as a demo
+    
+    const steps = ['ls1', 'ls2', 'ls3'];
+    let currentStep = 0;
+    
+    if (urlParam) {
+      // Simulate analysis steps
+      const interval = setInterval(() => {
+        if (currentStep < steps.length) {
+          document.getElementById(steps[currentStep]).classList.remove('active');
+          document.getElementById(steps[currentStep]).classList.add('done');
+        }
+        currentStep++;
+        if (currentStep < steps.length) {
+          document.getElementById(steps[currentStep]).classList.add('active');
+          document.getElementById('loader-fill').style.width = (currentStep * 33) + '%';
+        } else {
+          clearInterval(interval);
+          // In production: window.location.href = '/app?url=' + urlParam
+          // For demo: show completion
+          setTimeout(() => {
+            document.querySelector('.loader-steps').innerHTML = 
+              '<span class="loader-step done">Analysis complete!</span>';
+            document.getElementById('loader-fill').style.width = '100%';
+            document.querySelector('.analyze-url').textContent = 
+              'Product: ' + decodeURIComponent(urlParam);
+            document.querySelector('.analyze-url').style.color = 'var(--grn)';
+          }, 800);
+        }
+      }, 1200);
+    }
+  </script>
+</Layout>
+
+<style>
+.analyze-loading {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+.loader-wrap {
+  max-width: 400px;
+  width: 100%;
+}
+.loader-bar {
+  height: 4px;
+  background: var(--bg3);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.loader-fill {
+  height: 100%;
+  background: var(--grn);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+.loader-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.loader-step {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--t3);
+}
+.loader-step.active {
+  color: var(--t1);
+}
+.loader-step.done {
+  color: var(--grn);
+}
+.analyze-url {
+  margin-top: 32px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--t3);
+  word-break: break-all;
+  max-width: 600px;
+}
+</style>
+
+<style is:global>
+:root{
+  --bg0:#09090B;--bg1:#0F0F12;--bg2:#16161A;--bg3:#1C1C21;
+  --border:rgba(255,255,255,0.05);
+  --t1:#EDECEA;--t2:#72727A;--t3:#3F3F46;
+  --grn:#1A9E68;
+  --sans:'Instrument Sans',system-ui,sans-serif;
+  --mono:'DM Mono','Courier New',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--t1);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+</style>

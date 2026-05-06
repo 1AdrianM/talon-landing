@@ -1,8 +1,6 @@
 <nav>
   <div class="nav-logo">
-    <div class="logo-mark">
-      <svg width="13" height="14" viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
-    </div>
+    <img src="/talon-logo.png" alt="Talon" class="nav-logo-img" />
     <span class="logo-name">Talon</span>
   </div>
   <div class="nav-right">
@@ -166,36 +164,39 @@
 <hr class="divider"/>
 
 <section id="tool">
-  <div class="tool-section">
-    <div class="tool-tag">⚡ Free · No signup required</div>
-    <h2 class="tool-title">Run a live analysis now</h2>
-    <p class="tool-sub">Paste your product and a competitor. Get instant pricing intelligence.</p>
+  <div class="tool-section bridge-section">
+    <h2 class="bridge-title">Check if you're losing money on this product</h2>
+    <p class="bridge-sub">Paste your product URL. Get your optimal price in seconds.</p>
 
-    <div id="tool-input-state">
-      <div class="tool-inputs">
-        <div class="tool-field">
-          <label class="tool-label">Your product URL</label>
-          <input class="tool-input" id="input-your" type="url" placeholder="https://yourstore.com/product"/>
-        </div>
-        <div class="tool-field">
-          <label class="tool-label">Competitor URL</label>
-          <input class="tool-input" id="input-comp" type="url" placeholder="https://competitor.com/product"/>
-        </div>
+    <form class="bridge-form" onsubmit="return handleBridgeSubmit(event)">
+      <div class="bridge-input-wrap">
+        <input 
+          type="url" 
+          id="bridge-url" 
+          class="bridge-input" 
+          placeholder="https://your-store.com/product"
+          required
+        />
+        <button type="submit" class="bridge-btn">Check if I'm losing money →</button>
       </div>
-      <button class="tool-run" onclick="runAnalysis()">→ Run analysis</button>
-      <p class="cta-note" style="margin-top:12px">Get results in seconds · Optional email to save your analysis</p>
-    </div>
+    </form>
 
-    <div id="tool-loading" style="display:none;padding:32px 0">
-      <div class="loader-wrap">
-        <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
-        <div class="loader-steps">
-          <span class="loader-step active" id="ls1">Fetching prices…</span>
-          <span class="loader-step" id="ls2">Detecting changes…</span>
-          <span class="loader-step" id="ls3">Generating recommendation…</span>
-        </div>
-      </div>
-    </div>
+    <a href="/analyze?url=https://store.nike.com/air-jordan-1" class="bridge-sample">Try with a sample product</a>
+    <p class="bridge-trust">No signup · Results in seconds</p>
+  </div>
+</section>
+
+<script>
+function handleBridgeSubmit(e) {
+  e.preventDefault();
+  const input = document.getElementById('bridge-url');
+  const url = input.value.trim();
+  if (!url) return false;
+  const encoded = encodeURIComponent(url);
+  window.location.href = '/analyze?url=' + encoded;
+  return false;
+}
+</script>
 
     <div id="tool-result" style="display:none">
       <div class="result-card">
@@ -393,10 +394,8 @@
 
 <footer>
   <div class="footer-logo">
-    <div class="logo-mark">
-      <svg width="13" height="14" viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
-    </div>
-    Talon
+    <img src="/talon-logo.png" alt="Talon" class="footer-logo-img" />
+    <span>Talon</span>
   </div>
   <span class="footer-tagline">Pricing Intelligence Engine · Built for real-time decisions</span>
   <div class="footer-links">
@@ -504,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <style>
 nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px;border-bottom:1px solid var(--border);background:rgba(9,9,11,0.85);backdrop-filter:blur(12px)}
 .nav-logo{display:flex;align-items:center;gap:9px}
-.logo-mark{width:26px;height:26px;background:var(--t1);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo-img{width:52px;height:52px;object-fit:contain;border-radius:10px}
 .logo-name{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.3px}
 .nav-right{display:flex;align-items:center;gap:16px}
 .nav-cta{font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.1px}
@@ -581,6 +580,27 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(255,255,2
 .uc-sug-action:hover{opacity:0.88}
 
 .tool-section{background:var(--bg1);border:1px solid var(--border);border-radius:16px;padding:52px 48px;text-align:center}
+
+.bridge-section{padding:56px 48px;max-width:640px;margin:0 auto}
+.bridge-title{font-family:var(--display);font-size:26px;font-weight:700;letter-spacing:-0.5px;color:var(--t1);margin-bottom:10px;line-height:1.25}
+.bridge-sub{font-size:15px;color:var(--t2);margin-bottom:28px}
+.bridge-form{margin-bottom:16px}
+.bridge-input-wrap{display:flex;gap:10px}
+.bridge-input{flex:1;padding:14px 16px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);color:var(--t1);font-size:14px;outline:none;transition:border-color .15s}
+.bridge-input::placeholder{color:var(--t3)}
+.bridge-input:focus{border-color:var(--border-hi)}
+.bridge-btn{padding:14px 24px;background:var(--t1);color:var(--bg0);border:none;border-radius:8px;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer;transition:opacity .15s}
+.bridge-btn:hover{opacity:0.88}
+.bridge-sample{display:inline-block;font-size:13px;color:var(--t2);text-decoration:none;margin-bottom:10px;transition:color .15s}
+.bridge-sample:hover{color:var(--t1)}
+.bridge-trust{font-family:var(--mono);font-size:11px;color:var(--t3)}
+
+@media (max-width:600px){
+  .bridge-section{padding:40px 24px}
+  .bridge-title{font-size:22px}
+  .bridge-input-wrap{flex-direction:column}
+  .bridge-btn{width:100%;text-align:center}
+}
 .tool-tag{font-family:var(--mono);font-size:11px;color:var(--amb);border:1px solid var(--amb-bd);background:var(--amb-lo);padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:24px;letter-spacing:0.3px}
 .tool-title{font-family:var(--display);font-size:clamp(26px,3.5vw,36px);font-weight:700;letter-spacing:-0.7px;margin-bottom:10px}
 .tool-sub{font-size:15px;color:var(--t2);margin-bottom:36px}
@@ -649,6 +669,7 @@ h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(255,255,2
 
 footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .footer-logo{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
+.footer-logo-img{width:32px;height:32px;object-fit:contain;border-radius:6px}
 .footer-tagline{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px;flex:1}
 .footer-links{display:flex;gap:20px}
 .footer-links a{font-family:var(--mono);font-size:11px;color:var(--t3);text-decoration:none;transition:color .15s}

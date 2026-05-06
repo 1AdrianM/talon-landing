@@ -1,0 +1,271 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogPost from '../components/BlogPost.astro';
+
+const title = "Why Your Products Aren't Selling: The Pricing Diagnosis Guide";
+const description = "Find out why your products aren't converting. Learn how pricing gaps, competitor moves, and market position affect your sales — and what to do about it.";
+---
+
+<Layout title={`${title} — Talon`}>
+  <BlogPost
+    title={title}
+    description={description}
+    category="Diagnosis"
+    readTime="5 min read"
+    updated="Jan 2026"
+  >
+    <div class="prose">
+      <p class="lead">You have a great product, solid photos, good reviews — but the sales aren't there. Before you blame marketing or product-market fit, check the most common culprit: your price relative to the market.</p>
+
+      <div class="scenario-strip">
+        <div class="sc-item">
+          <span class="sc-tag">Problem 1</span>
+          <div class="sc-title">You're overpriced</div>
+          <div class="sc-impact sc-impact-r">−40% conversion</div>
+          <div class="sc-desc">18% above market average. Customers compare and bounce.</div>
+        </div>
+        <div class="sc-item">
+          <span class="sc-tag">Problem 2</span>
+          <div class="sc-title">Competitor undercut</div>
+          <div class="sc-impact sc-impact-r">Position lost</div>
+          <div class="sc-desc">They dropped 15% in the last 48h. You're now the expensive option.</div>
+        </div>
+        <div class="sc-item">
+          <span class="sc-tag">Problem 3</span>
+          <div class="sc-title">Search rank drop</div>
+          <div class="sc-impact sc-impact-r">−60% traffic</div>
+          <div class="sc-desc">Price-based ranking pushed you down. Less visibility = fewer sales.</div>
+        </div>
+      </div>
+
+      <h2 id="diagnosis">How to diagnose why your product isn't selling</h2>
+      <p>Follow this three-step check to identify the real problem:</p>
+
+      <div class="step-list">
+        <div class="step"><span class="step-num">1</span><div><strong>Check your price vs. market average</strong><br/><span class="step-desc">Find 3-5 competitors selling the same product. Calculate the average. If you're more than 10% above, that's your problem.</span></div></div>
+        <div class="step"><span class="step-num">2</span><div><strong>Check recent competitor price changes</strong><br/><span class="step-desc">Did a competitor just drop their price? A 15-20% drop in the last week can tank your conversion without any change on your end.</span></div></div>
+        <div class="step"><span class="step-num">3</span><div><strong>Check your price competitiveness score</strong><br/><span class="step-desc">If you're #3 or lower in price ranking for your top keywords, you're likely losing the majority of price-comparing customers.</span></div></div>
+      </div>
+
+      <hr/>
+
+      <h2 id="common-causes">The five most common pricing problems</h2>
+      <p>These account for ~80% of "my product isn't selling" cases:</p>
+
+      <div class="skip-grid">
+        <div class="skip-cell">
+          <div class="skip-lbl skip-lbl-r">❌ These kill sales</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>15%+ above market</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Competitor recently dropped</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Higher than top 3 results</div>
+        </div>
+        <div class="skip-cell">
+          <div class="skip-lbl skip-lbl-g">✓ These protect sales</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Within 5% of market</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Monitor daily for changes</div>
+          <div class="skip-item"><span class="skip-arrow">→</span>Price match top results</div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="impact">What each pricing problem costs you</h2>
+      <p>Understanding the revenue impact helps prioritize fixes:</p>
+
+      <div class="tool-card">
+        <div class="tc-head">
+          <div class="tc-head-left"><span class="tc-rank">Estimated Impact</span><div class="tc-name">Price Gap → Revenue Loss</div><div class="tc-tagline">Based on typical eCommerce conversion rates</div></div>
+          <div class="tc-v"><span class="v-lbl">Monthly Loss</span><span class="v-badge vb-lim">At 1000 visits/mo</span></div>
+        </div>
+        <div class="tc-body">
+          <div class="tc-pc">
+            <div class="pc-col">
+              <span class="pc-lbl" style="color:var(--red-txt)">10% above market</span>
+              <div class="pc-item"><span class="dot-r">→</span>~20% fewer conversions</div>
+              <div class="pc-item"><span class="dot-r">→</span>$800-1,200 lost/month</div>
+              <div class="pc-item"><span class="dot-r">→</span>Higher cart abandonment</div>
+            </div>
+            <div class="pc-col">
+              <span class="pc-lbl" style="color:var(--red-txt)">Competitor dropped 15%</span>
+              <div class="pc-item"><span class="dot-r">→</span>~35% fewer conversions</div>
+              <div class="pc-item"><span class="dot-r">→</span>$1,500-2,500 lost/month</div>
+              <div class="pc-item"><span class="dot-r">→</span>You become the expensive option</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="fix">How to fix pricing problems</h2>
+      <ol class="step-list">
+        <li><strong>Match the market within 5%</strong> — This is the sweet spot. You're competitive but don't leave margin on the table.</li>
+        <li><strong>Monitor competitors daily</strong> — Set alerts for any price changes on your hero SKUs. You need to know within hours, not days.</li>
+        <li><strong>Adjust based on trend</strong> — If competitor's drop is temporary (flash sale), wait. If it's permanent, match or beat.</li>
+        <li><strong>Differentiate beyond price</strong> — Free shipping, bundles, faster delivery. These justify a 5-10% premium.</li>
+      </ol>
+
+      <hr/>
+
+      <h2 id="who">Who experiences this most</h2>
+
+      <div class="who-grid">
+        <div class="who-card">
+          <span class="who-tag">New launches</span>
+          <div class="who-title">No price benchmark</div>
+          <div class="who-desc">You set a price without checking competitors.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Seasonal products</span>
+          <div class="who-title">Rapid market shifts</div>
+          <div class="who-desc">Prices move fast, you didn't keep up.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Resellers</span>
+          <div class="who-title">Thin margin pressure</div>
+          <div class="who-desc">Small price gaps = big margin impact.</div>
+        </div>
+        <div class="who-card">
+          <span class="who-tag">Any seller</span>
+          <div class="who-title who-tool-grn">Competitive market</div>
+          <div class="who-desc">If you have rivals, this applies to you.</div>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h2 id="takeaway">The bottom line</h2>
+      <p>Before you spend another dollar on ads or redesign your listing, check your price. A 15% gap above market can cut your conversion in half — no amount of marketing compensates for that.</p>
+      <p><strong>Get a free price diagnosis.</strong> Paste your product and a competitor. Within seconds, you'll see the gap and what action to take.</p>
+
+      <div class="article-cta">
+        <div class="cta-left">
+          <span class="cta-eyebrow">Free diagnosis — no signup</span>
+          <div class="cta-title">Find out why your product isn't selling</div>
+          <div class="cta-sub">Paste your product URL and a competitor. Get a clear gap analysis and recommended action.</div>
+        </div>
+        <div class="cta-right">
+          <a href="/#tool" class="cta-btn">→ Diagnose now</a>
+          <span class="cta-note">No account · No credit card</span>
+        </div>
+      </div>
+    </div>
+
+    <div slot="sidebar">
+      <div class="sidebar-cta">
+        <span class="sb-title">Free price diagnosis</span>
+        <div class="sb-desc">Paste your product and a competitor. Get instant gap analysis.</div>
+        <a href="/#tool" class="sb-btn">→ Diagnose now</a>
+        <span class="sb-note">No signup · No credit card</span>
+      </div>
+
+      <div class="sidebar-toc">
+        <div class="sb-lbl">In this guide</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#diagnosis"><span class="toc-num">01</span>How to diagnose</a></li>
+          <li class="toc-item"><a href="#common-causes"><span class="toc-num">02</span>Common problems</a></li>
+          <li class="toc-item"><a href="#impact"><span class="toc-num">03</span>Revenue impact</a></li>
+          <li class="toc-item"><a href="#fix"><span class="toc-num">04</span>How to fix</a></li>
+          <li class="toc-item"><a href="#who"><span class="toc-num">05</span>Who experiences this</a></li>
+          <li class="toc-item"><a href="#takeaway"><span class="toc-num">06</span>Bottom line</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-related">
+        <div class="sb-lbl">Related articles</div>
+        <div class="rel-list">
+          <div class="rel-item"><span class="rel-cat">Strategy</span><a href="/best-competitor-price-tracking-tools" class="rel-title">Best Competitor Price Tracking Tools</a></div>
+          <div class="rel-item"><span class="rel-cat">Shopify</span><a href="/shopify-competitor-monitoring-guide" class="rel-title">Shopify Competitor Monitoring Guide</a></div>
+          <div class="rel-item"><span class="rel-cat">Amazon</span><a href="/best-amazon-price-tracking-tools" class="rel-title">Best Amazon Price Tracking Tools</a></div>
+        </div>
+      </div>
+    </div>
+  </BlogPost>
+</Layout>
+
+<style>
+.prose{display:flex;flex-direction:column;gap:0}
+.prose h2{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:-0.4px;color:var(--t1);margin:48px 0 16px;line-height:1.25;scroll-margin-top:80px}
+.prose p{color:var(--t2);margin-bottom:18px;font-size:var(--body-size);line-height:var(--body-lh)}
+.prose strong{color:var(--t1);font-weight:600}
+.prose hr{border:none;border-top:1px solid var(--border);margin:40px 0}
+.prose ol{list-style:none;counter-reset:steps;display:flex;flex-direction:column;gap:16px;padding:0}
+
+.lead{font-size:19px;color:var(--t2);line-height:1.65;margin-bottom:24px}
+
+.scenario-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:0 0 40px}
+.sc-item{background:var(--bg1);padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.sc-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3)}
+.sc-title{font-size:15px;font-weight:600;color:var(--t1);letter-spacing:-0.1px}
+.sc-impact{font-family:var(--mono);font-size:13px;font-weight:500;padding:3px 9px;border-radius:4px;width:fit-content;margin-top:2px}
+.sc-impact-r{background:var(--red-lo);color:var(--red-txt);border:1px solid var(--red-bd)}
+.sc-desc{font-size:13px;color:var(--t3);line-height:1.5}
+
+.step-list{list-style:none;counter-reset:steps;display:flex;flex-direction:column;gap:18px;padding:0;margin:24px 0}
+.step-list li{counter-increment:steps;display:flex;align-items:flex-start;gap:14px;font-size:14.5px;color:var(--t2);line-height:1.6}
+.step-list li strong{color:var(--t1);font-weight:600}
+
+.step{display:flex;align-items:flex-start;gap:14px}
+.step-num{font-family:var(--mono);font-size:11px;background:var(--bg3);color:var(--t3);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-desc{font-size:13.5px;color:var(--t3);margin-top:4px;display:block}
+
+.skip-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:24px 0}
+.skip-cell{background:var(--bg2);padding:26px 28px}
+.skip-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.skip-lbl-r{color:var(--red-txt)}
+.skip-lbl-g{color:var(--grn-txt)}
+.skip-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--t2);margin-bottom:10px}
+.skip-arrow{color:var(--t3);flex-shrink:0}
+
+.tool-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:28px 0;background:var(--bg1)}
+.tc-head{padding:22px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:16px}
+.tc-head-left{display:flex;flex-direction:column;gap:5px}
+.tc-rank{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.tc-name{font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:-0.3px;color:var(--t1)}
+.tc-tagline{font-size:13.5px;color:var(--t2);margin-top:2px}
+.tc-v{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.v-lbl{font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.v-badge{font-family:var(--mono);font-size:12px;font-weight:500;padding:4px 11px;border-radius:5px;background:var(--bg3);color:var(--t3);border:1px solid var(--border)}
+.tc-body{padding:22px 24px;display:flex;flex-direction:column;gap:16px}
+.tc-pc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pc-col{display:flex;flex-direction:column;gap:8px}
+.pc-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px}
+.pc-item{display:flex;align-items:flex-start;gap:7px;font-size:13px;color:var(--t2);line-height:1.5}
+.dot-r{color:var(--red-txt);font-size:11px;margin-top:3px}
+
+.who-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:24px 0}
+.who-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.who-tag{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.who-title{font-size:14px;font-weight:600;color:var(--t1)}
+.who-tool-grn{color:var(--grn-txt);font-family:var(--mono);font-size:11px}
+.who-desc{font-size:12.5px;color:var(--t2);line-height:1.5}
+
+.article-cta{background:var(--bg2);border:1px solid var(--border-md);border-radius:12px;padding:36px 40px;margin:48px 0 0;display:flex;justify-content:space-between;gap:32px}
+.cta-left{display:flex;flex-direction:column;gap:8px;flex:1}
+.cta-eyebrow{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.cta-title{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:-0.4px;color:var(--t1);line-height:1.2}
+.cta-sub{font-size:14px;color:var(--t2);line-height:1.5}
+.cta-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:var(--t1);color:var(--bg0);border:none;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.cta-note{font-family:var(--mono);font-size:10px;color:var(--t3)}
+
+.sidebar-cta{background:var(--bg2);border:1px solid var(--border-md);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.sb-title{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--t1)}
+.sb-desc{font-size:12.5px;color:var(--t2);line-height:1.55}
+.sb-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;background:var(--t1);color:var(--bg0);border:none;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none}
+.sb-note{font-family:var(--mono);font-size:10px;color:var(--t3);text-align:center}
+
+.sidebar-toc{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.sb-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:14px}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-item a{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--t3);text-decoration:none;padding:5px 0;line-height:1.45}
+.toc-item a:hover{color:var(--t2)}
+.toc-num{font-family:var(--mono);font-size:10px;flex-shrink:0;margin-top:2px}
+
+.sidebar-related{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.rel-list{display:flex;flex-direction:column}
+.rel-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.rel-cat{font-family:var(--mono);font-size:9.5px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.rel-title{font-size:13px;color:var(--t2);text-decoration:none;display:block;margin-top:4px}
+.rel-title:hover{color:var(--t1)}
+</style>

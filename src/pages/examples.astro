@@ -1,0 +1,603 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Predefined examples - using popular sites that work well with scraping
+const examples = [
+  {
+    id: 'amazon',
+    name: 'Amazon Product',
+    description: 'Track electronics, books, or any Amazon product price',
+    domain: 'amazon.com',
+    icon: 'shopping-cart',
+    url: 'https://www.amazon.com/dp/B0CZ3MVR5Z',
+    selector: '.a-price-whole, .a-offscreen',
+    tip: 'Look for .a-price-whole or .a-offscreen class'
+  },
+  {
+    id: 'bestbuy',
+    name: 'Best Buy Product',
+    description: 'Monitor electronics and appliances from Best Buy',
+    domain: 'bestbuy.com',
+    icon: 'monitor',
+    url: 'https://www.bestbuy.com/site/apple-airpods-4-white/6400727.p',
+    selector: '.sr-text, .pricing-price__range-current',
+    tip: 'Look for .sr-text near the price'
+  },
+  {
+    id: 'target',
+    name: 'Target Product',
+    description: 'Track household items, groceries, and electronics',
+    domain: 'target.com',
+    icon: 'package',
+    url: 'https://www.target.com/p/apple-airpods-4/-/A-94379643',
+    selector: '[data-test="product-price"], .styles__CurrentPrice-sc-1mh0h75-0',
+    tip: 'Use data-test="product-price" attribute'
+  },
+  {
+    id: 'walmart',
+    name: 'Walmart Product',
+    description: 'Monitor prices across millions of products',
+    domain: 'walmart.com',
+    icon: 'tag',
+    url: 'https://www.walmart.com/ip/Apple-AirPods-4/5709364024',
+    selector: '[itemprop="price"], .price-current',
+    tip: 'Look for itemprop="price" attribute'
+  },
+  {
+    id: 'newegg',
+    name: 'Newegg Product',
+    description: 'Track computer hardware and electronics',
+    domain: 'newegg.com',
+    icon: 'cpu',
+    url: 'https://www.newegg.com/apple-airpods-4/p/N82E16816818634',
+    selector: '.price-current, .product-price',
+    tip: 'Look for .price-current class'
+  },
+  {
+    id: 'custom',
+    name: 'Your Own URL',
+    description: 'Track any product page with a custom CSS selector',
+    domain: 'any-site.com',
+    icon: 'globe',
+    url: '',
+    selector: '.price',
+    tip: 'Right-click price → Inspect → Copy selector'
+  }
+];
+
+// Icons as SVG
+const icons: Record<string, string> = {
+  'shopping-cart': '<path d="M9 2L6 9H3l2-7h4zM6 9h13l-2 7H8L6 9zM8 16a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM17 16a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>',
+  'monitor': '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+  'package': '<mline x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>',
+  'tag': '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>',
+  'cpu': '<rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>',
+  'globe': '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>'
+};
+---
+
+<Layout title="Examples - Talon Price Tracking API">
+  <nav>
+    <div class="container">
+      <a href="/" class="logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M4 14L14 4L24 14L14 24L4 14Z" fill="url(#grad)" />
+          <path d="M9 14L14 9L19 14L14 19L9 14Z" fill="#0a0e27" />
+          <defs>
+            <linearGradient id="grad" x1="4" y1="4" x2="24" y2="24">
+              <stop stop-color="#06b6d4" />
+              <stop offset="1" stop-color="#7c3aed" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>TALON</span>
+      </a>
+      <div class="nav-right">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/try" class="nav-link">Try Demo</a>
+        <a href="/docs" class="nav-link">Docs</a>
+        <a href="https://rapidapi.com/1AdrianM/api/price-tracking-api" target="_blank" class="btn-primary">Get API Key</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="examples-page">
+    <div class="container">
+      <!-- Header -->
+      <div class="page-header">
+        <span class="badge">Quick Start</span>
+        <h1>Example Selectors</h1>
+        <p class="subtitle">Pre-configured examples to help you get started. Click "Try This" to test instantly.</p>
+      </div>
+
+      <!-- Examples Grid -->
+      <div class="examples-grid">
+        {examples.map((example) => (
+          <div class="example-card" data-id={example.id}>
+            <div class="card-header">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <Fragment set:html={icons[example.icon]} />
+                </svg>
+              </div>
+              <div class="card-title">
+                <h3>{example.name}</h3>
+                <span class="domain">{example.domain}</span>
+              </div>
+            </div>
+
+            <p class="card-description">{example.description}</p>
+
+            <div class="card-details">
+              <div class="detail-row">
+                <span class="detail-label">URL</span>
+                <span class="detail-value url">{example.url || 'Your custom URL'}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Selector</span>
+                <code class="detail-value selector">{example.selector}</code>
+              </div>
+              <div class="detail-row tip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="16" x2="12" y2="12"/>
+                  <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                <span>{example.tip}</span>
+              </div>
+            </div>
+
+            <a
+              href={example.id === 'custom'
+                ? '/try'
+                : `/try?url=${encodeURIComponent(example.url)}&selector=${encodeURIComponent(example.selector)}`
+              }
+              class="try-button"
+            >
+              {example.id === 'custom' ? 'Try Custom' : 'Try This'}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- How to find selectors section -->
+      <div class="guide-section">
+        <h2>How to Find CSS Selectors</h2>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <div class="step-number">1</div>
+            <h4>Right-click the price</h4>
+            <p>Go to any product page and right-click on the price element.</p>
+          </div>
+          <div class="guide-step">
+            <div class="step-number">2</div>
+            <h4>Select "Inspect"</h4>
+            <p>This opens the browser's developer tools with the element highlighted.</p>
+          </div>
+          <div class="guide-step">
+            <div class="step-number">3</div>
+            <h4>Copy selector</h4>
+            <p>Right-click the highlighted element → Copy → Copy selector.</p>
+          </div>
+          <div class="guide-step">
+            <div class="step-number">4</div>
+            <h4>Paste and test</h4>
+            <p>Paste the selector into Talon and click "Track Price".</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-section">
+        <h2>Ready to build?</h2>
+        <p>Start tracking prices programmatically with the Talon API.</p>
+        <div class="cta-buttons">
+          <a href="/try" class="btn-secondary">Try Demo</a>
+          <a href="https://rapidapi.com/1AdrianM/api/price-tracking-api" target="_blank" class="btn-primary">Get API Key</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="examples-footer">
+    <div class="container">
+      <p><a href="/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Home</a></p>
+    </div>
+  </footer>
+
+  <style>
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      background: rgba(10, 14, 39, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #f1f5f9;
+      text-decoration: none;
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, #06b6d4, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: #f1f5f9;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #06b6d4, #7c3aed);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #f1f5f9;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      text-decoration: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(148, 163, 184, 0.4);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    /* Page Layout */
+    .examples-page {
+      min-height: 100vh;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      color: #06b6d4;
+      padding: 0.4rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .page-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Examples Grid */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+    }
+
+    .example-card {
+      background: rgba(13, 17, 23, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .example-card:hover {
+      border-color: rgba(6, 182, 212, 0.2);
+      background: rgba(13, 17, 23, 0.8);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(124, 58, 237, 0.15));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #06b6d4;
+    }
+
+    .card-title h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      margin-bottom: 0.1rem;
+    }
+
+    .domain {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    .card-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .detail-label {
+      color: #64748b;
+      min-width: 60px;
+      font-weight: 500;
+    }
+
+    .detail-value {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .detail-value.url {
+      color: #94a3b8;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .detail-value.selector {
+      background: rgba(6, 182, 212, 0.1);
+      color: #06b6d4;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+    }
+
+    .detail-row.tip {
+      margin-top: 0.25rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.06);
+      color: #64748b;
+    }
+
+    .detail-row.tip svg {
+      flex-shrink: 0;
+      color: #06b6d4;
+    }
+
+    .try-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      color: #f1f5f9;
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .try-button:hover {
+      background: linear-gradient(135deg, #06b6d4, #7c3aed);
+      border-color: transparent;
+    }
+
+    /* Guide Section */
+    .guide-section {
+      padding: 3rem 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.08);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+      margin-bottom: 3rem;
+    }
+
+    .guide-section h2 {
+      text-align: center;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .guide-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .guide-step {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(124, 58, 237, 0.15));
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #06b6d4;
+      margin: 0 auto 1rem;
+    }
+
+    .guide-step h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .guide-step p {
+      font-size: 0.85rem;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .cta-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-section p {
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    /* Footer */
+    .examples-footer {
+      padding: 2rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.06);
+      text-align: center;
+    }
+
+    .examples-footer a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .examples-footer a:hover {
+      color: #f1f5f9;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .guide-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .examples-page {
+        padding: 7rem 1.5rem 3rem;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .guide-steps {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .nav-right {
+        display: none;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</Layout>

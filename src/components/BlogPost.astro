@@ -1,0 +1,137 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  category: string;
+  readTime: string;
+  updated?: string;
+}
+
+const { title, description, category, readTime, updated } = Astro.props;
+---
+
+<nav class="topnav">
+  <a href="/" class="nav-logo">
+    <div class="logo-mark">
+      <svg width="13" height="14" viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
+    </div>
+    <span class="logo-name">Talon</span>
+  </a>
+  <div class="nav-links">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/resources" class="nav-link active">Resources</a>
+  </div>
+  <a href="/#tool" class="nav-cta">Try Free →</a>
+</nav>
+
+<div class="page">
+  <div class="breadcrumb">
+    <a href="/" class="bc-link">Home</a>
+    <span class="bc-sep">/</span>
+    <a href="/resources" class="bc-link">Resources</a>
+    <span class="bc-sep">/</span>
+    <span class="bc-current">{title.toLowerCase()}</span>
+  </div>
+
+  <header class="article-header">
+    <div class="article-cat">{category}</div>
+    <h1 class="article-h1">{title}</h1>
+    <p class="article-deck">{description}</p>
+    <div class="article-meta">
+      <div class="meta-author">
+        <div class="meta-avatar">T</div>
+        <span class="meta-name">Talon Team</span>
+      </div>
+      <div class="meta-sep"></div>
+      <span class="meta-item">📅 May 2026</span>
+      <div class="meta-sep"></div>
+      <span class="meta-item">⏱ {readTime}</span>
+      {updated && <><div class="meta-sep"></div><span class="meta-updated">Updated {updated}</span></>}
+    </div>
+  </header>
+
+  <div class="article-layout">
+    <article class="article-body">
+      <slot />
+    </article>
+
+    <aside class="article-sidebar">
+      <slot name="sidebar" />
+    </aside>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">
+    <div class="logo-mark">
+      <svg width="13" height="14" viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
+    </div>
+    Talon
+  </div>
+  <span class="footer-tagline">Pricing Intelligence Engine · Built for real-time decisions</span>
+</footer>
+
+<style is:global>
+:root{
+  --bg0:#09090B;--bg1:#0F0F12;--bg2:#16161A;--bg3:#1C1C21;--bg4:#242429;
+  --border:rgba(255,255,255,0.055);--border-md:rgba(255,255,255,0.09);--border-hi:rgba(255,255,255,0.16);
+  --t1:#EDECEA;--t2:#9A9A9A;--t3:#4A4A52;--t4:#2E2E34;
+  --red:#B83232;--red-lo:rgba(184,50,50,0.12);--red-bd:rgba(184,50,50,0.28);--red-txt:#D94040;
+  --grn:#1A9E68;--grn-lo:rgba(26,158,104,0.12);--grn-bd:rgba(26,158,104,0.28);--grn-txt:#1DB87A;
+  --amb:#B87A1B;--amb-lo:rgba(184,122,26,0.12);--amb-bd:rgba(184,122,26,0.28);--amb-txt:#D4921E;
+  --sans:'Instrument Sans',system-ui,sans-serif;
+  --mono:'DM Mono','Courier New',monospace;
+  --display:'Syne',sans-serif;
+  --body-size:17px;
+  --body-lh:1.75;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--t1);font-family:var(--sans);font-size:var(--body-size);line-height:var(--body-lh);-webkit-font-smoothing:antialiased}
+</style>
+
+<style>
+.topnav{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(9,9,11,0.9);backdrop-filter:blur(10px)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo-mark{width:36px;height:36px;background:var(--t1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-name{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{font-size:13px;color:var(--t3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:color .15s}
+.nav-link:hover{color:var(--t2)}
+.nav-link.active{color:var(--t2)}
+.nav-cta{font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer;text-decoration:none}
+
+.page{max-width:1160px;margin:0 auto;padding:0 32px}
+
+.breadcrumb{display:flex;align-items:center;gap:8px;padding:24px 0 0;font-family:var(--mono);font-size:11px;color:var(--t3)}
+.bc-sep{color:var(--t4)}
+.bc-link{color:var(--t3);text-decoration:none}
+.bc-current{color:var(--t2)}
+
+.article-header{padding:28px 0 36px;max-width:780px}
+.article-cat{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--amb-txt);background:var(--amb-lo);border:1px solid var(--amb-bd);padding:4px 12px;border-radius:20px;margin-bottom:20px;letter-spacing:0.3px}
+.article-h1{font-family:var(--display);font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--t1);margin-bottom:18px}
+.article-deck{font-size:19px;color:var(--t2);line-height:1.6;max-width:640px;margin-bottom:24px;font-weight:400}
+.article-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.meta-author{display:flex;align-items:center;gap:8px}
+.meta-avatar{width:28px;height:28px;border-radius:50%;background:var(--bg4);border:1px solid var(--border-md);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--t2)}
+.meta-name{font-size:13px;font-weight:500;color:var(--t2)}
+.meta-sep{width:1px;height:14px;background:var(--border-md)}
+.meta-item{font-family:var(--mono);font-size:11px;color:var(--t3);display:flex;align-items:center;gap:5px}
+.meta-updated{font-family:var(--mono);font-size:11px;color:var(--t3)}
+
+.article-layout{display:grid;grid-template-columns:1fr 268px;gap:64px;align-items:start;padding-bottom:80px}
+.article-body{min-width:0}
+.article-sidebar{position:sticky;top:72px;display:flex;flex-direction:column;gap:20px}
+
+.footer{border-top:1px solid var(--border);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;max-width:100%}
+.footer-logo{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
+.footer-tagline{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px}
+
+@media (max-width: 900px) {
+  .article-layout { grid-template-columns: 1fr; }
+  .article-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
+}
+@media (max-width: 640px) {
+  .topnav, .page, .footer { padding-left: 20px; padding-right: 20px; }
+}
+</style>

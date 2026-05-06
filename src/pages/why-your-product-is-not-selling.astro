@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SeoPage from '../components/SeoPage.astro';
+
+const pageTitle = "Why Your Product Is Not Selling — Price Analysis";
+const pageDescription = "Find out why your products aren't selling. Analyze your pricing vs competitors and get actionable recommendations to recover sales.";
+---
+
+<Layout title={pageTitle}>
+  <SeoPage
+    title={pageTitle}
+    description={pageDescription}
+    slug="why-your-product-is-not-selling"
+    heroEyebrow="Price Diagnosis"
+    heroHeadline="Your product isn't selling? It's probably your price."
+    heroSubheadline="Find out exactly why you're losing sales. Compare your pricing to competitors and get a clear action plan to recover your revenue."
+    ctaPrimary="Diagnose Your Product"
+    insightTitle="Common Price Problems We Detect"
+    insightData={[
+      { label: "You're Overpriced", value: "+18%", sub: "Above market average" },
+      { label: "Competitor Dropped", value: "−15%", sub: "Last 48 hours" },
+      { label: "Position Lost", value: "#1 → #4", sub: "In search results" }
+    ]}
+    insightText="83% of 'not selling' products have a pricing issue. Either you're overpriced vs competitors, or a competitor recently dropped their price and you're now the expensive option."
+    insightImpact="Fixing your price could recover 30-60% of lost sales. The average store loses $2,000-10,000/month to pricing errors."
+    actionTitle="How to fix it"
+    actionText="Analyze your product now. Get a clear recommendation: match price, increase price, or monitor competitors. No more guessing."
+  />
+</Layout>
