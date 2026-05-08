@@ -1,5 +1,5 @@
 ---
-import { Package, ShoppingCart, Footprints, Search, Trophy, Lightbulb, TrendingUp, TrendingDown } from '@lucide/astro';
+import { Package, ShoppingCart, Footprints, Search, Trophy, Lightbulb, TrendingUp, TrendingDown, Zap, Brain, Target, Lock } from '@lucide/astro';
 
 const { name, size = 16, class: className } = Astro.props;
 
@@ -12,6 +12,10 @@ const icons = {
   'lightbulb': Lightbulb,
   'trending-up': TrendingUp,
   'trending-down': TrendingDown,
+  'zap': Zap,
+  'brain': Brain,
+  'target': Target,
+  'lock': Lock,
 };
 
 const IconComponent = icons[name];
