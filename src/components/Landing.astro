@@ -2,103 +2,110 @@
 import Icon from './Icon.astro';
 ---
 
-<header class="site-header">
-  <div class="header-inner">
-    <a href="/" class="header-logo">
-      <img src="/talon-logo.png" alt="Talon" class="logo-img" />
-      <span class="logo-text">Talon</span>
-    </a>
-    <nav class="header-nav">
-      <a href="#product" class="nav-link">Product</a>
-      <a href="#how" class="nav-link">How it works</a>
-      <a href="/resources" class="nav-link">Resources</a>
-    </nav>
-    <div class="header-right">
-      <button class="btn-primary" onclick="document.getElementById('product-url').focus(); document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">
-        Analyze your product <span class="arr">→</span>
-      </button>
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
     </div>
+    <span class="nav-logo-name">Talon</span>
+  </a>
+  <div class="nav-links">
+    <a href="#how" class="nav-link">Product</a>
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="/resources" class="nav-link">Resources</a>
   </div>
-</header>
+  <a href="#tool" class="nav-cta">Analyze your product →</a>
+</nav>
 
-<section class="hero-split">
+<section class="hero" id="tool">
   <div class="hero-left">
     <div class="hero-eyebrow">Your competitors are adjusting prices right now</div>
-    <h1>Stop losing sales to competitor pricing.</h1>
+    <h1 class="hero-h1">Stop losing sales to competitor pricing.</h1>
     <p class="hero-sub">Paste your URL. See what you're losing — and the exact price to set.</p>
-    <div class="hero-icp">
-      <span>Shopify stores</span>
-      <span class="icp-div">·</span>
-      <span>Amazon sellers</span>
-      <span class="icp-div">·</span>
-      <span>DTC brands</span>
+    <div class="hero-form">
+      <label class="hero-input-label">Add product</label>
+      <div class="hero-input-wrap">
+        <input class="hero-input" type="url" placeholder="https://yourstore.com/product" id="product-url"/>
+        <button class="hero-btn" onclick="handleSubmit()">Analyze →</button>
+      </div>
     </div>
-    <div class="analyzer-box" id="analyzer">
-      <form class="analyzer-form" onsubmit="return handleSubmit(event)">
-        <input type="url" id="product-url" class="analyzer-input" placeholder="https://yourstore.com/product" required />
-        <button type="submit" class="analyzer-btn">Analyze →</button>
-      </form>
-      <p class="analyzer-note">No signup required · Results in seconds</p>
-    </div>
+    <span class="hero-trust">No signup required · Results in seconds</span>
   </div>
   <div class="hero-right">
     <div class="live-feed">
-      <div class="feed-header">
-        <span class="feed-title">Live Pricing Feed</span>
-        <span class="feed-status"><span class="status-dot"></span> <span class="status-text">4 products</span></span>
+      <div class="lf-header">
+        <span class="lf-title">Live Pricing Feed</span>
+        <span class="lf-live"><span class="lf-dot"></span> Tracking 4 products</span>
       </div>
-      <div class="feed-item feed-item-red">
-        <div class="feed-time">2 min ago</div>
-        <div class="feed-store">NikeStore.com</div>
-        <div class="feed-action">Dropped Air Force 1 '07 by 12%</div>
-        <div class="feed-impact">Est. impact: <span class="impact-red">-$38/day</span></div>
-        <div class="feed-suggestion"><span class="sug-label">Talon suggests:</span><span class="sug-action">Match to $109 →</span></div>
-        <div class="feed-meta"><span class="conf">92% confidence</span></div>
+      <div class="lf-event lf-event-r">
+        <div class="lf-row1">
+          <div>
+            <div class="lf-store">NikeStore.com</div>
+            <div class="lf-desc">Dropped Air Force 1'07 by 12%</div>
+          </div>
+          <span class="lf-time">2 min ago</span>
+        </div>
+        <div class="lf-row2">
+          <span class="lf-impact lf-impact-r">−$38/day</span>
+          <span class="lf-suggestion"><span class="lf-suggestion-label">Talon suggests</span> Match to $109 →</span>
+        </div>
+        <span class="lf-conf">92% confidence</span>
       </div>
-      <div class="feed-item feed-item-green">
-        <div class="feed-time">8 min ago</div>
-        <div class="feed-store">FinishLine</div>
-        <div class="feed-action">Raised Jordan 1 by 5%</div>
-        <div class="feed-impact">Est. impact: <span class="impact-green">+$22/day</span></div>
-        <div class="feed-suggestion"><span class="sug-label">Talon suggests:</span><span class="sug-action">Raise to $145 →</span></div>
-        <div class="feed-meta"><span class="conf">87% confidence</span></div>
+      <div class="lf-event lf-event-g">
+        <div class="lf-row1">
+          <div>
+            <div class="lf-store">FinishLine</div>
+            <div class="lf-desc">Raised Jordan 1 by 5%</div>
+          </div>
+          <span class="lf-time">8 min ago</span>
+        </div>
+        <div class="lf-row2">
+          <span class="lf-impact lf-impact-g">+$22/day</span>
+          <span class="lf-suggestion"><span class="lf-suggestion-label">Talon suggests</span> Raise to $145 →</span>
+        </div>
+        <span class="lf-conf">87% confidence</span>
       </div>
-      <div class="feed-item feed-item-amber">
-        <div class="feed-time">14 min ago</div>
-        <div class="feed-store">StockX</div>
-        <div class="feed-action">Supply squeeze detected - Yeezy 350</div>
-        <div class="feed-impact">Market moving upward</div>
-        <div class="feed-suggestion"><span class="sug-label">Talon suggests:</span><span class="sug-action">Increase stock before price jumps →</span></div>
-        <div class="feed-meta"><span class="conf">78% confidence</span></div>
+      <div class="lf-event lf-event-a">
+        <div class="lf-row1">
+          <div>
+            <div class="lf-store">StockX</div>
+            <div class="lf-desc">Supply squeeze detected — Yeezy 350</div>
+          </div>
+          <span class="lf-time">14 min ago</span>
+        </div>
+        <div class="lf-row2">
+          <span class="lf-impact lf-impact-a">Market moving</span>
+          <span class="lf-suggestion"><span class="lf-suggestion-label">Talon suggests</span> Increase stock →</span>
+        </div>
+        <span class="lf-conf">78% confidence</span>
       </div>
-      <div class="feed-item feed-item-green">
-        <div class="feed-time">32 min ago</div>
-        <div class="feed-store">JD Sports</div>
-        <div class="feed-action">Restocked Air Max 90</div>
-        <div class="feed-impact">Est. impact: <span class="impact-green">+$15/day</span></div>
-        <div class="feed-suggestion"><span class="sug-label">Talon suggests:</span><span class="sug-action">Raise to $165 →</span></div>
-        <div class="feed-meta"><span class="conf">85% confidence</span></div>
+      <div class="lf-event lf-event-g">
+        <div class="lf-row1">
+          <div>
+            <div class="lf-store">JD Sports</div>
+            <div class="lf-desc">Restocked Air Max 90</div>
+          </div>
+          <span class="lf-time">30 min ago</span>
+        </div>
+        <div class="lf-row2">
+          <span class="lf-impact lf-impact-g">+$15/day</span>
+          <span class="lf-suggestion"><span class="lf-suggestion-label">Talon suggests</span> Raise to $165 →</span>
+        </div>
+        <span class="lf-conf">83% confidence</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="stats-row" style="background:var(--bg1)">
-  <div class="stat-item">
-    <span class="stat-num">2,400+</span>
-    <span class="stat-label">Stores analyzed</span>
+<div class="logos-bar">
+  <span class="logos-label">Works with</span>
+  <div class="logos-items">
+    <span>Shopify</span>
+    <span>WooCommerce</span>
+    <span>BigCommerce</span>
+    <span>Magento</span>
   </div>
-  <div class="stat-divider"></div>
-  <div class="stat-item">
-    <span class="stat-num">&lt; 60s</span>
-    <span class="stat-label">To first insight</span>
-  </div>
-  <div class="stat-divider"></div>
-  <div class="stat-item">
-    <span class="stat-num">$1.2M</span>
-    <span class="stat-label">Revenue protected</span>
-  </div>
-</section>
+</div>
 
 <div class="signal-stack-section">
   <div class="ss-wrap" id="ss-wrap">
@@ -111,258 +118,254 @@ import Icon from './Icon.astro';
   <p class="ss-caption">Talon detects every signal. Tells you what to do with each one.</p>
 </div>
 
-<section class="logos-bar">
-  <span class="logos-label">Works with</span>
-  <div class="logos-track">
-    <span>Shopify</span>
-    <span>WooCommerce</span>
-    <span>BigCommerce</span>
-    <span>Magento</span>
-  </div>
-</section>
-
-<section class="how-it-works section-textured" id="how">
-  <div class="section-header">
-    <span class="section-tag">How it works</span>
-    <h2>Three steps. One action.</h2>
-  </div>
-
+<section class="section" id="how">
+  <div class="section-tag">How it works</div>
+  <div class="section-title">Three steps. One action.</div>
   <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-num">01</div>
+    <div class="step">
+      <span class="step-num step-num-1">01</span>
       <div class="step-title">Paste your product</div>
-      <div class="step-desc">Enter any product URL. Talon instantly maps your competitors and starts tracking.</div>
+      <div class="step-desc">Enter any product URL. Talon instantly maps your competitors and starts tracking in real time.</div>
     </div>
-    <div class="step-card">
-      <div class="step-num">02</div>
+    <div class="step">
+      <span class="step-num step-num-2">02</span>
       <div class="step-title">Detect pricing gaps</div>
-      <div class="step-desc">See every competitor price change in real time. Know exactly where you stand.</div>
+      <div class="step-desc">See every competitor price change the moment it happens. Know exactly where you stand in the market.</div>
     </div>
-    <div class="step-card">
-      <div class="step-num">03</div>
+    <div class="step">
+      <span class="step-num step-num-3">03</span>
       <div class="step-title">Get live actions</div>
-      <div class="step-desc">Receive specific pricing recommendations with estimated revenue impact.</div>
+      <div class="step-desc">Receive specific pricing recommendations with estimated revenue impact. No dashboards. No guessing.</div>
     </div>
   </div>
 </section>
 
-<section class="problem-section" style="background:var(--bg0)">
-  <div class="problem-content">
-    <p class="problem-lead">Most stores don't lose money because of bad pricing.</p>
-    <p class="problem-body">They lose money because they react too late. By the time you notice a competitor dropped their price, you've already lost the sale.</p>
+<div class="problem-wrap">
+  <div class="problem-block">
+    <p class="problem-p">
+      <strong>Most stores don't lose money because of bad pricing.</strong><br/>
+      They lose money because they react too late.<br/><br/>
+      By the time you notice a competitor dropped their price,<br/>
+      you've already lost the sale.
+    </p>
     <div class="problem-punch">The sale is gone before you even noticed.</div>
   </div>
-</section>
+</div>
 
-<section class="what-section">
-  <div class="section-header">
-    <span class="section-tag">What Talon does</span>
-    <h2>Not just data.<br/><em>Decisions.</em></h2>
-    <p class="section-sub">Talon doesn't just track prices. It tells you what changed, why it changed, and what to do — in seconds.</p>
-  </div>
+<section class="section bg-textured">
+  <div class="section-tag">What Talon does</div>
+  <div class="section-title">Not just data.<br/><em style="color:var(--t1);font-style:normal;font-weight:800">Decisions.</em></div>
   <div class="what-grid">
     <div class="what-item">
-      <div class="what-num">01</div>
+      <span class="what-num what-num-1">01</span>
       <div class="what-title">What changed</div>
       <div class="what-desc">Competitor price movements detected the moment they happen — not hours later.</div>
     </div>
     <div class="what-item">
-      <div class="what-num">02</div>
+      <span class="what-num what-num-2">02</span>
       <div class="what-title">Why it changed</div>
       <div class="what-desc">AI reasons through the signal — sale clearance, supply shock, seasonal shift — and explains it plainly.</div>
     </div>
     <div class="what-item">
-      <div class="what-num">03</div>
+      <span class="what-num what-num-3">03</span>
       <div class="what-title">What to do next</div>
-      <div class="what-desc">One clear action with the estimated dollar impact. No dashboards. No spreadsheets. No guessing.</div>
+      <div class="what-desc">One clear action with the estimated dollar impact. No spreadsheets. No guessing.</div>
     </div>
   </div>
-</section>
-
-<section class="use-cases-section" style="background:var(--bg1)">
-  <div class="section-header">
-    <span class="section-tag">Use cases</span>
-    <h2>Three ways stores <em>bleed money</em><br/>without knowing it.</h2>
-  </div>
-  <div class="uc-list">
-    <div class="uc-card">
-      <div class="uc-left">
-        <div class="uc-scenario">
-          <strong>You're losing sales and don't know why.</strong>
-          A competitor drops their price. You don't notice. You lose position. Customers pick them — not you.
-        </div>
-        <div class="uc-meta">
-          <span>Detected in &lt; 60s</span>
-          <span class="icp-div">·</span>
-          <span>92% confidence</span>
-        </div>
-      </div>
-      <div class="uc-right">
-        <div class="uc-sug-label">Talon detects</div>
-        <div class="signal-row">
-          <span class="signal-label">Price drop</span>
-          <span class="signal-badge badge-r">−12%</span>
-        </div>
-        <div class="signal-row">
-          <span class="signal-label">Daily impact</span>
-          <span class="signal-badge badge-r">−$320 / day</span>
-        </div>
-        <div class="uc-suggestion">
-          <div class="uc-sug-label">Talon suggests</div>
-          <div class="uc-sug-action" onclick="document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">Match price to recover lost sales <span>→</span></div>
-        </div>
-      </div>
+  <div class="product-preview">
+    <div class="pp-header">
+      <span class="pp-header-label">Action feed — live output</span>
+      <span class="pp-live"><span class="pp-live-dot"></span> Tracking 4 products</span>
     </div>
-    <div class="uc-card">
-      <div class="uc-left">
-        <div class="uc-scenario">
-          <strong>You became the most expensive option.</strong>
-          Your product is now +18% above the market. Customers compare — and leave. You never saw it happen.
+    <div class="pp-events">
+      <div class="pp-ev pp-ev-r">
+        <div class="pp-ev-left">
+          <div class="pp-dot pp-dot-r"></div>
+          <div class="pp-body">
+            <div class="pp-title">NikeStore dropped Air Force 1 by 12%</div>
+            <div class="pp-action">▸ Drop to $109 · recover position #2 · still $4 above cheapest</div>
+          </div>
         </div>
-        <div class="uc-meta">
-          <span>Detected in &lt; 60s</span>
-          <span class="icp-div">·</span>
-          <span>89% confidence</span>
-        </div>
-      </div>
-      <div class="uc-right">
-        <div class="uc-sug-label">Talon detects</div>
-        <div class="signal-row">
-          <span class="signal-label">Market position</span>
-          <span class="signal-badge badge-r">#2 → #5</span>
-        </div>
-        <div class="signal-row">
-          <span class="signal-label">Price gap</span>
-          <span class="signal-badge badge-r">+18% above market</span>
-        </div>
-        <div class="uc-suggestion">
-          <div class="uc-sug-label">Talon suggests</div>
-          <div class="uc-sug-action" onclick="document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">Adjust price to regain competitiveness <span>→</span></div>
+        <div class="pp-right">
+          <span class="pp-impact pp-impact-r">−$320/day</span>
+          <span class="pp-time">2m ago</span>
         </div>
       </div>
-    </div>
-    <div class="uc-card">
-      <div class="uc-left">
-        <div class="uc-scenario">
-          <strong>Market shifts — and you leave money on the table.</strong>
-          Competitors raise prices. Supply is tight. You stay put. You could have earned more — but you didn't know.
+      <div class="pp-ev pp-ev-g">
+        <div class="pp-ev-left">
+          <div class="pp-dot pp-dot-g"></div>
+          <div class="pp-body">
+            <div class="pp-title">Air Max 90 supply squeeze — 2 competitors raised price</div>
+            <div class="pp-action">▸ Raise to $145 · still lowest tracked · window est. 3–5 days</div>
+          </div>
         </div>
-        <div class="uc-meta">
-          <span>Detected in &lt; 60s</span>
-          <span class="icp-div">·</span>
-          <span>85% confidence</span>
+        <div class="pp-right">
+          <span class="pp-impact pp-impact-g">+12% margin</span>
+          <span class="pp-time">18m ago</span>
         </div>
       </div>
-      <div class="uc-right">
-        <div class="uc-sug-label">Talon detects</div>
-        <div class="signal-row">
-          <span class="signal-label">Market shift</span>
-          <span class="signal-badge badge-g">+8% upward</span>
+      <div class="pp-ev pp-ev-r">
+        <div class="pp-ev-left">
+          <div class="pp-dot pp-dot-r"></div>
+          <div class="pp-body">
+            <div class="pp-title">You're the most expensive for Jordan 1 by 18%</div>
+            <div class="pp-action">▸ Drop to $187 · reclaim 3 lost positions</div>
+          </div>
         </div>
-        <div class="signal-row">
-          <span class="signal-label">Margin opportunity</span>
-          <span class="signal-badge badge-g">+12% if you move</span>
-        </div>
-        <div class="uc-suggestion">
-          <div class="uc-sug-label">Talon suggests</div>
-          <div class="uc-sug-action" onclick="document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">Increase price while staying competitive <span>→</span></div>
+        <div class="pp-right">
+          <span class="pp-impact pp-impact-r">−$510/day</span>
+          <span class="pp-time">1h ago</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="why-section section-textured">
-  <div class="section-header">
-    <span class="section-tag">Why Talon</span>
-    <h2>Most tools show you data.<br/><em>Talon tells you what to do with it.</em></h2>
+<div class="uc-section">
+  <div class="uc-inner">
+    <div class="section-tag">Use cases</div>
+    <div class="section-title">Three ways stores <em>bleed money</em><br/>without knowing it.</div>
+    <div class="uc-list">
+      <div class="uc-card">
+        <div class="uc-left">
+          <div class="uc-scenario">
+            <strong>You're losing sales and don't know why.</strong>
+            A competitor drops their price. You don't notice. You lose position. Customers pick them — not you.
+          </div>
+          <div class="uc-meta"><span>Detected in &lt; 60s</span><span class="uc-meta-sep">·</span><span>92% confidence</span></div>
+        </div>
+        <div class="uc-right">
+          <div class="uc-sug-label">Talon detects</div>
+          <div class="signal-row"><span class="signal-label">Price drop</span><span class="signal-badge badge-r">−12%</span></div>
+          <div class="signal-row"><span class="signal-label">Daily impact</span><span class="signal-badge badge-r">−$320 / day</span></div>
+          <div class="uc-suggestion">
+            <div class="uc-sug-label">Talon suggests</div>
+            <div class="uc-action">Match price to recover lost sales <span>→</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-left">
+          <div class="uc-scenario">
+            <strong>You became the most expensive option.</strong>
+            Your product is now +18% above the market. Customers compare — and leave. You never saw it happen.
+          </div>
+          <div class="uc-meta"><span>Detected in &lt; 60s</span><span class="uc-meta-sep">·</span><span>95% confidence</span></div>
+        </div>
+        <div class="uc-right">
+          <div class="uc-sug-label">Talon detects</div>
+          <div class="signal-row"><span class="signal-label">Market position</span><span class="signal-badge badge-r">#2 → #5</span></div>
+          <div class="signal-row"><span class="signal-label">Price gap</span><span class="signal-badge badge-r">+18% above market</span></div>
+          <div class="uc-suggestion">
+            <div class="uc-sug-label">Talon suggests</div>
+            <div class="uc-action">Adjust price to regain competitiveness <span>→</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-left">
+          <div class="uc-scenario">
+            <strong>Market shifts — and you leave money on the table.</strong>
+            Competitors raise prices. Supply is tight. You stay put. You could have earned more — but you didn't know.
+          </div>
+          <div class="uc-meta"><span>Detected in &lt; 60s</span><span class="uc-meta-sep">·</span><span>74% confidence</span></div>
+        </div>
+        <div class="uc-right">
+          <div class="uc-sug-label">Talon detects</div>
+          <div class="signal-row"><span class="signal-label">Market shift</span><span class="signal-badge badge-g">+8% upward</span></div>
+          <div class="signal-row"><span class="signal-label">Margin opportunity</span><span class="signal-badge badge-g">+12% if you move</span></div>
+          <div class="uc-suggestion">
+            <div class="uc-sug-label">Talon suggests</div>
+            <div class="uc-action">Increase price while staying competitive <span>→</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="why-block">
-    <div class="why-cell">
-      <div class="why-cell-label">Other tools</div>
-      <div class="why-cell-title muted">Here's a dashboard with 14 charts</div>
-    </div>
-    <div class="why-cell">
-      <div class="why-cell-label">Talon</div>
-      <div class="why-cell-title bright">Drop to $187 — you're losing $510/day</div>
-    </div>
-  </div>
-  <div class="pillars">
-    <div class="pillar">
-      <div class="pillar-icon"><Icon name="zap" size="18" /></div>
-      <div class="pillar-title">Instant analysis</div>
-      <div class="pillar-desc">Results in seconds, not after a 3-hour manual review session.</div>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon"><Icon name="brain" size="18" /></div>
-      <div class="pillar-title">Clear reasoning</div>
-      <div class="pillar-desc">Plain-language explanations — not just numbers, but the why behind them.</div>
-    </div>
-    <div class="pillar">
-      <div class="pillar-icon"><Icon name="target" size="18" /></div>
-      <div class="pillar-title">Direct actions</div>
-      <div class="pillar-desc">Built for operators who need to move fast, not analysts building decks.</div>
-    </div>
-  </div>
-</section>
+</div>
 
-<section class="cta-section">
-  <div class="cta-inner">
-    <div class="cta-content">
-      <span class="cta-tag">Ready?</span>
-      <h2>Your competitors are adjusting prices right now.</h2>
-      <p>Every minute you wait, you're leaving money on the table. Stop guessing — start tracking.</p>
-      <div class="cta-actions">
-        <button class="btn-primary btn-lg" onclick="document.getElementById('product-url').focus(); document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">
-          Analyze your product →
-        </button>
-        <span class="cta-note">Free to start · No credit card</span>
+<div class="why-section">
+  <div class="why-inner">
+    <div class="section-tag">Why Talon</div>
+    <div class="section-title" style="margin-bottom:32px">Most tools show you data.<br/><em style="font-style:normal;color:var(--t1);font-weight:800">Talon tells you what to do with it.</em></div>
+    <div class="why-comparison" style="margin-bottom:20px">
+      <div class="why-cell">
+        <span class="why-cell-label">Other tools</span>
+        <div class="why-cell-muted">Here's a dashboard with 14 charts</div>
+      </div>
+      <div class="why-cell">
+        <span class="why-cell-label">Talon</span>
+        <div class="why-cell-bright">Drop to $187 — you're losing $510/day</div>
       </div>
     </div>
-    <div class="cta-visual">
-      <div class="cta-card">
-        <div class="cta-card-header">
-          <span class="cta-card-icon">⚡</span>
-          <span class="cta-card-title">Today's Insight</span>
-        </div>
-        <div class="cta-card-body">
-          <div class="cta-stat">
-            <span class="cta-stat-num">12</span>
-            <span class="cta-stat-label">price changes detected</span>
-          </div>
-          <div class="cta-stat">
-            <span class="cta-stat-num">3</span>
-            <span class="cta-stat-label">opportunities found</span>
-          </div>
-          <div class="cta-stat">
-            <span class="cta-stat-num">$847</span>
-            <span class="cta-stat-label">potential revenue</span>
-          </div>
-        </div>
+    <div class="pillars">
+      <div class="pillar"><div class="pillar-icon">⚡</div><div class="pillar-title">Instant analysis</div><div class="pillar-desc">Results in seconds, not after a 3-hour manual review session.</div></div>
+      <div class="pillar"><div class="pillar-icon">🧠</div><div class="pillar-title">Clear reasoning</div><div class="pillar-desc">Plain-language explanations — not just numbers, but the why behind them.</div></div>
+      <div class="pillar"><div class="pillar-icon">🎯</div><div class="pillar-title">Direct actions</div><div class="pillar-desc">Built for operators who need to move fast, not analysts building decks.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="faq-section">
+  <div class="faq-inner">
+    <div class="section-tag">FAQ</div>
+    <div class="section-title" style="margin-bottom:36px">Questions?<br/><em style="font-style:normal;color:var(--t2)">We've got answers.</em></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Is this really free?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes, the basic analysis is completely free with no signup required. We offer premium features for stores that need continuous monitoring and alerts.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>How accurate is the analysis?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Our AI model achieves 98% accuracy on price change detection and 91% confidence on pricing recommendations based on market position analysis.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Which platforms do you support?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">We support all major e-commerce platforms including Shopify, Amazon, WooCommerce, BigCommerce, Magento, and any custom store with a product URL.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>How often do you check competitor prices?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Free users get on-demand analysis. Premium users get real-time monitoring with alerts within 15 minutes of any competitor price change.</div>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<div class="final-section">
+  <div class="final-inner">
+    <p class="final-kicker">Right now, while you're reading this — <span>your competitors are moving.</span></p>
+    <h2 class="final-h2">Stop reacting late.<br/>Start pricing with context.</h2>
+    <div class="final-cta-group">
+      <button class="final-btn"><span class="arr">→</span> Analyze your product now</button>
+      <span class="cta-note">No signup required · Get results in seconds</span>
+    </div>
+    <p class="final-guarantee">🔒 Your data is secure. We don't store your product data.</p>
+  </div>
+</div>
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="/talon-logo.png" alt="Talon" class="footer-logo" />
-      <span>Talon</span>
+  <div class="footer-logo">
+    <div class="nav-logo-mark" style="width:22px;height:22px">
+      <svg viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
     </div>
-    <span class="footer-tag">Pricing Intelligence for Ecommerce</span>
-    <div class="footer-links">
-      <a href="/resources">Resources</a>
-      <a href="#how">How it works</a>
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-    </div>
+    Talon
+  </div>
+  <span class="footer-tagline">Pricing Intelligence Engine · Built for real-time decisions</span>
+  <div class="footer-links">
+    <a href="/resources">Resources</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
   </div>
 </footer>
 
+<div class="sticky-bar" id="sticky-bar">
+  <span class="sticky-bar-text">Competitors are moving. Your pricing is stale.</span>
+  <button class="sticky-bar-btn" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Analyze now →</button>
+</div>
+
 <script>
-function handleSubmit(e) {
-  e.preventDefault();
+function handleSubmit() {
   const input = document.getElementById('product-url');
   const url = input.value.trim();
   if (!url) return false;
@@ -374,20 +377,10 @@ function handleSubmit(e) {
 function toggleFaq(btn) {
   const item = btn.parentElement;
   item.classList.toggle('open');
-  const icon = btn.querySelector('.faq-icon');
-  icon.textContent = item.classList.contains('open') ? '−' : '+';
+  btn.querySelector('.faq-icon').textContent = item.classList.contains('open') ? '−' : '+';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const stickyBar = document.getElementById('sticky-bar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-      stickyBar.classList.add('show');
-    } else {
-      stickyBar.classList.remove('show');
-    }
-  });
-
   const ssItems = document.querySelectorAll('.ss-item');
   if (ssItems.length > 0) {
     let ssCurrent = 0;
@@ -397,252 +390,280 @@ document.addEventListener('DOMContentLoaded', () => {
       ssItems[ssCurrent].classList.add('ss-active');
     }, 2000);
   }
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('sticky-bar').classList.toggle('show', window.scrollY > 500);
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.step,.what-item,.pillar,.uc-card,.faq-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
 });
 </script>
 
 <style>
-.site-header{position:sticky;top:0;z-index:100;background:rgba(9,9,11,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:16px 24px}
-.header-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
-.logo-img{width:36px;height:36px;object-fit:contain;border-radius:8px}
-.logo-text{font-family:var(--display);font-size:18px;font-weight:700;color:var(--t1)}
-.header-nav{display:flex;gap:32px}
-.nav-link{font-family:var(--sans);font-size:14px;color:var(--t2);text-decoration:none;transition:color .15s}
-.nav-link:hover{color:var(--t1)}
-.header-right{display:flex;align-items:center}
-.header-right .btn-primary{background:var(--t1);color:var(--bg0);border:none;box-shadow:none}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:10px 20px;border-radius:8px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s,box-shadow .15s;white-space:nowrap}
-.btn-primary:hover{opacity:0.9;transform:translateY(-1px)}
-.btn-primary .arr{transition:transform .15s}
-.btn-primary:hover .arr{transform:translateX(3px)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg0:#09090B;--bg1:#0F0F12;--bg2:#16161A;--bg3:#1C1C21;--bg4:#242429;--bg5:#2A2A30;
+  --border:rgba(255,255,255,0.055);--border-md:rgba(255,255,255,0.09);--border-hi:rgba(255,255,255,0.16);
+  --t1:#EDECEA;--t2:#72727A;--t3:#3F3F46;--t4:#2A2A2E;
+  --red:#B83232;--red-lo:rgba(184,50,50,0.12);--red-bd:rgba(184,50,50,0.28);--red-glow:rgba(184,50,50,0.35);--red-txt:#D94040;
+  --grn:#1A9E68;--grn-lo:rgba(26,158,104,0.11);--grn-bd:rgba(26,158,104,0.26);--grn-glow:rgba(26,158,104,0.30);--grn-txt:#1DB87A;
+  --amb:#B87A1A;--amb-lo:rgba(184,122,26,0.11);--amb-bd:rgba(184,122,26,0.26);--amb-txt:#D4921E;
+  --sans:'Instrument Sans',system-ui,sans-serif;
+  --mono:'DM Mono','Courier New',monospace;
+  --display:'Syne',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--t1);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 6px var(--grn-glow)}50%{opacity:.6;box-shadow:0 0 12px var(--grn-glow)}}
 
-.sticky-bar{position:fixed;bottom:-60px;left:0;right:0;z-index:99;display:flex;align-items:center;justify-content:center;gap:20px;padding:16px 24px;background:rgba(15,15,18,0.98);border-top:1px solid var(--border);transition:bottom .3s ease;box-shadow:0 -4px 20px rgba(0,0,0,0.4)}
-.sticky-bar.show{bottom:0}
-.sticky-bar span{font-size:14px;color:var(--t2)}
-.sticky-bar button{font-size:13px;font-weight:600;color:var(--t1);background:none;border:none;cursor:pointer;text-decoration:underline}
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:52px;border-bottom:1px solid var(--border);background:rgba(9,9,11,0.9);backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-logo-mark{width:24px;height:24px;background:var(--t1);border-radius:5px;display:flex;align-items:center;justify-content:center}
+.nav-logo-mark svg{width:12px;height:12px}
+.nav-logo-name{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-link{font-size:13px;color:var(--t3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:color .15s}
+.nav-link:hover{color:var(--t2)}
+.nav-cta{font-family:var(--sans);font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.1px;text-decoration:none}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px)}
 
-.hero-split{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;max-width:1200px;margin:0 auto;padding:64px 24px 56px;align-items:start}
-.hero-left{}
-.hero-eyebrow{font-family:var(--mono);font-size:11px;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red-glow);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-h1{font-family:var(--display);font-size:clamp(28px,3.5vw,40px);font-weight:800;line-height:1.15;color:var(--t1);margin-bottom:14px;max-width:520px}
-.hero-sub{font-size:15px;color:var(--t2);line-height:1.55;margin-bottom:16px;max-width:460px}
-.hero-icp{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-family:var(--mono);font-size:11px;color:var(--t3)}
-.hero-icp span{color:var(--t2)}
-.icp-div{color:var(--t3)}
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;padding:80px 64px 100px;max-width:1280px;margin:0 auto;position:relative;overflow:hidden;min-height:calc(100vh - 52px)}
+.hero::before{content:'';position:absolute;top:-20%;left:-10%;width:60%;height:80%;background:radial-gradient(ellipse at 30% 40%,rgba(184,50,50,0.07) 0%,transparent 65%);pointer-events:none;z-index:0}
+.hero-left{display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;padding-top:20px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--red-txt);letter-spacing:0.5px;margin-bottom:28px;text-transform:uppercase}
+.hero-eyebrow::before{content:'●';font-size:8px;animation:blink 1.5s infinite}
+.hero-h1{font-family:var(--display);font-size:clamp(40px,4.5vw,58px);font-weight:800;letter-spacing:-1.5px;line-height:1.06;color:var(--t1);margin-bottom:20px}
+.hero-sub{font-size:16px;color:var(--t2);line-height:1.65;margin-bottom:36px;max-width:460px}
+.hero-form{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.hero-input-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.hero-input-wrap{display:flex;background:var(--bg3);border:1px solid var(--border-md);border-radius:9px;padding:5px 5px 5px 16px;transition:border-color .15s,box-shadow .15s}
+.hero-input-wrap:focus-within{border-color:var(--border-hi);box-shadow:0 0 0 3px rgba(237,236,234,0.04)}
+.hero-input{flex:1;padding:10px 0;border:none;background:transparent;color:var(--t1);font-family:var(--sans);font-size:14px;outline:none}
+.hero-input::placeholder{color:var(--t3)}
+.hero-btn{padding:12px 22px;background:var(--t1);color:var(--bg0);border:none;border-radius:6px;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap;letter-spacing:-0.1px}
+.hero-btn:hover{opacity:.88}
+.hero-trust{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px}
 
-.analyzer-box{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:18px;max-width:500px;position:relative}
-.analyzer-box::before{content:'Add product';position:absolute;top:-9px;left:16px;background:var(--bg0);padding:2px 10px;font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px;border:1px solid var(--border);border-radius:4px}
-.analyzer-form{display:flex;gap:10px;margin-bottom:8px}
-.analyzer-input{flex:1;padding:12px 14px;background:var(--bg2);border:1px solid var(--border-md);border-radius:6px;color:var(--t1);font-size:13px;outline:none;transition:border-color .15s,box-shadow .15s}
-.analyzer-input::placeholder{color:var(--t3)}
-.analyzer-input:focus{border-color:var(--t2);box-shadow:0 0 0 3px rgba(237,236,234,0.05)}
-.analyzer-btn{padding:12px 20px;background:var(--t1);color:var(--bg0);border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .15s,transform .15s}
-.analyzer-btn:hover{opacity:0.9;transform:translateY(-1px)}
-.analyzer-note{font-family:var(--mono);font-size:10px;color:var(--t3)}
+/* ── LIVE FEED (hero right) ── */
+.hero-right{position:relative;z-index:1;padding-top:10px}
+.live-feed{background:var(--bg1);border:1px solid var(--border-md);border-radius:14px;overflow:hidden}
+.lf-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--bg2)}
+.lf-title{font-family:var(--mono);font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.8px}
+.lf-live{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--t3)}
+.lf-dot{width:6px;height:6px;border-radius:50%;background:var(--grn);animation:pulse-dot 2s infinite;flex-shrink:0}
+.lf-event{padding:16px 18px;border-bottom:1px solid var(--border);border-left:2px solid transparent;display:flex;flex-direction:column;gap:6px;transition:background .15s;cursor:default}
+.lf-event:last-child{border-bottom:none}
+.lf-event:hover{background:var(--bg2)}
+.lf-event-r{border-left-color:var(--red)}
+.lf-event-g{border-left-color:var(--grn)}
+.lf-event-a{border-left-color:var(--amb)}
+.lf-row1{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.lf-time{font-family:var(--mono);font-size:10px;color:var(--t3);white-space:nowrap;margin-top:2px;flex-shrink:0}
+.lf-store{font-size:13.5px;font-weight:600;color:var(--t1);line-height:1.3}
+.lf-desc{font-size:12px;color:var(--t2);line-height:1.45}
+.lf-row2{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.lf-impact{font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:-0.3px}
+.lf-impact-r{color:var(--red-txt);text-shadow:0 0 14px var(--red-glow)}
+.lf-impact-g{color:var(--grn-txt);text-shadow:0 0 12px var(--grn-glow)}
+.lf-impact-a{color:var(--amb-txt)}
+.lf-suggestion{font-family:var(--mono);font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px}
+.lf-suggestion-label{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.lf-conf{font-family:var(--mono);font-size:10px;color:var(--t3)}
 
-.hero-right{}
-.live-feed{background:var(--bg1);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.2)}
-.feed-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--border)}
-.feed-title{font-family:var(--mono);font-size:11px;color:var(--t1);font-weight:500}
-.feed-status{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--t3)}
-.status-dot{width:5px;height:5px;border-radius:50%;background:var(--grn);box-shadow:0 0 8px var(--grn-glow);animation:pulse-green 2s infinite}
-.status-text{color:var(--t2)}
-@keyframes pulse-green{0%,100%{opacity:1;box-shadow:0 0 8px var(--grn-glow)}50%{opacity:0.6;box-shadow:0 0 4px var(--grn-glow)}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
-.feed-item{padding:14px 16px;border-bottom:1px solid var(--border-md);transition:background .15s}
-.feed-item:last-child{border-bottom:none}
-.feed-item:hover{background:var(--bg2)}
-.feed-item{animation:fadeIn 0.5s ease forwards;opacity:0}
-.feed-item:nth-child(2){animation-delay:0.1s}
-.feed-item:nth-child(3){animation-delay:0.2s}
-.feed-item:nth-child(4){animation-delay:0.3s}
-.feed-item:nth-child(5){animation-delay:0.4s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.feed-item-red{border-left:3px solid var(--red);background:rgba(184,50,50,0.03)}
-.feed-item-red:hover{background:rgba(184,50,50,0.06)}
-.feed-item-green{border-left:3px solid var(--grn);background:rgba(26,158,104,0.03)}
-.feed-item-green:hover{background:rgba(26,158,104,0.06)}
-.feed-item-amber{border-left:3px solid var(--amb)}
-.feed-time{font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:3px}
-.feed-store{font-family:var(--display);font-size:12px;font-weight:600;color:var(--t1);margin-bottom:3px}
-.feed-action{font-size:12px;color:var(--t2);margin-bottom:4px}
-.feed-impact{font-family:var(--mono);font-size:11px;color:var(--t2);margin-bottom:4px}
-.impact-red{color:var(--red);font-weight:600}
-.impact-green{color:#1DB87A;font-weight:600}
-.feed-suggestion{display:flex;align-items:center;gap:6px;margin-bottom:3px}
-.sug-label{font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase}
-.sug-action{font-size:11px;font-weight:600;color:var(--t1)}
-.feed-meta{}
-.conf{font-family:var(--mono);font-size:9px;color:var(--t3)}
+/* ── LOGOS BAR ── */
+.logos-bar{background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 40px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
+.logos-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px}
+.logos-items{display:flex;gap:40px;align-items:center;flex-wrap:wrap;justify-content:center}
+.logos-items span{font-family:var(--display);font-size:15px;font-weight:600;color:var(--t3);letter-spacing:-0.3px;transition:color .2s}
+.logos-items span:hover{color:var(--t2)}
 
-.stats-row{display:flex;align-items:center;justify-content:center;gap:48px;padding:48px 24px;background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.stat-item{display:flex;flex-direction:column;align-items:center;gap:4px}
-.stat-num{font-family:var(--display);font-size:28px;font-weight:700;color:var(--t1)}
-.stat-label{font-family:var(--mono);font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px}
-.stat-divider{width:1px;height:40px;background:var(--border-md)}
-
+/* ── SIGNAL STACK ── */
 .signal-stack-section{padding:100px 40px;text-align:center;position:relative;background-image:radial-gradient(circle,rgba(255,255,255,0.035) 1px,transparent 1px);background-size:24px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .ss-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:28px}
 .ss-item{font-family:var(--display);font-size:clamp(26px,3.5vw,48px);font-weight:800;letter-spacing:-0.5px;line-height:1.15;color:var(--t4);transition:color .4s;cursor:default;display:flex;align-items:center;gap:16px}
 .ss-item.ss-active{color:var(--t1)}
-.ss-arrow{color:var(--red);font-size:0.75em;transition:opacity .4s}
+.ss-arrow{color:var(--red-txt);font-size:0.75em;transition:opacity .4s}
 .ss-caption{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.4px}
 
-.logos-bar{display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px 24px;border-bottom:1px solid var(--border)}
-.logos-label{font-family:var(--mono);font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
-.logos-track{display:flex;gap:32px;flex-wrap:wrap;justify-content:center}
-.logos-track span{font-family:var(--display);font-size:15px;font-weight:600;color:var(--t2);letter-spacing:-0.3px}
+/* ── HOW IT WORKS ── */
+.section{padding:140px 64px;max-width:1200px;margin:0 auto}
+.section.narrow{max-width:860px}
+.section-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:var(--t3);margin-bottom:14px}
+.section-title{font-family:var(--display);font-size:clamp(28px,3.5vw,42px);font-weight:700;letter-spacing:-0.8px;line-height:1.12;color:var(--t1);margin-bottom:48px}
+.section-title em{font-style:normal;color:var(--t2)}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.step{background:var(--bg1);padding:32px 28px;display:flex;flex-direction:column;gap:12px;transition:background .2s}
+.step:hover{background:var(--bg2)}
+.step-num{font-family:var(--mono);font-size:11px;letter-spacing:1px}
+.step-num-1{color:var(--red-txt)}
+.step-num-2{color:var(--amb-txt)}
+.step-num-3{color:var(--grn-txt)}
+.step-title{font-family:var(--display);font-size:19px;font-weight:600;color:var(--t1);letter-spacing:-0.3px}
+.step-desc{font-size:13.5px;color:var(--t2);line-height:1.65}
+.step:nth-child(1){border-top:2px solid rgba(184,50,50,0.35)}
+.step:nth-child(2){border-top:2px solid rgba(184,122,26,0.3)}
+.step:nth-child(3){border-top:2px solid rgba(26,158,104,0.3)}
 
-.section-textured{background-image:radial-gradient(circle,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:24px 24px;background-position:0 0}
-.how-it-works{padding:80px 24px;max-width:1000px;margin:0 auto}
-.section-header{text-align:center;margin-bottom:40px}
-.section-tag{font-family:var(--mono);font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:12px}
-.section-header h2{font-family:var(--display);font-size:32px;font-weight:700;color:var(--t1)}
-.steps-grid{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
-.step-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px;max-width:280px;text-align:left}
-.step-num{font-family:var(--mono);font-size:11px;color:var(--red);margin-bottom:12px;display:block}
-.step-title{font-family:var(--display);font-size:18px;font-weight:600;color:var(--t1);margin-bottom:8px}
-.step-desc{font-size:13px;color:var(--t2);line-height:1.5}
-.step-arrow{color:var(--t3);flex-shrink:0}
+/* ── PROBLEM BLOCK ── */
+.problem-wrap{padding:0 64px 140px;max-width:1200px;margin:0 auto}
+.problem-block{background:var(--bg1);border:1px solid var(--border);border-radius:14px;padding:64px 72px;text-align:center;position:relative;overflow:hidden}
+.problem-block::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(184,50,50,0.4),transparent)}
+.problem-p{font-size:clamp(17px,2vw,21px);color:var(--t2);line-height:1.75;max-width:580px;margin:0 auto}
+.problem-p strong{color:var(--t1);font-weight:500}
+.problem-punch{font-family:var(--display);font-size:clamp(22px,2.8vw,34px);font-weight:700;color:var(--red-txt);letter-spacing:-0.5px;margin-top:32px;padding-top:32px;border-top:1px solid rgba(184,50,50,0.18);text-shadow:0 0 40px var(--red-glow)}
 
-.problem-section{padding:100px 40px;text-align:center;background-image:radial-gradient(circle,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:24px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.problem-content{max-width:640px;margin:0 auto}
-.problem-lead{font-family:var(--display);font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--t1);letter-spacing:-0.5px;margin-bottom:20px}
-.problem-body{font-size:16px;color:var(--t2);line-height:1.7;margin-bottom:36px}
-.problem-punch{font-family:var(--display);font-size:clamp(28px,3.5vw,44px);font-weight:800;color:var(--red);letter-spacing:-0.6px;text-shadow:0 0 50px var(--red-glow);position:relative;display:inline-block}
-.problem-punch::before{content:'';position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--red-glow),transparent)}
-
-.what-section{padding:80px 24px;max-width:1080px;margin:0 auto}
-.section-header h2{font-family:var(--display);font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--t1);letter-spacing:-0.8px;line-height:1.15}
-.section-header h2 em{font-style:normal;color:var(--t2)}
-.section-tag{font-family:var(--mono);font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:12px}
-.section-sub{font-size:15px;color:var(--t2);margin-top:16px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.65}
-.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.what-item{background:var(--bg2);padding:36px 32px;display:flex;flex-direction:column;gap:14px;border-top:2px solid transparent}
-.what-item:nth-child(1){border-top-color:rgba(184,50,50,0.4)}
-.what-item:nth-child(2){border-top-color:rgba(184,122,26,0.3)}
-.what-item:nth-child(3){border-top-color:rgba(26,158,104,0.35)}
+/* ── NOT JUST DATA ── */
+.bg-textured{background-image:radial-gradient(circle,rgba(255,255,255,0.032) 1px,transparent 1px);background-size:24px 24px}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:48px}
+.what-item{background:var(--bg2);padding:34px 30px;display:flex;flex-direction:column;gap:12px;transition:background .2s}
+.what-item:hover{background:var(--bg3)}
 .what-num{font-family:var(--mono);font-size:11px;letter-spacing:1px}
-.what-item:nth-child(1) .what-num{color:var(--red)}
-.what-item:nth-child(2) .what-num{color:var(--amb)}
-.what-item:nth-child(3) .what-num{color:var(--grn)}
-.what-title{font-family:var(--display);font-size:20px;font-weight:600;color:var(--t1);letter-spacing:-0.3px}
-.what-desc{font-size:13.5px;color:var(--t2);line-height:1.6}
+.what-num-1{color:var(--red-txt)}
+.what-num-2{color:var(--amb-txt)}
+.what-num-3{color:var(--grn-txt)}
+.what-title{font-family:var(--display);font-size:19px;font-weight:600;color:var(--t1);letter-spacing:-0.2px}
+.what-desc{font-size:13.5px;color:var(--t2);line-height:1.65}
+.what-item:nth-child(1){border-top:2px solid rgba(184,50,50,0.35)}
+.what-item:nth-child(2){border-top:2px solid rgba(184,122,26,0.30)}
+.what-item:nth-child(3){border-top:2px solid rgba(26,158,104,0.30)}
 
-.product-preview{margin-top:48px;background:var(--bg2);border:1px solid var(--border-md);border-radius:14px;overflow:hidden;max-width:780px;margin-left:auto;margin-right:auto}
-.pp-header{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--border);background:var(--bg3)}
-.pp-label{font-family:var(--mono);font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+/* ── PRODUCT PREVIEW ── */
+.product-preview{background:var(--bg1);border:1px solid var(--border-md);border-radius:14px;overflow:hidden;max-width:820px;margin:0 auto}
+.pp-header{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--border);background:var(--bg2)}
+.pp-header-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
 .pp-live{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--t3)}
-.pp-live-dot{width:5px;height:5px;border-radius:50%;background:var(--grn);box-shadow:0 0 6px var(--grn-glow);animation:blink 2.5s infinite}
+.pp-live-dot{width:5px;height:5px;border-radius:50%;background:var(--grn);box-shadow:0 0 6px var(--grn-glow);animation:blink 2.5s infinite;flex-shrink:0}
 .pp-events{display:flex;flex-direction:column}
-.pp-event{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--border);border-left:2px solid transparent;gap:16px;transition:background .15s}
-.pp-event:last-child{border-bottom:none}
-.pp-event-r{border-left-color:var(--red)}
-.pp-event-g{border-left-color:var(--grn)}
-.pp-event-left{display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0}
-.pp-event-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
-.pp-dot-r{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
+.pp-ev{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:1px solid var(--border);border-left:2px solid transparent;gap:16px;transition:background .15s}
+.pp-ev:last-child{border-bottom:none}
+.pp-ev:hover{background:var(--bg2)}
+.pp-ev-r{border-left-color:var(--red)}
+.pp-ev-g{border-left-color:var(--grn)}
+.pp-ev-a{border-left-color:var(--amb)}
+.pp-ev-left{display:flex;align-items:flex-start;gap:12px;flex:1;min-width:0}
+.pp-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.pp-dot-r{background:var(--red);box-shadow:0 0 5px var(--red-glow)}
 .pp-dot-g{background:var(--grn)}
-.pp-event-body{display:flex;flex-direction:column;gap:4px;min-width:0}
-.pp-event-title{font-size:13.5px;font-weight:500;color:var(--t1);line-height:1.35;letter-spacing:-0.1px}
-.pp-event-action{font-size:12px;color:var(--t2)}
-.pp-event-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
-.pp-event-impact{font-family:var(--display);font-size:18px;font-weight:800;letter-spacing:-0.4px;line-height:1}
-.pp-impact-r{color:#D94040;text-shadow:0 0 16px var(--red-glow)}
-.pp-impact-g{color:#1DB87A;text-shadow:0 0 14px var(--grn-glow)}
-.pp-event-time{font-family:var(--mono);font-size:10px;color:var(--t3)}
+.pp-dot-a{background:var(--amb)}
+.pp-body{display:flex;flex-direction:column;gap:4px;min-width:0}
+.pp-title{font-size:13.5px;font-weight:500;color:var(--t1);line-height:1.35;letter-spacing:-0.1px}
+.pp-action{font-size:12px;color:var(--t2)}
+.pp-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
+.pp-impact{font-family:var(--display);font-size:19px;font-weight:800;letter-spacing:-0.4px;line-height:1}
+.pp-impact-r{color:var(--red-txt);text-shadow:0 0 16px var(--red-glow)}
+.pp-impact-g{color:var(--grn-txt);text-shadow:0 0 14px var(--grn-glow)}
+.pp-time{font-family:var(--mono);font-size:10px;color:var(--t3)}
 
-.use-cases-section{padding:80px 24px;max-width:1080px;margin:0 auto}
+/* ── USE CASES ── */
+.uc-section{background:var(--bg1);padding:140px 64px}
+.uc-inner{max-width:1200px;margin:0 auto}
 .uc-list{display:flex;flex-direction:column;gap:12px}
-.uc-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg2)}
-.uc-left{padding:36px;border-right:1px solid var(--border)}
-.uc-right{padding:36px;background:var(--bg3)}
-.uc-scenario{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:16px}
-.uc-scenario strong{display:block;font-family:var(--display);font-size:19px;font-weight:600;color:var(--t1);letter-spacing:-0.3px;margin-bottom:8px}
-.uc-meta{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:20px;font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px}
-.uc-meta .icp-div{color:var(--t4)}
-.signal-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg4);border:1px solid var(--border-md);border-radius:6px;margin-bottom:8px}
+.uc-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg2);transition:border-color .2s}
+.uc-card:hover{border-color:var(--border-md)}
+.uc-left{padding:40px 40px;border-right:1px solid var(--border)}
+.uc-right{padding:40px 40px;background:var(--bg3)}
+.uc-scenario strong{display:block;font-family:var(--display);font-size:19px;font-weight:600;color:var(--t1);letter-spacing:-0.3px;margin-bottom:10px;line-height:1.3}
+.uc-scenario{font-size:14px;color:var(--t2);line-height:1.65}
+.uc-meta{display:flex;align-items:center;gap:8px;margin-top:24px;font-family:var(--mono);font-size:11px;color:var(--t3)}
+.uc-meta-sep{color:var(--t4)}
+.uc-sug-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px}
+.signal-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg4);border:1px solid var(--border-md);border-radius:7px;margin-bottom:8px}
 .signal-label{font-size:12px;color:var(--t2);flex:1}
-.signal-badge{font-family:var(--mono);font-size:12px;font-weight:500;padding:2px 9px;border-radius:4px}
-.badge-r{background:var(--red-lo);color:var(--red);border:1px solid var(--red-bd)}
-.badge-g{background:var(--grn-lo);color:var(--grn);border:1px solid var(--grn-bd)}
+.signal-badge{font-family:var(--mono);font-size:12px;font-weight:500;padding:3px 10px;border-radius:4px;white-space:nowrap}
+.badge-r{background:var(--red-lo);color:var(--red-txt);border:1px solid var(--red-bd)}
+.badge-g{background:var(--grn-lo);color:var(--grn-txt);border:1px solid var(--grn-bd)}
+.badge-a{background:var(--amb-lo);color:var(--amb-txt);border:1px solid var(--amb-bd)}
 .uc-suggestion{margin-top:20px}
-.uc-sug-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px}
-.uc-sug-action{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:transparent;color:var(--t1);border:1px solid var(--border-md);border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;transition:background .15s,border-color .15s}
-.uc-sug-action:hover{background:var(--bg3);border-color:var(--border-hi)}
+.uc-action{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:transparent;color:var(--t1);border:1px solid var(--border-md);border-radius:7px;font-size:13px;font-weight:500;cursor:pointer;transition:background .15s,border-color .15s}
+.uc-action:hover{background:var(--bg4);border-color:var(--border-hi)}
 
-.why-section{padding:80px 24px;max-width:1080px;margin:0 auto}
-.why-block{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:24px}
-.why-cell{background:var(--bg2);padding:36px 32px;display:flex;flex-direction:column;gap:10px}
-.why-cell:first-child{opacity:0.7}
-.why-cell:last-child{background:var(--bg3);border-left:2px solid rgba(237,236,234,0.1)}
+/* ── WHY TALON ── */
+.why-section{padding:140px 64px;position:relative;background-image:radial-gradient(circle,rgba(255,255,255,0.032) 1px,transparent 1px);background-size:24px 24px}
+.why-inner{max-width:1200px;margin:0 auto}
+.why-comparison{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px}
+.why-cell{padding:40px 36px;display:flex;flex-direction:column;gap:10px}
+.why-cell:first-child{background:var(--bg1);opacity:0.65}
+.why-cell:last-child{background:var(--bg2);border-left:1px solid var(--border-md)}
 .why-cell-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3)}
-.why-cell-title{font-family:var(--display);font-size:clamp(18px,2.2vw,24px);font-weight:700;letter-spacing:-0.4px;line-height:1.2}
-.why-cell-title.muted{color:var(--t3);text-decoration:line-through;text-decoration-color:var(--t4);font-weight:400}
-.why-cell-title.bright{color:var(--t1)}
-.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.pillar{padding:24px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;display:flex;flex-direction:column;gap:8px}
-.pillar-icon{color:var(--t2)}
-.pillar-title{font-size:14px;font-weight:500;color:var(--t1)}
-.pillar-desc{font-size:12.5px;color:var(--t2);line-height:1.55}
+.why-cell-muted{font-family:var(--display);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--t3);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.1);line-height:1.25}
+.why-cell-bright{font-family:var(--display);font-size:clamp(18px,2.2vw,26px);font-weight:700;color:var(--t1);letter-spacing:-0.4px;line-height:1.2}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pillar{padding:26px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s}
+.pillar:hover{border-color:var(--border-md)}
+.pillar-icon{font-size:17px}
+.pillar-title{font-size:14px;font-weight:600;color:var(--t1);letter-spacing:-0.1px}
+.pillar-desc{font-size:13px;color:var(--t2);line-height:1.6}
 
-.cta-section{position:relative;padding:80px 24px;background:var(--bg2);border-top:1px solid var(--border);overflow:hidden}
-.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse at center,rgba(237,236,234,0.04) 0%,transparent 70%);pointer-events:none}
-.cta-section::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:1px;background:linear-gradient(90deg,transparent,var(--red-glow),transparent)}
-.cta-section .cta-bottom-line{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:600px;height:1px;background:linear-gradient(90deg,transparent,var(--red-glow),transparent)}
-.cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;max-width:1100px;margin:0 auto;align-items:center}
-.cta-content{text-align:left}
-.cta-tag{font-family:var(--mono);font-size:11px;color:var(--red);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:16px}
-.cta-section h2{font-family:var(--display);font-size:clamp(28px,3.5vw,42px);font-weight:800;color:var(--t1);margin-bottom:16px;line-height:1.15}
-.cta-section .cta-content p{font-size:16px;color:var(--t2);margin-bottom:32px;line-height:1.6;max-width:480px}
-.cta-actions{display:flex;flex-direction:column;gap:12px}
-.cta-note{font-family:var(--mono);font-size:11px;color:var(--t3)}
-.btn-lg{padding:16px 32px;font-size:16px}
+/* ── FAQ ── */
+.faq-section{padding:140px 64px;background:var(--bg1);border-top:1px solid var(--border)}
+.faq-inner{max-width:860px;margin:0 auto}
+.faq-list{display:flex;flex-direction:column;gap:4px}
+.faq-item{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--bg2);transition:border-color .2s}
+.faq-item.open{border-color:var(--border-md)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:none;border:none;color:var(--t1);font-family:var(--sans);font-size:15px;font-weight:500;text-align:left;cursor:pointer;gap:12px;transition:background .15s}
+.faq-q:hover{background:var(--bg3)}
+.faq-icon{font-size:18px;color:var(--t3);transition:transform .2s,color .2s;line-height:1;flex-shrink:0}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--t2)}
+.faq-a{max-height:0;overflow:hidden;padding:0 24px;font-size:14px;color:var(--t2);line-height:1.7;transition:max-height .28s ease,padding .28s ease}
+.faq-item.open .faq-a{max-height:200px;padding:0 24px 22px}
 
-.cta-visual{position:relative}
-.cta-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;overflow:hidden}
-.cta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--grn))}
-.cta-card-header{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
-.cta-card-icon{font-size:20px}
-.cta-card-title{font-family:var(--mono);font-size:11px;color:var(--t2);text-transform:uppercase;letter-spacing:0.8px}
-.cta-card-body{display:flex;flex-direction:column;gap:16px}
-.cta-stat{display:flex;align-items:baseline;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border-md)}
-.cta-stat:last-child{border-bottom:none}
-.cta-stat-num{font-family:var(--display);font-size:24px;font-weight:700;color:var(--t1)}
-.cta-stat-label{font-family:var(--mono);font-size:11px;color:var(--t3)}
+/* ── FINAL CTA ── */
+.final-section{padding:140px 64px;background:var(--bg2);text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--border)}
+.final-section::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:500px;height:1px;background:linear-gradient(90deg,transparent,rgba(237,236,234,0.15),transparent)}
+.final-section::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:500px;background:radial-gradient(ellipse at center,rgba(237,236,234,0.04) 0%,transparent 65%);pointer-events:none}
+.final-inner{position:relative;z-index:1}
+.final-kicker{font-family:var(--mono);font-size:13px;color:var(--t2);margin-bottom:18px;letter-spacing:0.2px}
+.final-kicker span{color:var(--red-txt)}
+.final-h2{font-family:var(--display);font-size:clamp(38px,5vw,60px);font-weight:800;letter-spacing:-1.6px;line-height:1.06;margin-bottom:40px;color:var(--t1);max-width:580px;margin-left:auto;margin-right:auto}
+.final-cta-group{display:flex;flex-direction:column;align-items:center;gap:12px}
+.final-btn{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;background:var(--t1);color:var(--bg0);border:none;border-radius:9px;font-family:var(--sans);font-size:16px;font-weight:600;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.2px}
+.final-btn:hover{opacity:.88;transform:translateY(-1px)}
+.final-btn .arr{transition:transform .15s}
+.final-btn:hover .arr{transform:translateX(3px)}
+.cta-note{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px}
+.final-guarantee{font-family:var(--mono);font-size:11px;color:var(--t3);margin-top:16px}
 
-footer{border-top:1px solid var(--border);padding:24px}
-.footer-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto}
-.footer-brand{display:flex;align-items:center;gap:8px}
-.footer-logo{width:28px;height:28px;border-radius:6px}
-.footer-brand span{font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
-.footer-tag{font-family:var(--mono);font-size:11px;color:var(--t3);flex:1;text-align:center}
+/* ── STICKY BAR ── */
+.sticky-bar{position:fixed;bottom:-70px;left:0;right:0;z-index:99;display:flex;align-items:center;justify-content:center;gap:20px;padding:14px 20px;background:rgba(15,15,18,0.97);border-top:1px solid var(--border-md);backdrop-filter:blur(16px);transition:bottom .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -8px 32px rgba(0,0,0,0.4)}
+.sticky-bar.show{bottom:0}
+.sticky-bar-text{font-family:var(--mono);font-size:12px;color:var(--t2)}
+.sticky-bar-btn{padding:8px 18px;background:var(--t1);color:var(--bg0);border:none;border-radius:6px;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s;white-space:nowrap}
+.sticky-bar-btn:hover{opacity:.88}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--bg0)}
+.footer-logo{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
+.footer-tagline{font-family:var(--mono);font-size:11px;color:var(--t3);flex:1;text-align:center;letter-spacing:0.3px}
 .footer-links{display:flex;gap:20px}
-.footer-links a{font-family:var(--mono);font-size:11px;color:var(--t3);text-decoration:none}
+.footer-links a{font-family:var(--mono);font-size:11px;color:var(--t3);text-decoration:none;transition:color .15s}
 .footer-links a:hover{color:var(--t2)}
 
-@media (max-width:900px){
-  .hero-split{grid-template-columns:1fr;gap:40px}
-  .hero-right{margin-top:20px}
-  .header-nav{display:none}
-  .stats-row{gap:24px}
-  .steps-grid{flex-direction:column}
-  .step-arrow{transform:rotate(90deg)}
-  .what-grid{grid-template-columns:1fr}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:60px 32px;min-height:auto}
+  .hero-right{display:none}
+  .section,.faq-section,.final-section,.problem-wrap,.uc-section,.why-section{padding-left:24px;padding-right:24px}
+  .steps-grid,.what-grid,.why-comparison,.pillars{grid-template-columns:1fr}
   .uc-card{grid-template-columns:1fr}
   .uc-left{border-right:none;border-bottom:1px solid var(--border)}
-  .pillars{grid-template-columns:1fr}
-  .why-block{grid-template-columns:1fr}
-  .footer-inner{flex-direction:column;gap:16px;text-align:center}
-}
-@media (max-width:600px){
-  .hero-split{padding:48px 16px}
-  .analyzer-form{flex-direction:column}
-  .analyzer-btn{width:100%}
-  h1{font-size:28px}
-  .problem-block{padding:36px 24px}
-  .what-item,.uc-card{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:14px;text-align:center}
+  .footer-tagline{text-align:center}
+  .footer-links{justify-content:center}
+  .logos-bar{gap:24px}
 }
 </style>

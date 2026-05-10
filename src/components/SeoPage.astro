@@ -1,0 +1,246 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  heroEyebrow?: string;
+  heroHeadline: string;
+  heroSubheadline: string;
+  ctaPrimary?: string;
+  insightTitle?: string;
+  insightData?: Array<{label: string; value: string; sub?: string}>;
+  insightText?: string;
+  insightImpact?: string;
+  actionTitle?: string;
+  actionText?: string;
+}
+
+const {
+  title,
+  description,
+  slug,
+  heroEyebrow = "Free Tool",
+  heroHeadline,
+  heroSubheadline,
+  ctaPrimary = "Analyze Now",
+  insightTitle = "Live Insight",
+  insightData = [],
+  insightText = "",
+  insightImpact = "",
+  actionTitle = "Recommended Action",
+  actionText = ""
+} = Astro.props;
+---
+
+<nav>
+  <div class="nav-logo">
+    <a href="/">
+      <img src="/talon-logo.png" alt="Talon" class="nav-logo-img" />
+      <span class="logo-name">Talon</span>
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="/" class="nav-link">Home</a>
+    <button class="nav-cta" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Analyze your product →</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">{heroEyebrow}</div>
+  <h1>{heroHeadline}</h1>
+  <p class="hero-sub">{heroSubheadline}</p>
+
+  <div class="cta-group">
+    <button class="btn-primary" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
+      <span class="arr">→</span> {ctaPrimary}
+    </button>
+    <span class="cta-note">No signup required · Get results in seconds</span>
+  </div>
+</section>
+
+{insightData.length > 0 && (
+  <section class="insight-section" id="tool">
+    <div class="tool-section">
+      <div class="tool-tag">⚡ Live Analysis Demo</div>
+      <h2 class="tool-title">{insightTitle}</h2>
+
+      <div class="result-card">
+        <div class="result-signals">
+          {insightData.map((item, index) => (
+            <div class={`rsig ${index === 0 ? 'rsig-r' : index === 1 ? 'rsig-r' : 'rsig-g'}`}>
+              <div class="rsig-label">{item.label}</div>
+              <div class="rsig-value">{item.value}</div>
+              {item.sub && <div class="rsig-sub">{item.sub}</div>}
+            </div>
+          ))}
+        </div>
+
+        {insightText && (
+          <div class="result-why">
+            <span class="result-why-label">What's happening —</span>
+            {insightText}
+          </div>
+        )}
+
+        {insightImpact && (
+          <div class="result-action-block">
+            <div class="result-action-label">💰 Money Impact</div>
+            <div class="result-action-row">
+              <div class="result-action-text">{insightImpact}</div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <p class="insight-note">This is simulated data. Connect your product for real-time analysis.</p>
+    </div>
+  </section>
+)}
+
+<section class="action-section">
+  <div class="sec-header">
+    <div class="sec-tag">Take Action</div>
+    <h2 class="sec-title">{actionTitle || "What to do next"}</h2>
+    {actionText && <p class="sec-sub">{actionText}</p>}
+  </div>
+
+  <div class="action-cards">
+    <div class="action-card">
+      <div class="action-icon">🎯</div>
+      <div class="action-content">
+        <h3>Analyze your product</h3>
+        <p>Get real-time pricing intelligence for your specific product.</p>
+      </div>
+      <button class="btn-primary" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
+        Start Analysis →
+      </button>
+    </div>
+
+    <div class="action-card">
+      <div class="action-icon">📊</div>
+      <div class="action-content">
+        <h3>Track competitors automatically</h3>
+        <p>Get alerts when competitor prices change.</p>
+      </div>
+      <button class="btn-secondary" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
+        Set Up Tracking →
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <h2>Stop guessing. Start optimizing.</h2>
+  <p class="final-sub">See exactly what your competitors are doing — and what to do about it.</p>
+  <div class="cta-group">
+    <button class="btn-primary btn-lg" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
+      <span class="arr">→</span> Analyze your product now
+    </button>
+    <span class="cta-note">Free · No signup required</span>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <a href="/">
+      <img src="/talon-logo.png" alt="Talon" class="footer-logo-img" />
+      <span>Talon</span>
+    </a>
+  </div>
+  <span class="footer-tagline">Pricing Intelligence Engine</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/docs">Docs</a>
+  </div>
+</footer>
+
+<style>
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px;border-bottom:1px solid var(--border);background:rgba(9,9,11,0.85);backdrop-filter:blur(12px)}
+.nav-logo a{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo-img{width:52px;height:52px;object-fit:contain;border-radius:10px}
+.logo-name{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-link{color:var(--t2);text-decoration:none;font-size:14px;transition:color .15s}
+.nav-link:hover{color:var(--t1)}
+.nav-cta{font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.1px}
+.nav-cta:hover{opacity:0.88;transform:translateY(-1px)}
+
+section{padding:96px 40px;max-width:860px;margin:0 auto}
+section.full{max-width:100%;padding-left:0;padding-right:0}
+
+.hero{text-align:center;padding-top:80px;padding-bottom:60px;position:relative}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--amb);border:1px solid var(--amb-bd);background:var(--amb-lo);padding:5px 12px;border-radius:20px;margin-bottom:24px;letter-spacing:0.4px}
+h1{font-family:var(--display);font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-1.2px;line-height:1.1;color:var(--t1);margin-bottom:16px;max-width:700px;margin-left:auto;margin-right:auto}
+.hero-sub{font-size:clamp(16px,2vw,18px);color:var(--t2);max-width:520px;margin:0 auto 32px;line-height:1.6;font-weight:400}
+
+.cta-group{display:flex;flex-direction:column;align-items:center;gap:12px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.2px}
+.btn-primary:hover{opacity:0.88;transform:translateY(-1px)}
+.btn-primary .arr{font-size:16px;transition:transform .15s}
+.btn-primary:hover .arr{transform:translateX(3px)}
+.btn-lg{padding:16px 32px;font-size:16px}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:transparent;color:var(--t1);border:1px solid var(--border-md);cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.2px}
+.btn-secondary:hover{opacity:0.88;transform:translateY(-1px)}
+.cta-note{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px}
+
+.insight-section{padding:48px 40px;max-width:700px;margin:0 auto}
+.tool-section{background:var(--bg1);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}
+.tool-tag{font-family:var(--mono);font-size:11px;color:var(--amb);border:1px solid var(--amb-bd);background:var(--amb-lo);padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:20px;letter-spacing:0.3px}
+.tool-title{font-family:var(--display);font-size:clamp(22px,3vw,28px);font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}
+
+.result-card{background:var(--bg2);border:1px solid var(--border-md);border-radius:12px;overflow:hidden;margin:24px 0;text-align:left}
+.result-signals{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.rsig{padding:18px 20px;display:flex;flex-direction:column;gap:5px;background:var(--bg2)}
+.rsig-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
+.rsig-value{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:-0.5px;line-height:1}
+.rsig-sub{font-size:11.5px;color:var(--t3)}
+.rsig-r .rsig-value{color:#D94040;text-shadow:0 0 20px var(--red-glow)}
+.rsig-g .rsig-value{color:#1DB87A;text-shadow:0 0 20px var(--grn-glow)}
+
+.result-why{padding:16px 22px;font-size:14px;color:var(--t2);line-height:1.65;border-bottom:1px solid var(--border)}
+.result-why-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px;margin-right:4px}
+
+.result-action-block{padding:20px 22px;background:var(--grn-lo)}
+.result-action-label{font-family:var(--mono);font-size:10px;color:var(--grn);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px}
+.result-action-row{display:flex;align-items:center;gap:16px}
+.result-action-text{font-size:15px;color:var(--t1);font-weight:500}
+
+.insight-note{font-family:var(--mono);font-size:11px;color:var(--t3);margin-top:16px}
+
+.action-section{background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-width:100%;padding:80px 40px}
+.action-section .sec-header{text-align:center;margin-bottom:40px;max-width:860px;margin-left:auto;margin-right:auto}
+.sec-header{margin-bottom:32px}
+.sec-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--grn);margin-bottom:8px}
+.sec-title{font-family:var(--display);font-size:clamp(24px,4vw,36px);font-weight:700;letter-spacing:-0.8px;line-height:1.15;color:var(--t1)}
+.sec-sub{font-size:15px;color:var(--t2);margin-top:12px;max-width:480px;line-height:1.65}
+
+.action-cards{display:flex;flex-direction:column;gap:16px;max-width:600px;margin:0 auto}
+.action-card{display:flex;align-items:center;gap:20px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px}
+.action-icon{font-size:28px;flex-shrink:0}
+.action-content{flex:1}
+.action-content h3{font-family:var(--display);font-size:16px;font-weight:600;color:var(--t1);margin-bottom:4px}
+.action-content p{font-size:13px;color:var(--t2)}
+.action-card .btn-primary,.action-card .btn-secondary{white-space:nowrap;padding:10px 20px;font-size:13px}
+
+.final-cta{text-align:center;padding:96px 40px;max-width:860px;margin:0 auto}
+.final-cta h2{font-family:var(--display);font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.15;color:var(--t1);margin-bottom:12px}
+.final-sub{font-size:16px;color:var(--t2);margin-bottom:32px}
+
+footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.footer-logo a{display:flex;align-items:center;gap:8px;text-decoration:none}
+.footer-logo-img{width:32px;height:32px;object-fit:contain;border-radius:6px}
+.footer-logo{font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
+.footer-tagline{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px;flex:1}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-family:var(--mono);font-size:11px;color:var(--t3);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--t2)}
+
+@media (max-width: 768px) {
+  .result-signals { grid-template-columns: 1fr; }
+  .action-card { flex-direction: column; text-align: center; }
+  nav { padding: 0 20px; }
+  section { padding: 64px 20px; }
+  .insight-section, .action-section { padding: 48px 20px; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+}
+</style>

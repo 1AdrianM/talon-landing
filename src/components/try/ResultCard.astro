@@ -1,0 +1,555 @@
+---
+// ResultCard - The moment of truth
+// Shows extracted price with visual signal of change
+// States: Loading, Success (with insight), Error, Rate Limit
+
+interface Props {
+  // No props - fully client-side rendered via JS API
+}
+---
+
+<div class="result-card" id="result-card" style="display: none;">
+  <!-- Loading State -->
+  <div class="state-container loading-state" id="loading-state">
+    <div class="loading-content">
+      <div class="skeleton-price"></div>
+      <div class="skeleton-row skeleton-short"></div>
+      <div class="skeleton-row"></div>
+    </div>
+    <p class="loading-text">Fetching price...</p>
+  </div>
+
+  <!-- Success State -->
+  <div class="state-container success-state" id="success-state" style="display: none;">
+    <!-- Primary: Price -->
+    <div class="price-section">
+      <div class="price-main" id="current-price">$0.00</div>
+      
+      <!-- Change Indicator -->
+      <div class="change-indicator" id="change-indicator">
+        <span class="change-icon" id="change-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+          </svg>
+        </span>
+        <span class="change-text" id="change-text">No change</span>
+      </div>
+    </div>
+
+    <!-- Insight Line (THE SIGNAL) -->
+    <div class="insight-line" id="insight-line">
+      <span class="insight-dot"></span>
+      <span class="insight-text" id="insight-text">Price stable — monitoring continues</span>
+    </div>
+
+    <!-- Supporting Info -->
+    <div class="supporting-info">
+      <div class="info-row">
+        <span class="info-label">Previous</span>
+        <span class="info-value previous" id="previous-price">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Last checked</span>
+        <span class="info-value" id="timestamp">Just now</span>
+      </div>
+    </div>
+
+    <!-- Conversion CTA -->
+    <div class="result-cta">
+      <a href="https://rapidapi.com/1AdrianM/api/price-tracking-api" target="_blank" class="cta-button">
+        <span>Use this in your app</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17 17 7M7 7h10v10"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Trust Signal -->
+    <div class="trust-signal">
+      <span class="trust-dot"></span>
+      <span>Powered by Talon API</span>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div class="state-container error-state" id="error-state" style="display: none;">
+    <div class="error-icon">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+    </div>
+    <h3 class="error-title" id="error-title">Couldn&apos;t extract price</h3>
+    <p class="error-message" id="error-message">Try a different CSS selector</p>
+    <div class="error-tip">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="16" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+      <span>Right-click → Inspect → Copy selector</span>
+    </div>
+    <button class="retry-button" id="retry-btn">Try Again</button>
+  </div>
+
+  <!-- Rate Limit State -->
+  <div class="state-container rate-limit-state" id="rate-limit-state" style="display: none;">
+    <div class="rate-icon">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </div>
+    <h3 class="rate-title">Demo limit reached</h3>
+    <p class="rate-message">3 requests per hour in demo mode</p>
+    <a href="https://rapidapi.com/1AdrianM/api/price-tracking-api" target="_blank" class="rate-cta">
+      Get your API key to continue
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<style>
+  /* Card Container */
+  .result-card {
+    background: linear-gradient(180deg, rgba(13, 17, 23, 0.9), rgba(10, 14, 39, 0.95));
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 1rem;
+    backdrop-filter: blur(20px);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(6, 182, 212, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    animation: cardEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @keyframes cardEnter {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* State Containers */
+  .state-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ========== LOADING STATE ========== */
+  .loading-content {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .skeleton-price {
+    height: 64px;
+    width: 180px;
+    background: linear-gradient(
+      90deg,
+      rgba(148, 163, 184, 0.08) 25%,
+      rgba(148, 163, 184, 0.15) 50%,
+      rgba(148, 163, 184, 0.08) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .skeleton-row {
+    height: 16px;
+    background: linear-gradient(
+      90deg,
+      rgba(148, 163, 184, 0.05) 25%,
+      rgba(148, 163, 184, 0.1) 50%,
+      rgba(148, 163, 184, 0.05) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+  }
+
+  .skeleton-short {
+    width: 60%;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .loading-text {
+    color: #64748b;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .loading-text::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(6, 182, 212, 0.2);
+    border-top-color: #06b6d4;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ========== SUCCESS STATE ========== */
+  .success-state {
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Price Section */
+  .price-section {
+    margin-bottom: 0.75rem;
+  }
+
+  .price-main {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #f1f5f9;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+    animation: priceReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    text-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+  }
+
+  @keyframes priceReveal {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Change Indicator */
+  .change-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .change-indicator.drop {
+    background: rgba(16, 185, 129, 0.12);
+    color: #10b981;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+  }
+
+  .change-indicator.increase {
+    background: rgba(239, 68, 68, 0.12);
+    color: #ef4444;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+  }
+
+  .change-indicator.neutral {
+    background: rgba(148, 163, 184, 0.1);
+    color: #94a3b8;
+  }
+
+  .change-indicator.drop .change-icon svg {
+    transform: rotate(180deg);
+  }
+
+  .change-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Insight Line (THE SIGNAL) */
+  .insight-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.08), rgba(124, 58, 237, 0.08));
+    border: 1px solid rgba(6, 182, 212, 0.15);
+    border-radius: 10px;
+    margin: 1rem 0;
+    animation: fadeIn 0.4s ease 0.2s both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .insight-dot {
+    width: 6px;
+    height: 6px;
+    background: #06b6d4;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+  }
+
+  .insight-text {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  /* Supporting Info */
+  .supporting-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(148, 163, 184, 0.08);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    margin-bottom: 1.25rem;
+    width: 100%;
+  }
+
+  .info-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .info-label {
+    font-size: 0.7rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .info-value {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .info-value.previous {
+    text-decoration: line-through;
+    text-decoration-color: rgba(148, 163, 184, 0.3);
+  }
+
+  /* CTA Button */
+  .result-cta {
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #06b6d4, #7c3aed);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(6, 182, 212, 0.4);
+  }
+
+  .cta-button svg {
+    transition: transform 0.2s;
+  }
+
+  .cta-button:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  /* Trust Signal */
+  .trust-signal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+
+  .trust-dot {
+    width: 4px;
+    height: 4px;
+    background: #10b981;
+    border-radius: 50%;
+  }
+
+  /* ========== ERROR STATE ========== */
+  .error-state {
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .error-icon {
+    color: #ef4444;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    animation: shake 0.5s ease-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  .error-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 0.5rem;
+  }
+
+  .error-message {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 1rem;
+  }
+
+  .error-tip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: #06b6d4;
+    background: rgba(6, 182, 212, 0.08);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.25rem;
+  }
+
+  .retry-button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    color: #f1f5f9;
+    padding: 0.625rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .retry-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(148, 163, 184, 0.3);
+  }
+
+  /* ========== RATE LIMIT STATE ========== */
+  .rate-limit-state {
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .rate-icon {
+    color: #f59e0b;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+  }
+
+  .rate-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 0.5rem;
+  }
+
+  .rate-message {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 1.25rem;
+  }
+
+  .rate-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, #06b6d4, #7c3aed);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .rate-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .result-card {
+      padding: 1.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .price-main {
+      font-size: 2.75rem;
+    }
+
+    .supporting-info {
+      gap: 1.5rem;
+    }
+
+    .insight-text {
+      font-size: 0.8rem;
+    }
+  }
+</style>
