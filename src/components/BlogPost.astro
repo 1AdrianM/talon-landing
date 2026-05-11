@@ -1,4 +1,6 @@
 ---
+import TalonLogo from './TalonLogo.astro';
+
 interface Props {
   title: string;
   description: string;
@@ -12,9 +14,7 @@ const { title, description, category, readTime, updated } = Astro.props;
 
 <nav class="topnav">
   <a href="/" class="nav-logo">
-    <div class="logo-mark">
-      <svg width="13" height="14" viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
-    </div>
+    <TalonLogo size={80} class="logo-mark" />
     <span class="logo-name">Talon</span>
   </a>
   <div class="nav-links">
@@ -91,9 +91,9 @@ body{background:var(--bg0);color:var(--t1);font-family:var(--sans);font-size:var
 
 <style>
 .topnav{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(9,9,11,0.9);backdrop-filter:blur(10px)}
-.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo{display:flex;align-items:center;gap:4px;text-decoration:none}
 .logo-mark{width:36px;height:36px;background:var(--t1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.logo-name{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
+.logo-name{font-family:var(--display);font-size:27px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
 .nav-links{display:flex;align-items:center;gap:4px}
 .nav-link{font-size:13px;color:var(--t3);text-decoration:none;padding:6px 12px;border-radius:6px;transition:color .15s}
 .nav-link:hover{color:var(--t2)}

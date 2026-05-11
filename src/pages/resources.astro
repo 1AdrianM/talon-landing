@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TalonLogo from '../components/TalonLogo.astro';
 
 const posts = [
   {
@@ -81,7 +82,7 @@ const posts = [
 <nav>
   <div class="nav-logo">
     <a href="/">
-      <img src="/talon-logo.png" alt="Talon" class="nav-logo-img" />
+      <TalonLogo size={96} class="nav-logo-img" />
       <span class="logo-name">Talon</span>
     </a>
   </div>
@@ -131,7 +132,7 @@ const posts = [
 <footer>
   <div class="footer-logo">
     <a href="/">
-      <img src="/talon-logo.png" alt="Talon" class="footer-logo-img" />
+      <TalonLogo size={80} class="footer-logo-img" />
       <span>Talon</span>
     </a>
   </div>
@@ -140,9 +141,9 @@ const posts = [
 
 <style>
 nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px;border-bottom:1px solid var(--border);background:rgba(9,9,11,0.85);backdrop-filter:blur(12px)}
-.nav-logo a{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo a{display:flex;align-items:center;gap:4px;text-decoration:none}
 .nav-logo-img{width:40px;height:40px;object-fit:contain;border-radius:8px}
-.logo-name{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
+.logo-name{font-family:var(--display);font-size:28px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
 .nav-right{display:flex;align-items:center;gap:20px}
 .nav-link{color:var(--t2);text-decoration:none;font-size:14px;transition:color .15s}
 .nav-link:hover,.nav-link.active{color:var(--t1)}
@@ -170,7 +171,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 
 .cta-section{background:var(--bg1);border-top:1px solid var(--border);padding:80px 40px;text-align:center}
 .cta-section h2{font-family:var(--display);font-size:28px;font-weight:700;color:var(--t1);margin-bottom:12px}
-.cta-section p{font-size:16px;color:var(--t2);margin-bottom:24px}
+.cta-section p{font-size:28px;color:var(--t2);margin-bottom:24px}
 .cta-group{display:flex;flex-direction:column;align-items:center;gap:12px}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:var(--t1);color:var(--bg0);border:none;cursor:pointer;text-decoration:none}
 .btn-primary:hover{opacity:0.88}

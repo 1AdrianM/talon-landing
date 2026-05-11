@@ -1,4 +1,6 @@
 ---
+import TalonLogo from './TalonLogo.astro';
+
 interface Props {
   title: string;
   description: string;
@@ -35,7 +37,7 @@ const {
 <nav>
   <div class="nav-logo">
     <a href="/">
-      <img src="/talon-logo.png" alt="Talon" class="nav-logo-img" />
+      <TalonLogo size={120} class="nav-logo-img" />
       <span class="logo-name">Talon</span>
     </a>
   </div>
@@ -156,9 +158,9 @@ const {
 
 <style>
 nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px;border-bottom:1px solid var(--border);background:rgba(9,9,11,0.85);backdrop-filter:blur(12px)}
-.nav-logo a{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo a{display:flex;align-items:center;gap:4px;text-decoration:none}
 .nav-logo-img{width:52px;height:52px;object-fit:contain;border-radius:10px}
-.logo-name{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
+.logo-name{font-family:var(--display);font-size:28px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
 .nav-right{display:flex;align-items:center;gap:16px}
 .nav-link{color:var(--t2);text-decoration:none;font-size:14px;transition:color .15s}
 .nav-link:hover{color:var(--t1)}
@@ -176,9 +178,9 @@ h1{font-family:var(--display);font-size:clamp(32px,5vw,52px);font-weight:800;let
 .cta-group{display:flex;flex-direction:column;align-items:center;gap:12px}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.2px}
 .btn-primary:hover{opacity:0.88;transform:translateY(-1px)}
-.btn-primary .arr{font-size:16px;transition:transform .15s}
+.btn-primary .arr{font-size:28px;transition:transform .15s}
 .btn-primary:hover .arr{transform:translateX(3px)}
-.btn-lg{padding:16px 32px;font-size:16px}
+.btn-lg{padding:16px 32px;font-size:28px}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:transparent;color:var(--t1);border:1px solid var(--border-md);cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.2px}
 .btn-secondary:hover{opacity:0.88;transform:translateY(-1px)}
 .cta-note{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px}
@@ -218,13 +220,13 @@ h1{font-family:var(--display);font-size:clamp(32px,5vw,52px);font-weight:800;let
 .action-card{display:flex;align-items:center;gap:20px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px}
 .action-icon{font-size:28px;flex-shrink:0}
 .action-content{flex:1}
-.action-content h3{font-family:var(--display);font-size:16px;font-weight:600;color:var(--t1);margin-bottom:4px}
+.action-content h3{font-family:var(--display);font-size:28px;font-weight:600;color:var(--t1);margin-bottom:4px}
 .action-content p{font-size:13px;color:var(--t2)}
 .action-card .btn-primary,.action-card .btn-secondary{white-space:nowrap;padding:10px 20px;font-size:13px}
 
 .final-cta{text-align:center;padding:96px 40px;max-width:860px;margin:0 auto}
 .final-cta h2{font-family:var(--display);font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.15;color:var(--t1);margin-bottom:12px}
-.final-sub{font-size:16px;color:var(--t2);margin-bottom:32px}
+.final-sub{font-size:28px;color:var(--t2);margin-bottom:32px}
 
 footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .footer-logo a{display:flex;align-items:center;gap:8px;text-decoration:none}

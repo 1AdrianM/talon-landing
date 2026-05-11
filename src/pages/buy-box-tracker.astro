@@ -1,13 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TalonLogo from '../components/TalonLogo.astro';
 ---
 
 <nav>
   <div class="nav-logo">
     <a href="/">
-      <div class="logo-mark">
-        <svg width="13" height="14" viewBox="0 0 13 14" fill="none"><path d="M6.5 1L10 5H8V9.5L10.8 13H2.2L5 9.5V5H3L6.5 1Z" fill="#09090B"/></svg>
-      </div>
+      <TalonLogo size={80} class="logo-mark" />
       <span class="logo-name">Talon</span>
     </a>
   </div>
@@ -301,9 +300,9 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
 nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px;border-bottom:1px solid var(--border);background:rgba(9,9,11,0.85);backdrop-filter:blur(12px)}
-.nav-logo a{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo a{display:flex;align-items:center;gap:4px;text-decoration:none}
 .logo-mark{width:26px;height:26px;background:var(--t1);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.logo-name{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
+.logo-name{font-family:var(--display);font-size:28px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
 .nav-right{display:flex;align-items:center;gap:20px}
 .nav-link{color:var(--t2);text-decoration:none;font-size:14px;transition:color .15s}
 .nav-link:hover{color:var(--t1)}
@@ -328,23 +327,23 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 
 .content-section{max-width:700px;margin:0 auto;padding:64px 40px}
 .content-section h2{font-family:var(--display);font-size:clamp(22px,3vw,28px);font-weight:700;letter-spacing:-0.5px;color:var(--t1);margin-bottom:20px}
-.content-section p{font-size:16px;color:var(--t2);line-height:1.75;margin-bottom:16px}
+.content-section p{font-size:28px;color:var(--t2);line-height:1.75;margin-bottom:16px}
 .content-section p strong{color:var(--t1)}
 
 .stat-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;margin:32px 0}
 .stat-number{font-family:var(--display);font-size:48px;font-weight:800;color:var(--red);margin-bottom:8px}
-.stat-text{font-size:16px;color:var(--t2);line-height:1.6}
+.stat-text{font-size:28px;color:var(--t2);line-height:1.6}
 
 .reason-list{display:flex;flex-direction:column;gap:16px;margin-top:24px}
 .reason-item{display:flex;gap:20px;padding:20px;background:var(--bg1);border:1px solid var(--border);border-radius:10px}
 .reason-num{font-family:var(--mono);font-size:14px;color:var(--t3);flex-shrink:0;width:32px}
-.reason-content h3{font-family:var(--display);font-size:16px;font-weight:600;color:var(--t1);margin-bottom:6px}
+.reason-content h3{font-family:var(--display);font-size:28px;font-weight:600;color:var(--t1);margin-bottom:6px}
 .reason-content p{font-size:14px;color:var(--t2);line-height:1.6;margin:0}
 
 .fail-list{display:flex;flex-direction:column;gap:16px;margin:24px 0}
 .fail-item{display:flex;gap:16px;padding:20px;background:var(--bg1);border:1px solid var(--border);border-radius:10px}
 .fail-icon{font-size:24px;flex-shrink:0}
-.fail-content h3{font-family:var(--display);font-size:16px;font-weight:600;color:var(--t1);margin-bottom:6px}
+.fail-content h3{font-family:var(--display);font-size:28px;font-weight:600;color:var(--t1);margin-bottom:6px}
 .fail-content p{font-size:14px;color:var(--t2);line-height:1.6;margin:0}
 
 .money-impact{background:var(--red-lo);border:1px solid var(--red-bd);border-radius:12px;padding:24px;margin-top:32px}
@@ -355,7 +354,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .solution-steps{display:flex;flex-direction:column;gap:16px;margin-top:24px}
 .solution-step{display:flex;gap:16px;padding:20px;background:var(--bg1);border:1px solid var(--border);border-radius:10px}
 .step-icon{font-size:28px;flex-shrink:0}
-.step-content h3{font-family:var(--display);font-size:16px;font-weight:600;color:var(--t1);margin-bottom:6px}
+.step-content h3{font-family:var(--display);font-size:28px;font-weight:600;color:var(--t1);margin-bottom:6px}
 .step-content p{font-size:14px;color:var(--t2);line-height:1.6;margin:0}
 
 .comparison-table{background:var(--bg1);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:24px}
@@ -381,12 +380,12 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 
 .final-cta{text-align:center;padding:80px 40px;max-width:700px;margin:0 auto}
 .final-cta h2{font-family:var(--display);font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-1px;color:var(--t1);margin-bottom:16px}
-.final-cta p{font-size:16px;color:var(--t2);margin-bottom:32px}
+.final-cta p{font-size:28px;color:var(--t2);margin-bottom:32px}
 
 .cta-group{display:flex;flex-direction:column;align-items:center;gap:12px}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:var(--t1);color:var(--bg0);border:none;cursor:pointer}
 .btn-primary:hover{opacity:0.88}
-.btn-lg{padding:16px 32px;font-size:16px}
+.btn-lg{padding:16px 32px;font-size:28px}
 .cta-note{font-family:var(--mono);font-size:11px;color:var(--t3)}
 
 footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between}
