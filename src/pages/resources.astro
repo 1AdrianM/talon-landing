@@ -4,206 +4,168 @@ import TalonLogo from '../components/TalonLogo.astro';
 
 const posts = [
   {
-    title: "What Is Repricing in eCommerce? (And Why Most Sellers Do It Wrong)",
-    description: "Learn what repricing actually means, why most sellers fail at it, and how to move from reactive pricing to intelligent decisions.",
-    category: "Strategy",
-    slug: "what-is-repricing-ecommerce",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop"
+    title: "How to Monitor Your Shopify Competitors (2026 Guide)",
+    description: "A practical guide to tracking rival stores, reacting to price changes in real time, and protecting your sales margin.",
+    category: "Shopify",
+    slug: "shopify-competitor-monitoring-guide",
+    readTime: "5 min"
   },
   {
     title: "Best Shopify Competitor Price Monitoring Tools (2026)",
-    description: "Compare the best tools for Shopify. Talon, Prisync, Price2Spy, Minderest, and Competera reviewed.",
-    category: "Platform",
-    slug: "best-shopify-competitor-price-tracking-tools",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
+    description: "Talon, Prisync, Price2Spy, Minderest, and Competera reviewed — judged on reaction speed and quality of output.",
+    category: "Tools",
+    slug: "best-shopify-competitor-price-monitoring-tools",
+    readTime: "6 min"
   },
   {
-    title: "Best Amazon Price Tracking Tools (2026)",
-    description: "Compare the best Amazon price tracking tools. Real-time alerts, Buy Box protection, and actionable insights.",
-    category: "Amazon",
-    slug: "best-amazon-price-tracking-tools",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1557821552-17105176666c?w=400&h=250&fit=crop"
+    title: "What Is Repricing in eCommerce? (And Why Most Sellers Do It Wrong)",
+    description: "Learn what repricing actually means and how to move from reactive pricing to intelligent, impact-driven decisions.",
+    category: "Strategy",
+    slug: "what-is-repricing-ecommerce",
+    readTime: "6 min"
   },
   {
-    title: "Best Tools to Track Competitor Prices (2026)",
-    description: "Compare tools for Amazon, Shopify, WooCommerce. Real-time speed and actionable insights compared.",
+    title: "Best Tools to Track Competitor Prices in Real-Time (2026)",
+    description: "Compare the best competitor price tracking tools for Shopify and WooCommerce sellers on reaction speed and actionable output.",
     category: "Tools",
     slug: "best-competitor-price-tracking-tools",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop"
-  },
-  {
-    title: "Amazon Buy Box Strategy: Price Monitoring Guide",
-    description: "Learn how to win and keep the Amazon Buy Box. Monitor competitor prices in real time and protect your position.",
-    category: "Amazon",
-    slug: "amazon-buy-box-strategy",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=400&h=250&fit=crop"
-  },
-  {
-    title: "How to Monitor Your Shopify Competitors (2026 Guide)",
-    description: "A practical guide to monitoring your Shopify competitors' prices. React to price changes in real time.",
-    category: "Shopify",
-    slug: "shopify-competitor-monitoring-guide",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
+    readTime: "7 min"
   },
   {
     title: "Why Your Products Aren't Selling: The Pricing Diagnosis Guide",
-    description: "Find out why your products aren't converting. Learn how pricing gaps and competitor moves affect your sales.",
+    description: "Find out why your products aren't converting — pricing gaps, competitor moves, and what to do about each one.",
     category: "Diagnosis",
     slug: "why-your-products-arent-selling",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400&h=250&fit=crop"
-  },
-  {
-    title: "Yeezy 350 Resale: Market Price Tracking Guide",
-    description: "Track Yeezy 350 prices across StockX, GOAT, eBay. Learn to time your sales and maximize profit margins.",
-    category: "Sneakers",
-    slug: "yeezy-350-resale-guide",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=250&fit=crop"
-  },
-  {
-    title: "Air Force 1 Resale: Competitive Pricing Guide",
-    description: "Track Nike Air Force 1 prices across Nike.com, Foot Locker, StockX. Monitor competitors and maximize margins.",
-    category: "Sneakers",
-    slug: "air-force-1-resale-guide",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=250&fit=crop"
+    readTime: "5 min"
   }
 ];
 ---
 
-<Layout title="Resources — Talon Pricing Intelligence">
-<nav>
-  <div class="nav-logo">
-    <a href="/">
-      <TalonLogo size={96} class="nav-logo-img" />
+<Layout
+  title="Resources — Talon"
+  description="Guides and tools to help Shopify store owners price smarter. Competitor monitoring, repricing strategy, and decision frameworks."
+>
+  <nav class="topnav">
+    <a href="/" class="nav-logo">
+      <TalonLogo size={24} />
       <span class="logo-name">Talon</span>
     </a>
-  </div>
-  <div class="nav-right">
-    <a href="/" class="nav-link">Home</a>
-    <a href="/" class="nav-link active">Resources</a>
-    <button class="nav-cta" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Try Free →</button>
-  </div>
-</nav>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/resources" class="nav-link active" aria-current="page">Resources</a>
+    </div>
+    <a href="/#early-access" class="nav-cta">Get early access →</a>
+  </nav>
 
-<header class="page-header">
-  <div class="breadcrumb">Talon / Resources</div>
-  <h1>Pricing Intelligence Resources</h1>
-  <p class="page-intro">
-    Guides, tools, and insights to help you price smarter and compete better.
-  </p>
-</header>
+  <header class="page-header">
+    <p class="page-tag">Resources</p>
+    <h1>Pricing guides for Shopify sellers</h1>
+    <p class="page-intro">Practical frameworks for competitive pricing decisions — no dashboards, no data science required.</p>
+  </header>
 
-<section class="posts-section" id="tool">
-  <div class="posts-grid">
-    {posts.map((post, index) => (
-      <a href={`/${post.slug}`} class="post-card">
-        <div class="post-image" style={`background-image: url('${post.image}')`}></div>
-        <div class="post-content">
-          <div class="post-category">{post.category}</div>
-          <h2 class="post-title">{post.title}</h2>
-          <p class="post-description">{post.description}</p>
-          <div class="post-meta">
-            <span class="post-readtime">{post.readTime}</span>
-            <span class="post-arrow">→</span>
+  <section class="posts-section">
+    <div class="posts-grid">
+      {posts.map((post) => (
+        <a href={`/${post.slug}`} class="post-card">
+          <div class="post-content">
+            <div class="post-meta-top">
+              <span class="post-category">{post.category}</span>
+              <span class="post-readtime">{post.readTime} read</span>
+            </div>
+            <h2 class="post-title">{post.title}</h2>
+            <p class="post-description">{post.description}</p>
+            <span class="post-cta">Read article →</span>
           </div>
-        </div>
-      </a>
-    ))}
-  </div>
-</section>
+        </a>
+      ))}
+    </div>
+  </section>
 
-<section class="cta-section">
-  <h2>Ready to take action?</h2>
-  <p>Start analyzing your products and see what your competitors are doing.</p>
-  <div class="cta-group">
-    <a href="/" class="btn-primary">Analyze Your Product →</a>
-    <span class="cta-note">Free · No signup required</span>
-  </div>
-</section>
+  <section class="cta-section">
+    <div class="cta-inner">
+      <p class="cta-tag">Free tool</p>
+      <h2>See where your price stands right now</h2>
+      <p class="cta-sub">Paste any Shopify product URL. Get a verdict in seconds — no signup.</p>
+      <a href="/#tool" class="btn-primary">Check my price →</a>
+    </div>
+  </section>
 
-<footer>
-  <div class="footer-logo">
-    <a href="/">
-      <TalonLogo size={80} class="footer-logo-img" />
+  <footer class="footer">
+    <div class="footer-brand">
+      <TalonLogo size={20} />
       <span>Talon</span>
-    </a>
-  </div>
-  <span class="footer-tagline">Pricing Intelligence Engine</span>
-</footer>
+    </div>
+    <span class="footer-tagline">Pricing Decision Engine · Early access</span>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:hello@trytalon.com">Contact</a>
+    </div>
+  </footer>
+</Layout>
 
 <style>
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px;border-bottom:1px solid var(--border);background:rgba(9,9,11,0.85);backdrop-filter:blur(12px)}
-.nav-logo a{display:flex;align-items:center;gap:4px;text-decoration:none}
-.nav-logo-img{width:40px;height:40px;object-fit:contain;border-radius:8px}
-.logo-name{font-family:var(--display);font-size:28px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
-.nav-right{display:flex;align-items:center;gap:20px}
-.nav-link{color:var(--t2);text-decoration:none;font-size:14px;transition:color .15s}
-.nav-link:hover,.nav-link.active{color:var(--t1)}
-.nav-cta{font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-.page-header{max-width:860px;margin:0 auto;padding:80px 40px 60px;text-align:center}
-.breadcrumb{font-family:var(--mono);font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
-.page-header h1{font-family:var(--display);font-size:clamp(32px,5vw,48px);font-weight:800;letter-spacing:-1px;line-height:1.15;color:var(--t1);margin-bottom:16px}
-.page-intro{font-size:18px;color:var(--t2);max-width:520px;margin:0 auto;line-height:1.6}
-
-.posts-section{padding:0 40px 80px;max-width:1100px;margin:0 auto}
-.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-
-.post-card{background:var(--bg1);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;transition:transform .2s,border-color .2s}
-.post-card:hover{transform:translateY(-4px);border-color:var(--border-hi)}
-.post-image{width:100%;height:160px;background-size:cover;background-position:center;background-color:var(--bg2)}
-.post-content{padding:24px;display:flex;flex-direction:column;flex:1}
-.post-category{font-family:var(--mono);font-size:10px;color:var(--grn);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.post-title{font-family:var(--display);font-size:20px;font-weight:700;color:var(--t1);line-height:1.3;margin-bottom:12px}
-.post-description{font-size:14px;color:var(--t2);line-height:1.6;flex:1;margin-bottom:14px}
-.post-meta{display:flex;align-items:center;justify-content:space-between}
-.post-readtime{font-family:var(--mono);font-size:11px;color:var(--t3)}
-.post-arrow{font-size:18px;color:var(--t2);transition:transform .2s}
-.post-card:hover .post-arrow{transform:translateX(4px);color:var(--t1)}
-
-.cta-section{background:var(--bg1);border-top:1px solid var(--border);padding:80px 40px;text-align:center}
-.cta-section h2{font-family:var(--display);font-size:28px;font-weight:700;color:var(--t1);margin-bottom:12px}
-.cta-section p{font-size:28px;color:var(--t2);margin-bottom:24px}
-.cta-group{display:flex;flex-direction:column;align-items:center;gap:12px}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:var(--t1);color:var(--bg0);border:none;cursor:pointer;text-decoration:none}
-.btn-primary:hover{opacity:0.88}
-.cta-note{font-family:var(--mono);font-size:11px;color:var(--t3)}
-
-footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between}
-.footer-logo a{display:flex;align-items:center;gap:8px;text-decoration:none}
-.footer-logo-img{width:32px;height:32px;object-fit:contain;border-radius:6px}
-.footer-logo{font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
-.footer-tagline{font-family:var(--mono);font-size:11px;color:var(--t3)}
-
-@media (max-width: 900px) {
-  .posts-grid { grid-template-columns: repeat(2, 1fr); }
+.topnav {
+  height: 54px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(251,247,240,0.92); backdrop-filter: blur(12px);
 }
+.nav-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.logo-name { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--ink); }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { font-size: 13px; color: var(--ink-2); text-decoration: none; padding: 6px 10px; border-radius: 6px; transition: color .15s; }
+.nav-link:hover, .nav-link.active { color: var(--ink); }
+.nav-cta { font-size: 13px; font-weight: 600; padding: 7px 16px; border-radius: 8px; background: var(--accent); color: var(--accent-ink); text-decoration: none; transition: opacity .15s; }
+.nav-cta:hover { opacity: .9; }
 
-@media (max-width: 640px) {
+.page-header { max-width: 680px; margin: 0 auto; padding: 56px 32px 40px; text-align: center; }
+.page-tag { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--hold); margin-bottom: 14px; }
+h1 { font-family: var(--display); font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.7px; color: var(--ink); margin-bottom: 14px; line-height: 1.15; }
+.page-intro { font-size: 16px; color: var(--ink-2); line-height: 1.65; max-width: 480px; margin: 0 auto; }
+
+.posts-section { max-width: 1000px; margin: 0 auto; padding: 0 32px 72px; }
+.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+.post-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  text-decoration: none; display: flex; flex-direction: column;
+  transition: box-shadow .2s, border-color .2s;
+}
+.post-card:hover { border-color: var(--ink-2); box-shadow: 0 4px 20px rgba(31,26,23,0.08); }
+.post-content { padding: 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.post-meta-top { display: flex; align-items: center; justify-content: space-between; }
+.post-category { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--opp); }
+.post-readtime { font-family: var(--mono); font-size: 10px; color: var(--hold); }
+.post-title { font-family: var(--display); font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.3; letter-spacing: -0.2px; }
+.post-description { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; flex: 1; }
+.post-cta { font-family: var(--mono); font-size: 11px; color: var(--hold); transition: color .15s; }
+.post-card:hover .post-cta { color: var(--ink); }
+
+.cta-section { background: var(--hold-bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 64px 32px; text-align: center; }
+.cta-inner { max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.cta-tag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--hold); }
+.cta-section h2 { font-family: var(--display); font-size: clamp(20px, 3vw, 26px); font-weight: 700; letter-spacing: -0.4px; color: var(--ink); }
+.cta-sub { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; padding: 12px 24px; border-radius: var(--radius); background: var(--ink); color: var(--surface); text-decoration: none; transition: opacity .15s; }
+.btn-primary:hover { opacity: .85; }
+
+.footer { border-top: 1px solid var(--line); padding: 22px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: var(--bg); }
+.footer-brand { display: flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 14px; font-weight: 700; color: var(--ink); }
+.footer-tagline { font-family: var(--mono); font-size: 11px; color: var(--hold); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; color: var(--hold); text-decoration: none; transition: color .15s; }
+.footer-links a:hover { color: var(--ink); }
+
+@media (max-width: 860px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) {
   .posts-grid { grid-template-columns: 1fr; }
-  nav,.page-header,.posts-section,.cta-section,footer { padding-left: 20px; padding-right: 20px; }
+  .topnav, .page-header, .posts-section, .cta-section, .footer { padding-left: 20px; padding-right: 20px; }
+  .footer { flex-direction: column; gap: 10px; text-align: center; }
+  .footer-links { justify-content: center; flex-wrap: wrap; }
+  .nav-links { display: none; }
 }
-</style>
-
-<style is:global>
-:root{
-  --bg0:#09090B;--bg1:#0F0F12;--bg2:#16161A;--bg3:#1C1C21;--bg4:#242429;
-  --border:rgba(255,255,255,0.05);--border-md:rgba(255,255,255,0.09);--border-hi:rgba(255,255,255,0.14);
-  --t1:#EDECEA;--t2:#72727A;--t3:#3F3F46;
-  --grn:#1A9E68;
-  --sans:'Instrument Sans',system-ui,sans-serif;
-  --mono:'DM Mono','Courier New',monospace;
-  --display:'Syne',sans-serif;
-  --radius:8px;
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg0);color:var(--t1);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 </style>
