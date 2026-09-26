@@ -34,4 +34,26 @@
   --display: 'Plus Jakarta Sans', sans-serif;
   --sans: 'Instrument Sans', system-ui, sans-serif;
   --mono: 'DM Mono', 'Courier New', monospace;
+
+  /* ── Legacy aliases (SEO pages migrated from dark theme) ── */
+  --t1: var(--ink);
+  --t2: var(--ink-2);
+  --t3: var(--hold);
+  --bg0: var(--bg);
+  --bg1: var(--surface);
+  --bg2: var(--hold-bg);
+  --bg3: #EDE8E0;
+  --border: var(--line);
+  --border-md: #D4C9BC;
+  --red-lo: var(--alert-bg);
+  --red-txt: var(--alert);
+  --red-bd: var(--alert-bd);
+  --grn-lo: var(--opp-bg);
+  --grn-txt: var(--opp);
+  --grn-bd: var(--opp-bd);
+  --amb-lo: #FEF3CD;
+  --amb-txt: #A06B00;
+  --amb-bd: rgba(160, 107, 0, 0.28);
+  --body-size: 15px;
+  --body-lh: 1.7;
 }
