@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Terms of Service — Talon"
+  description="Talon terms of service. Free price-check tool for Shopify store owners. Early access."
+>
+  <nav class="topnav">
+    <a href="/" class="nav-logo">
+      <img src="/talon_logo.svg" alt="Talon" width="22" height="22" />
+      <span class="logo-name">Talon</span>
+    </a>
+    <a href="/" class="nav-link">← Back to home</a>
+  </nav>
+
+  <main class="page">
+    <header class="page-header">
+      <div class="page-tag">Legal</div>
+      <h1>Terms of Service</h1>
+      <p class="page-meta">Effective: September 2026 · Last updated: September 2026</p>
+    </header>
+
+    <article class="prose">
+      <h2>What Talon is</h2>
+      <p>
+        Talon is an early-access pricing decision tool. You can use the free price check
+        without creating an account. By using Talon, you agree to these terms.
+      </p>
+
+      <h2>Acceptable use</h2>
+      <ul>
+        <li>Only submit URLs of products you own or are authorized to analyze.</li>
+        <li>Do not use Talon to scrape competitor data at scale for purposes beyond your own pricing decisions.</li>
+        <li>Do not attempt to circumvent rate limits or abuse the free tier.</li>
+      </ul>
+
+      <h2>No warranty</h2>
+      <p>
+        Talon is in early access and provided as-is. Pricing recommendations are based on
+        publicly available data and deterministic rules — they are suggestions, not financial advice.
+        Always apply your own judgment before changing prices.
+      </p>
+
+      <h2>Limitation of liability</h2>
+      <p>
+        Talon is not liable for any loss of revenue, missed sales, or pricing decisions made
+        using information from this tool.
+      </p>
+
+      <h2>Changes</h2>
+      <p>We may update these terms as the product evolves. We'll post the updated date above.</p>
+
+      <h2>Contact</h2>
+      <p>Questions? <a href="mailto:hello@trytalon.com">hello@trytalon.com</a></p>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <span class="footer-brand">Talon</span>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms" aria-current="page">Terms</a>
+      <a href="mailto:hello@trytalon.com">Contact</a>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.topnav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 54px; border-bottom: 1px solid var(--line);
+  background: rgba(251,247,240,0.92); position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.nav-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.logo-name { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--ink); }
+.nav-link { font-family: var(--mono); font-size: 12px; color: var(--ink-2); text-decoration: none; }
+.nav-link:hover { color: var(--ink); }
+.page { max-width: 720px; margin: 0 auto; padding: 48px 32px 80px; }
+.page-header { margin-bottom: 40px; }
+.page-tag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--hold); margin-bottom: 10px; }
+h1 { font-family: var(--display); font-size: clamp(28px, 3.5vw, 38px); font-weight: 800; letter-spacing: -0.7px; color: var(--ink); margin-bottom: 8px; }
+.page-meta { font-family: var(--mono); font-size: 11px; color: var(--hold); }
+.prose { display: flex; flex-direction: column; gap: 24px; }
+.prose h2 { font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--ink); margin-top: 8px; }
+.prose p { font-size: 15px; color: var(--ink-2); line-height: 1.75; }
+.prose ul { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.prose li { font-size: 15px; color: var(--ink-2); line-height: 1.7; }
+.prose a { color: var(--ink); text-underline-offset: 3px; }
+.footer {
+  border-top: 1px solid var(--line); padding: 22px 32px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; background: var(--bg);
+}
+.footer-brand { font-family: var(--display); font-size: 14px; font-weight: 700; color: var(--ink); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; color: var(--hold); text-decoration: none; }
+.footer-links a:hover { color: var(--ink); }
+@media (max-width: 640px) {
+  .topnav, .page, .footer { padding-left: 20px; padding-right: 20px; }
+  .footer { flex-direction: column; gap: 10px; }
+}
+</style>
