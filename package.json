@@ -10,8 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^7.0.0",
     "@lucide/astro": "^1.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@vercel/analytics": "^2.0.1",
-    "astro": "^4.0.0"
+    "astro": "^4.0.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }
