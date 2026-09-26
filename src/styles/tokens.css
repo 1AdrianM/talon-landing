@@ -1,0 +1,37 @@
+:root {
+  /* ── Surfaces ── */
+  --bg: #FBF7F0;
+  --surface: #FFFFFF;
+  --line: #E6DDD0;
+
+  /* ── Text ── */
+  --ink: #1F1A17;
+  --ink-2: #6E645B;
+
+  /* ── Accent: marigold — NOT for state colors ── */
+  --accent: #F2A900;
+  --accent-ink: #1F1A17;
+
+  /* ── Semantic: alert / drop / act ── */
+  --alert: #B8352B;
+  --alert-bg: #FBEAE7;
+  --alert-bd: rgba(184, 53, 43, 0.28);
+
+  /* ── Semantic: opportunity / raise ── */
+  --opp: #2E7D4F;
+  --opp-bg: #E7F3EB;
+  --opp-bd: rgba(46, 125, 79, 0.28);
+
+  /* ── Semantic: hold / maintain ── */
+  --hold: #6E645B;
+  --hold-bg: #F1ECE4;
+  --hold-bd: rgba(110, 100, 91, 0.28);
+
+  /* ── Radius ── */
+  --radius: 12px;
+
+  /* ── Typography ── */
+  --display: 'Plus Jakarta Sans', sans-serif;
+  --sans: 'Instrument Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', 'Courier New', monospace;
+}
