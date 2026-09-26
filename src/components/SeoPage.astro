@@ -1,5 +1,6 @@
 ---
 import TalonLogo from './TalonLogo.astro';
+import { AnalyzerHero } from './AnalyzerHero';
 
 interface Props {
   title: string;
@@ -9,10 +10,6 @@ interface Props {
   heroHeadline: string;
   heroSubheadline: string;
   ctaPrimary?: string;
-  insightTitle?: string;
-  insightData?: Array<{label: string; value: string; sub?: string}>;
-  insightText?: string;
-  insightImpact?: string;
   actionTitle?: string;
   actionText?: string;
 }
@@ -24,26 +21,22 @@ const {
   heroEyebrow = "Free Tool",
   heroHeadline,
   heroSubheadline,
-  ctaPrimary = "Analyze Now",
-  insightTitle = "Live Insight",
-  insightData = [],
-  insightText = "",
-  insightImpact = "",
-  actionTitle = "Recommended Action",
-  actionText = ""
+  ctaPrimary = "Check my price",
+  actionTitle,
+  actionText,
 } = Astro.props;
 ---
 
 <nav>
   <div class="nav-logo">
-    <a href="/">
-      <TalonLogo size={120} class="nav-logo-img" />
+    <a href="/" class="nav-logo-link">
+      <TalonLogo size={24} />
       <span class="logo-name">Talon</span>
     </a>
   </div>
   <div class="nav-right">
     <a href="/" class="nav-link">Home</a>
-    <button class="nav-cta" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Analyze your product →</button>
+    <a href="#tool" class="nav-cta">Check my price →</a>
   </div>
 </nav>
 
@@ -51,198 +44,184 @@ const {
   <div class="hero-eyebrow">{heroEyebrow}</div>
   <h1>{heroHeadline}</h1>
   <p class="hero-sub">{heroSubheadline}</p>
-
   <div class="cta-group">
-    <button class="btn-primary" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
-      <span class="arr">→</span> {ctaPrimary}
-    </button>
-    <span class="cta-note">No signup required · Get results in seconds</span>
+    <a href="#tool" class="btn-primary">
+      <span class="arr" aria-hidden="true">→</span> {ctaPrimary}
+    </a>
+    <span class="cta-note">No signup required · Free analysis</span>
   </div>
 </section>
 
-{insightData.length > 0 && (
-  <section class="insight-section" id="tool">
-    <div class="tool-section">
-      <div class="tool-tag">⚡ Live Analysis Demo</div>
-      <h2 class="tool-title">{insightTitle}</h2>
+<section class="tool-section" id="tool">
+  <div class="tool-inner">
+    <div class="tool-tag">Free Price Check</div>
+    <h2 class="tool-title">Check your product now</h2>
+    <AnalyzerHero client:load />
+    <p class="tool-note">Early access: we're onboarding the first stores by hand.</p>
+  </div>
+</section>
 
-      <div class="result-card">
-        <div class="result-signals">
-          {insightData.map((item, index) => (
-            <div class={`rsig ${index === 0 ? 'rsig-r' : index === 1 ? 'rsig-r' : 'rsig-g'}`}>
-              <div class="rsig-label">{item.label}</div>
-              <div class="rsig-value">{item.value}</div>
-              {item.sub && <div class="rsig-sub">{item.sub}</div>}
-            </div>
-          ))}
+{(actionTitle || actionText) && (
+  <section class="action-section">
+    <div class="sec-inner">
+      <div class="sec-tag">What to do next</div>
+      <h2 class="sec-title">{actionTitle ?? "Take action"}</h2>
+      {actionText && <p class="sec-sub">{actionText}</p>}
+      <div class="action-cards">
+        <div class="action-card">
+          <div class="action-content">
+            <h3>Analyze your product</h3>
+            <p>Get a price verdict for your specific product — free, no signup.</p>
+          </div>
+          <a href="#tool" class="btn-primary btn-sm">Check my price →</a>
         </div>
-
-        {insightText && (
-          <div class="result-why">
-            <span class="result-why-label">What's happening —</span>
-            {insightText}
+        <div class="action-card">
+          <div class="action-content">
+            <h3>Get alerts when prices change</h3>
+            <p>Leave your email and we'll notify you when the picture changes. Monitoring is in early access.</p>
           </div>
-        )}
-
-        {insightImpact && (
-          <div class="result-action-block">
-            <div class="result-action-label">💰 Money Impact</div>
-            <div class="result-action-row">
-              <div class="result-action-text">{insightImpact}</div>
-            </div>
-          </div>
-        )}
+          <a href="/#early-access" class="btn-secondary btn-sm">Get early access →</a>
+        </div>
       </div>
-
-      <p class="insight-note">This is simulated data. Connect your product for real-time analysis.</p>
     </div>
   </section>
 )}
 
-<section class="action-section">
-  <div class="sec-header">
-    <div class="sec-tag">Take Action</div>
-    <h2 class="sec-title">{actionTitle || "What to do next"}</h2>
-    {actionText && <p class="sec-sub">{actionText}</p>}
-  </div>
-
-  <div class="action-cards">
-    <div class="action-card">
-      <div class="action-icon">🎯</div>
-      <div class="action-content">
-        <h3>Analyze your product</h3>
-        <p>Get real-time pricing intelligence for your specific product.</p>
-      </div>
-      <button class="btn-primary" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
-        Start Analysis →
-      </button>
-    </div>
-
-    <div class="action-card">
-      <div class="action-icon">📊</div>
-      <div class="action-content">
-        <h3>Track competitors automatically</h3>
-        <p>Get alerts when competitor prices change.</p>
-      </div>
-      <button class="btn-secondary" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
-        Set Up Tracking →
-      </button>
-    </div>
-  </div>
-</section>
-
 <section class="final-cta">
-  <h2>Stop guessing. Start optimizing.</h2>
-  <p class="final-sub">See exactly what your competitors are doing — and what to do about it.</p>
+  <h2>Stop guessing. Start pricing with context.</h2>
+  <p class="final-sub">See where you stand — and what to do next.</p>
   <div class="cta-group">
-    <button class="btn-primary btn-lg" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
-      <span class="arr">→</span> Analyze your product now
-    </button>
+    <a href="#tool" class="btn-primary btn-lg">
+      <span class="arr" aria-hidden="true">→</span> Check my price now
+    </a>
     <span class="cta-note">Free · No signup required</span>
   </div>
 </section>
 
 <footer>
   <div class="footer-logo">
-    <a href="/">
-      <img src="/talon-logo.png" alt="Talon" class="footer-logo-img" />
+    <a href="/" class="footer-logo-link">
+      <TalonLogo size={22} />
       <span>Talon</span>
     </a>
   </div>
-  <span class="footer-tagline">Pricing Intelligence Engine</span>
+  <span class="footer-tagline">Pricing Decision Engine · Early access</span>
   <div class="footer-links">
     <a href="/">Home</a>
-    <a href="/docs">Docs</a>
+    <a href="/privacy">Privacy</a>
+    <a href="mailto:hello@trytalon.com">Contact</a>
   </div>
 </footer>
 
 <style>
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:56px;border-bottom:1px solid var(--border);background:rgba(9,9,11,0.85);backdrop-filter:blur(12px)}
-.nav-logo a{display:flex;align-items:center;gap:4px;text-decoration:none}
-.nav-logo-img{width:52px;height:52px;object-fit:contain;border-radius:10px}
-.logo-name{font-family:var(--display);font-size:28px;font-weight:600;letter-spacing:-0.3px;color:var(--t1)}
-.nav-right{display:flex;align-items:center;gap:16px}
-.nav-link{color:var(--t2);text-decoration:none;font-size:14px;transition:color .15s}
-.nav-link:hover{color:var(--t1)}
-.nav-cta{font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.1px}
-.nav-cta:hover{opacity:0.88;transform:translateY(-1px)}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-section{padding:96px 40px;max-width:860px;margin:0 auto}
-section.full{max-width:100%;padding-left:0;padding-right:0}
+nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 54px;
+  background: rgba(251,247,240,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo-link { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.logo-name { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-link { font-size: 13px; color: var(--ink-2); text-decoration: none; transition: color .15s; }
+.nav-link:hover { color: var(--ink); }
+.nav-cta {
+  font-size: 13px; font-weight: 600; padding: 8px 18px;
+  border-radius: 8px; background: var(--accent); color: var(--accent-ink);
+  text-decoration: none; transition: opacity .15s;
+}
+.nav-cta:hover { opacity: .9; }
 
-.hero{text-align:center;padding-top:80px;padding-bottom:60px;position:relative}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--amb);border:1px solid var(--amb-bd);background:var(--amb-lo);padding:5px 12px;border-radius:20px;margin-bottom:24px;letter-spacing:0.4px}
-h1{font-family:var(--display);font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-1.2px;line-height:1.1;color:var(--t1);margin-bottom:16px;max-width:700px;margin-left:auto;margin-right:auto}
-.hero-sub{font-size:clamp(16px,2vw,18px);color:var(--t2);max-width:520px;margin:0 auto 32px;line-height:1.6;font-weight:400}
+.hero {
+  text-align: center; padding: 80px 40px 60px;
+  max-width: 800px; margin: 0 auto;
+}
+.hero-eyebrow {
+  display: inline-block; font-family: var(--mono); font-size: 11px;
+  color: var(--hold); border: 1px solid var(--hold-bd); background: var(--hold-bg);
+  padding: 4px 12px; border-radius: 20px; margin-bottom: 24px; letter-spacing: 0.3px;
+}
+h1 {
+  font-family: var(--display); font-size: clamp(30px, 4.5vw, 48px);
+  font-weight: 800; letter-spacing: -1px; line-height: 1.1;
+  color: var(--ink); margin-bottom: 16px; max-width: 680px; margin-left: auto; margin-right: auto;
+}
+.hero-sub {
+  font-size: clamp(15px, 1.8vw, 17px); color: var(--ink-2);
+  max-width: 520px; margin: 0 auto 28px; line-height: 1.65;
+}
+.cta-group { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: 15px; font-weight: 600;
+  padding: 13px 26px; border-radius: var(--radius);
+  background: var(--ink); color: var(--surface); text-decoration: none;
+  border: none; cursor: pointer; transition: opacity .15s, transform .15s;
+}
+.btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+.btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-primary .arr { transition: transform .15s; }
+.btn-primary:hover .arr { transform: translateX(3px); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: 15px; font-weight: 600;
+  padding: 13px 26px; border-radius: var(--radius);
+  background: transparent; color: var(--ink);
+  border: 1.5px solid var(--line); text-decoration: none; cursor: pointer;
+  transition: border-color .15s;
+}
+.btn-secondary:hover { border-color: var(--ink-2); }
+.btn-sm { padding: 9px 18px; font-size: 13px; }
+.btn-lg { padding: 15px 30px; font-size: 16px; }
+.cta-note { font-family: var(--mono); font-size: 11px; color: var(--hold); }
 
-.cta-group{display:flex;flex-direction:column;align-items:center;gap:12px}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:var(--t1);color:var(--bg0);border:none;cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.2px}
-.btn-primary:hover{opacity:0.88;transform:translateY(-1px)}
-.btn-primary .arr{font-size:28px;transition:transform .15s}
-.btn-primary:hover .arr{transform:translateX(3px)}
-.btn-lg{padding:16px 32px;font-size:28px}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:14px 28px;border-radius:var(--radius);background:transparent;color:var(--t1);border:1px solid var(--border-md);cursor:pointer;transition:opacity .15s,transform .15s;letter-spacing:-0.2px}
-.btn-secondary:hover{opacity:0.88;transform:translateY(-1px)}
-.cta-note{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px}
+.tool-section { padding: 48px 40px; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.tool-inner { max-width: 600px; margin: 0 auto; }
+.tool-tag {
+  font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--hold); margin-bottom: 10px;
+}
+.tool-title { font-family: var(--display); font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 20px; }
+.tool-note { font-family: var(--mono); font-size: 11px; color: var(--hold); margin-top: 14px; }
 
-.insight-section{padding:48px 40px;max-width:700px;margin:0 auto}
-.tool-section{background:var(--bg1);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}
-.tool-tag{font-family:var(--mono);font-size:11px;color:var(--amb);border:1px solid var(--amb-bd);background:var(--amb-lo);padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:20px;letter-spacing:0.3px}
-.tool-title{font-family:var(--display);font-size:clamp(22px,3vw,28px);font-weight:700;letter-spacing:-0.5px;margin-bottom:8px}
+.action-section { padding: 80px 40px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.sec-inner { max-width: 860px; margin: 0 auto; }
+.sec-tag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--hold); margin-bottom: 8px; }
+.sec-title { font-family: var(--display); font-size: clamp(22px, 3.5vw, 32px); font-weight: 700; letter-spacing: -0.6px; color: var(--ink); margin-bottom: 10px; }
+.sec-sub { font-size: 14px; color: var(--ink-2); margin-bottom: 28px; line-height: 1.65; max-width: 480px; }
+.action-cards { display: flex; flex-direction: column; gap: 12px; max-width: 560px; }
+.action-card {
+  display: flex; align-items: center; gap: 20px;
+  padding: 20px; background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--radius);
+}
+.action-content { flex: 1; }
+.action-content h3 { font-family: var(--display); font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.action-content p { font-size: 13px; color: var(--ink-2); }
 
-.result-card{background:var(--bg2);border:1px solid var(--border-md);border-radius:12px;overflow:hidden;margin:24px 0;text-align:left}
-.result-signals{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
-.rsig{padding:18px 20px;display:flex;flex-direction:column;gap:5px;background:var(--bg2)}
-.rsig-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px}
-.rsig-value{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:-0.5px;line-height:1}
-.rsig-sub{font-size:11.5px;color:var(--t3)}
-.rsig-r .rsig-value{color:#D94040;text-shadow:0 0 20px var(--red-glow)}
-.rsig-g .rsig-value{color:#1DB87A;text-shadow:0 0 20px var(--grn-glow)}
+.final-cta { text-align: center; padding: 80px 40px; max-width: 760px; margin: 0 auto; }
+.final-cta h2 { font-family: var(--display); font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; letter-spacing: -0.8px; color: var(--ink); margin-bottom: 10px; }
+.final-sub { font-size: 16px; color: var(--ink-2); margin-bottom: 28px; }
 
-.result-why{padding:16px 22px;font-size:14px;color:var(--t2);line-height:1.65;border-bottom:1px solid var(--border)}
-.result-why-label{font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.8px;margin-right:4px}
-
-.result-action-block{padding:20px 22px;background:var(--grn-lo)}
-.result-action-label{font-family:var(--mono);font-size:10px;color:var(--grn);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px}
-.result-action-row{display:flex;align-items:center;gap:16px}
-.result-action-text{font-size:15px;color:var(--t1);font-weight:500}
-
-.insight-note{font-family:var(--mono);font-size:11px;color:var(--t3);margin-top:16px}
-
-.action-section{background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-width:100%;padding:80px 40px}
-.action-section .sec-header{text-align:center;margin-bottom:40px;max-width:860px;margin-left:auto;margin-right:auto}
-.sec-header{margin-bottom:32px}
-.sec-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--grn);margin-bottom:8px}
-.sec-title{font-family:var(--display);font-size:clamp(24px,4vw,36px);font-weight:700;letter-spacing:-0.8px;line-height:1.15;color:var(--t1)}
-.sec-sub{font-size:15px;color:var(--t2);margin-top:12px;max-width:480px;line-height:1.65}
-
-.action-cards{display:flex;flex-direction:column;gap:16px;max-width:600px;margin:0 auto}
-.action-card{display:flex;align-items:center;gap:20px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px}
-.action-icon{font-size:28px;flex-shrink:0}
-.action-content{flex:1}
-.action-content h3{font-family:var(--display);font-size:28px;font-weight:600;color:var(--t1);margin-bottom:4px}
-.action-content p{font-size:13px;color:var(--t2)}
-.action-card .btn-primary,.action-card .btn-secondary{white-space:nowrap;padding:10px 20px;font-size:13px}
-
-.final-cta{text-align:center;padding:96px 40px;max-width:860px;margin:0 auto}
-.final-cta h2{font-family:var(--display);font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.15;color:var(--t1);margin-bottom:12px}
-.final-sub{font-size:28px;color:var(--t2);margin-bottom:32px}
-
-footer{border-top:1px solid var(--border);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.footer-logo a{display:flex;align-items:center;gap:8px;text-decoration:none}
-.footer-logo-img{width:32px;height:32px;object-fit:contain;border-radius:6px}
-.footer-logo{font-family:var(--display);font-size:14px;font-weight:600;color:var(--t1)}
-.footer-tagline{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.3px;flex:1}
-.footer-links{display:flex;gap:20px}
-.footer-links a{font-family:var(--mono);font-size:11px;color:var(--t3);text-decoration:none;transition:color .15s}
-.footer-links a:hover{color:var(--t2)}
+footer {
+  border-top: 1px solid var(--line); padding: 22px 40px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; background: var(--bg);
+}
+.footer-logo-link { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.footer-logo { font-family: var(--display); font-size: 14px; font-weight: 700; color: var(--ink); }
+.footer-tagline { font-family: var(--mono); font-size: 11px; color: var(--hold); flex: 1; text-align: center; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; color: var(--hold); text-decoration: none; transition: color .15s; }
+.footer-links a:hover { color: var(--ink); }
 
 @media (max-width: 768px) {
-  .result-signals { grid-template-columns: 1fr; }
-  .action-card { flex-direction: column; text-align: center; }
   nav { padding: 0 20px; }
-  section { padding: 64px 20px; }
-  .insight-section, .action-section { padding: 48px 20px; }
-  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .hero, .tool-section, .action-section, .final-cta { padding-left: 24px; padding-right: 24px; }
+  .action-card { flex-direction: column; text-align: center; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-tagline { text-align: center; }
+  .footer-links { justify-content: center; flex-wrap: wrap; }
 }
 </style>
