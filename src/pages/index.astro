@@ -7,14 +7,37 @@ import Control from '../components/landing/Control.astro';
 import Pricing from '../components/landing/Pricing.astro';
 import FAQ from '../components/landing/FAQ.astro';
 import Waitlist from '../components/landing/Waitlist.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Talon",
+  "description": "Monitor de precios para Shopify. Pega el link de un producto y mira en segundos si tu precio está bien puesto frente a la competencia.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "49",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "49",
+      "priceCurrency": "USD",
+      "unitText": "month"
+    }
+  }
+};
 ---
 
 <Layout
   title="Talon — Monitor de precios para Shopify"
   description="Pega el link de un producto y mira en segundos si tu precio está bien puesto. Talon cruza los precios de tu competencia con tu margen y te dice: sube, baja o mantén."
+  lang="es"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} slot="head" />
+
   <Hero />
-  <main>
+  <main id="main-content">
     <Contrast />
     <HowItWorks />
     <Control />

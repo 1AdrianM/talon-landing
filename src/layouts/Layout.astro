@@ -8,6 +8,7 @@ interface Props {
   noindex?: boolean;
   canonical?: string;
   ogImage?: string;
+  lang?: string;
 }
 
 const {
@@ -16,13 +17,14 @@ const {
   noindex = false,
   canonical,
   ogImage,
+  lang = 'en',
 } = Astro.props;
 
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -42,6 +44,7 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).toStri
 
     <title>{title}</title>
 
+    <slot name="head" />
     <Analytics />
     <link rel="icon" type="image/svg+xml" href="/talon_logo.svg" />
 
@@ -54,6 +57,7 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).toStri
     />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <slot />
   </body>
 </html>
@@ -75,5 +79,21 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).toStri
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute; top: -100px; left: 16px;
+    background: var(--cl-cobalt, #2F52D6); color: #fff;
+    padding: 8px 16px; border-radius: 4px; font-size: 14px;
+    z-index: 9999; text-decoration: none; transition: top .15s;
+  }
+  .skip-link:focus { top: 16px; }
+
+  /* Global focus ring (AA compliant) */
+  :focus-visible {
+    outline: 2px solid var(--cl-cobalt, #2F52D6);
+    outline-offset: 3px;
+    border-radius: 3px;
   }
 </style>
