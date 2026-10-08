@@ -56,4 +56,42 @@
   --amb-bd: rgba(160, 107, 0, 0.28);
   --body-size: 15px;
   --body-lh: 1.7;
+
+  /* ── Cobalt landing ─────────────────────────────── */
+  /* Light surfaces */
+  --cl-bg:        #EEF0F3;
+  --cl-text:      #161A22;
+  --cl-cobalt:    #2F52D6;
+  --cl-border:    #D7DAE0;
+  --cl-muted:     #5b6270;
+  --cl-subtle:    #8a93a3;
+
+  /* Dark sections (contrast · control · footer) */
+  --cl-dk-bg:     #100E1A;
+  --cl-dk-card:   #17142A;
+  --cl-dk-border: #262040;
+  --cl-dk-accent: #5B7CFF;
+  --cl-dk-text:   #EDEBF7;
+  --cl-dk-muted:  #a29dc0;
+  --cl-dk-muted2: #8b87a3;
+
+  /* Semantic — price drop */
+  --cl-red-dk:    #E5556B;   /* on dark bg */
+  --cl-red-lt:    #C1432E;   /* on light bg */
+
+  /* Semantic — price rise */
+  --cl-grn-dk:    #57C98A;
+  --cl-grn-lt:    #2F9E66;
+
+  /* Semantic — floor / warning */
+  --cl-amber:     #E2A03D;
+
+  /* Typography */
+  --cl-display:   'Space Grotesk', sans-serif;
+  --cl-body:      'Inter', sans-serif;
+  --cl-mono:      'JetBrains Mono', monospace;
+
+  /* Layout */
+  --cl-gutter:    64px;   /* desktop horizontal padding */
+  --cl-section:   120px;  /* vertical section gap desktop */
 }
