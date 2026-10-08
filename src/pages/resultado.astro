@@ -1,7 +1,550 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// Phase 4: full resultado page
+
+const apiUrl    = import.meta.env.PUBLIC_API_URL    ?? '';
+const demoKey   = import.meta.env.PUBLIC_DEMO_KEY   ?? '';
+const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
 ---
-<Layout title="Resultado · Talon" noindex={true}>
-  <p style="padding:4rem;font-family:sans-serif;color:#161A22">Resultado — Phase 4</p>
+
+<Layout
+  title="Resultado · Talon"
+  description="Análisis de tu precio frente a la competencia. Gratis, sin registro."
+  noindex={true}
+>
+  <!-- Header -->
+  <header class="res-header">
+    <a href="/" class="res-logo" aria-label="Volver a inicio">Talon</a>
+    <span class="res-header-note">Análisis gratis · sin registro</span>
+  </header>
+
+  <!-- URL input bar -->
+  <div class="res-bar">
+    <form class="res-bar-form" id="res-bar-form">
+      <input
+        id="res-url"
+        type="url"
+        name="url"
+        aria-label="URL de tu producto"
+        autocomplete="url"
+        class="mono res-url-input"
+        placeholder="mitienda.com/products/product-name"
+      />
+      <button type="submit" class="res-recheck-btn">Revisar otro</button>
+    </form>
+  </div>
+
+  <!-- States -->
+  <main class="res-main" id="res-main" aria-live="polite">
+    <!-- Loading -->
+    <div class="res-state" id="state-loading">
+      <div class="res-spinner" aria-hidden="true"></div>
+      <p class="res-loading-text">Analizando tu precio…</p>
+    </div>
+
+    <!-- Error -->
+    <div class="res-state hidden" id="state-error">
+      <div class="res-error-icon" aria-hidden="true">⚠</div>
+      <p class="res-error-msg" id="error-msg">No pudimos analizar este producto.</p>
+      <a href="/" class="res-error-back">Volver al inicio</a>
+    </div>
+
+    <!-- Result -->
+    <div class="res-state hidden" id="state-result">
+      <!-- Product name + meta -->
+      <div class="res-product">
+        <h1 class="res-product-name" id="res-product-name">—</h1>
+        <span class="mono res-product-meta" id="res-product-meta">revisado hace unos segundos</span>
+      </div>
+
+      <!-- Verdict card -->
+      <div class="res-card" id="res-verdict">
+        <span class="mono res-card-eyebrow">veredicto</span>
+        <div class="res-verdict-headline" id="res-verdict-headline">—</div>
+        <div class="res-verdict-detail" id="res-verdict-detail"></div>
+        <div class="res-verdict-action" id="res-verdict-action"></div>
+      </div>
+
+      <!-- Market scale card -->
+      <div class="res-card" id="res-scale-card">
+        <span class="mono res-card-eyebrow">dónde estás parado</span>
+        <div class="res-scale" id="res-scale">
+          <div class="res-scale-track"></div>
+          <!-- markers injected by JS -->
+        </div>
+      </div>
+
+      <!-- Competitor table -->
+      <div class="res-card res-table-card">
+        <div class="res-table-head">
+          <span>vendedor</span>
+          <span>precio</span>
+          <span>vs. tú</span>
+          <span>último cambio</span>
+        </div>
+        <div id="res-table-body"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Waitlist CTA (dark, always visible) -->
+  <section class="res-cta" aria-labelledby="res-cta-title">
+    <div class="res-cta-left">
+      <b class="res-cta-title" id="res-cta-title">Esto es una foto de hoy.</b>
+      <span class="res-cta-sub">Talon revisa a estos competidores una vez al día (tú eliges la frecuencia) y te avisa cuando alguno se mueva, con el precio exacto que recomienda según tu margen real.</span>
+    </div>
+    <div class="res-cta-right">
+      <form class="res-cta-form" id="res-cta-form" novalidate>
+        <input
+          id="res-cta-email"
+          type="email"
+          name="email"
+          placeholder="tu@email.com"
+          aria-label="Tu email"
+          autocomplete="email"
+          class="res-cta-input"
+          required
+        />
+        <button type="submit" class="res-cta-btn">Avisarme</button>
+      </form>
+      <p class="res-cta-note" id="res-cta-status" aria-live="polite">Talon está en validación: entras a la lista de espera.</p>
+    </div>
+  </section>
 </Layout>
+
+<!-- Pass env vars to client script -->
+<script define:vars={{ apiUrl, demoKey, mode }}>
+  // ── Helpers ──────────────────────────────────────────
+  function show(id) {
+    document.querySelectorAll('.res-state').forEach(el => el.classList.add('hidden'));
+    document.getElementById(id)?.classList.remove('hidden');
+  }
+  function setText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+  function setHTML(id, html) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  }
+  function fmt(n) {
+    return '$' + Number(n).toFixed(2).replace(/\.00$/, '');
+  }
+
+  // ── Read URL from query string ────────────────────────
+  const params     = new URLSearchParams(window.location.search);
+  const productUrl = params.get('url') ?? '';
+  const urlInput   = document.getElementById('res-url');
+  if (urlInput) urlInput.value = productUrl;
+
+  // ── Navigate on re-check ──────────────────────────────
+  document.getElementById('res-bar-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const val = urlInput?.value.trim() ?? '';
+    window.location.href = val
+      ? '/resultado?url=' + encodeURIComponent(val)
+      : '/resultado';
+  });
+
+  // ── Main analysis flow ────────────────────────────────
+  async function analyze() {
+    if (!productUrl) {
+      show('state-error');
+      setText('error-msg', 'Ingresa el link de un producto para analizar su precio.');
+      return;
+    }
+
+    show('state-loading');
+
+    try {
+      const endpoint = (apiUrl || '') + '/api/v2/analyze';
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + (demoKey || ''),
+        },
+        body: JSON.stringify({ url: productUrl }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message ?? ('HTTP ' + res.status));
+      }
+
+      const data = await res.json();
+      renderResult(data);
+
+    } catch (err) {
+      show('state-error');
+      const msg = String(err?.message ?? err);
+      if (msg.includes('401') || msg.includes('403')) {
+        setText('error-msg', 'Error de autenticación. Recarga la página e inténtalo de nuevo.');
+      } else if (msg.includes('400')) {
+        setText('error-msg', 'Esta URL no parece ser de un producto Shopify. Revisa el link.');
+      } else {
+        setText('error-msg', 'No pudimos analizar este producto. Inténtalo de nuevo más tarde.');
+      }
+    }
+  }
+
+  // ── Render result ─────────────────────────────────────
+  function renderResult(d) {
+    // Product name + meta
+    const name = d.product_name || 'Tu producto';
+    setText('res-product-name', name);
+    const analyzed = d.competitors_analyzed ?? 0;
+    setText('res-product-meta', [
+      new URL(productUrl).hostname,
+      'revisado hace unos segundos',
+      analyzed > 0 ? analyzed + ' vendedores encontrados' : '',
+    ].filter(Boolean).join(' · '));
+
+    // Verdict
+    const yourPrice = d.suggested_price ?? d.recommended_price;
+    const diff      = d.price_diff ?? '';          // e.g. "-12%"
+    const isOver    = diff.startsWith('-');         // negative diff = overpriced vs cheapest
+    const isUnder   = diff.startsWith('+');
+
+    let headline = '';
+    let detail   = '';
+    let action   = '';
+
+    if (isOver) {
+      const diffAbs = Math.abs(parseFloat(diff));
+      headline = 'Estás ' + fmt(diffAbs) + ' por encima del más barato.';
+      detail   = d.insight ?? d.reason ?? '';
+      action   = d.action ?? ('Bajar hacia ' + fmt(d.recommended_price));
+    } else if (isUnder) {
+      headline = 'Estás por debajo del precio de mercado.';
+      detail   = d.insight ?? d.reason ?? '';
+      action   = d.action ?? ('Subir hacia ' + fmt(d.recommended_price));
+    } else {
+      headline = 'Tu precio está en línea con el mercado.';
+      detail   = d.insight ?? d.reason ?? '';
+      action   = d.action ?? 'No se necesita acción inmediata.';
+    }
+
+    setText('res-verdict-headline', headline);
+    setText('res-verdict-detail', detail);
+    const arrowColor = isUnder ? '#2F9E66' : (isOver ? '#C1432E' : '#5b6270');
+    const arrow = isUnder ? '↑' : (isOver ? '↓' : '→');
+    setHTML('res-verdict-action',
+      `<span style="color:${arrowColor};font-weight:700">${arrow}</span> ${action}`
+    );
+
+    // Scale (using price_range)
+    renderScale(d);
+
+    // Table (using feed_preview)
+    renderTable(d);
+
+    show('state-result');
+  }
+
+  function renderScale(d) {
+    const scale   = document.getElementById('res-scale');
+    if (!scale) return;
+
+    const min   = d.price_range?.min ?? d.recommended_price * 0.9;
+    const max   = d.price_range?.max ?? d.recommended_price * 1.1;
+    const yours = d.suggested_price ?? d.recommended_price;
+    const rec   = d.recommended_price;
+    const prices = [min, rec, max, yours].filter(Boolean);
+    const allMin  = Math.min(...prices) * 0.95;
+    const allMax  = Math.max(...prices) * 1.05;
+    const range   = allMax - allMin || 1;
+    const pct = (v) => ((v - allMin) / range * 100).toFixed(1) + '%';
+
+    // Zone: suggested range
+    const zoneLeft  = parseFloat(pct(min));
+    const zoneRight = parseFloat(pct(max));
+    const zoneW = (zoneRight - zoneLeft).toFixed(1) + '%';
+
+    // Competitor markers from feed_preview
+    const feed = d.feed_preview ?? [];
+    const competitorMarkers = feed.slice(0, 4).map((item) => {
+      const price = item.suggested_price ?? item.current_price ?? rec;
+      const label = item.product_name ?? 'Competidor';
+      return { price, label };
+    });
+
+    let html = `<div class="res-scale-track"></div>`;
+    html += `<div class="res-scale-zone" style="left:${pct(min)};width:${zoneW}" title="Zona sugerida"></div>`;
+
+    // Competitor dots
+    competitorMarkers.forEach((c) => {
+      html += `
+        <div class="res-scale-mk" style="left:${pct(c.price)}">
+          <span class="mono res-scale-price">${fmt(c.price)}</span>
+          <span class="res-scale-dot"></span>
+          <span class="res-scale-lbl">${c.label}</span>
+        </div>`;
+    });
+
+    // Your price marker
+    html += `
+      <div class="res-scale-mk res-scale-mk--you" style="left:${pct(yours)}">
+        <span class="mono res-scale-price you">${fmt(yours)} · tú</span>
+        <span class="res-scale-dot you"></span>
+      </div>`;
+
+    // Zone label
+    html += `<div class="res-scale-zone-lbl" style="left:${pct(min)};width:${zoneW}">zona sugerida</div>`;
+
+    scale.innerHTML = html;
+  }
+
+  function renderTable(d) {
+    const tbody = document.getElementById('res-table-body');
+    if (!tbody) return;
+    const feed  = d.feed_preview ?? [];
+    const yours = d.suggested_price ?? d.recommended_price;
+
+    if (feed.length === 0) {
+      tbody.innerHTML = '<div class="res-table-empty">No hay datos de competidores disponibles.</div>';
+      return;
+    }
+
+    tbody.innerHTML = feed.slice(0, 5).map((item) => {
+      const price = item.suggested_price ?? item.current_price ?? 0;
+      const diff  = price - yours;
+      const diffStr = (diff > 0 ? '+' : '') + fmt(diff);
+      const diffColor = diff < 0 ? '#C1432E' : diff > 0 ? '#2F9E66' : '#5b6270';
+      const change = item.insight ?? '—';
+      const name   = item.product_name ?? 'Competidor';
+      return `
+        <div class="res-table-row">
+          <b class="res-row-name">${name}</b>
+          <span class="mono">${fmt(price)}</span>
+          <span class="mono" style="color:${diffColor}">${diffStr}</span>
+          <span class="res-row-change">${change}</span>
+        </div>`;
+    }).join('');
+  }
+
+  // Start analysis
+  analyze();
+
+  // ── Waitlist CTA form ──────────────────────────────────
+  document.getElementById('res-cta-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email    = document.getElementById('res-cta-email')?.value.trim() ?? '';
+    const statusEl = document.getElementById('res-cta-status');
+    if (!statusEl) return;
+    statusEl.textContent = 'Enviando…';
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'resultado' }),
+      });
+      if (res.ok) {
+        statusEl.textContent = '¡Listo! Te avisamos cuando abramos.';
+        statusEl.style.color = 'var(--cl-grn-dk)';
+      } else {
+        statusEl.textContent = 'Algo salió mal. Inténtalo de nuevo.';
+        statusEl.style.color = 'var(--cl-red-dk)';
+      }
+    } catch {
+      statusEl.textContent = 'Error de red. Inténtalo de nuevo.';
+      statusEl.style.color = 'var(--cl-red-dk)';
+    }
+  });
+</script>
+
+<style is:global>
+  .hidden { display: none !important; }
+</style>
+
+<style>
+  /* ── Page shell ── */
+  :global(body) {
+    background: var(--cl-bg); color: var(--cl-text);
+    font-family: var(--cl-body); margin: 0; padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  .res-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px var(--cl-gutter); border-bottom: 1px solid var(--cl-border);
+    background: var(--cl-bg);
+  }
+  .res-logo {
+    font-family: var(--cl-display); font-weight: 700; font-size: 18px;
+    color: var(--cl-text); text-decoration: none; letter-spacing: -0.01em;
+  }
+  .res-header-note { font-size: 13px; color: var(--cl-subtle); }
+
+  /* URL bar */
+  .res-bar {
+    padding: 20px var(--cl-gutter) 0;
+    max-width: 720px;
+  }
+  .res-bar-form { display: flex; gap: 10px; }
+  .res-url-input {
+    flex: 1; padding: 12px 14px; border-radius: 8px;
+    border: 1px solid var(--cl-border); background: #fff;
+    font-size: 13.5px; color: var(--cl-text); outline: none;
+    font-family: var(--cl-mono); font-variant-numeric: tabular-nums;
+  }
+  .res-url-input::placeholder { color: var(--cl-subtle); }
+  .res-url-input:focus { border-color: var(--cl-cobalt); box-shadow: 0 0 0 3px rgba(47,82,214,.12); }
+  .res-recheck-btn {
+    padding: 12px 20px; border-radius: 8px;
+    border: 1px solid var(--cl-border); background: none;
+    color: var(--cl-text); font-size: 13.5px; font-weight: 500;
+    font-family: var(--cl-body); cursor: pointer; white-space: nowrap;
+    transition: background .15s;
+  }
+  .res-recheck-btn:hover { background: var(--cl-border); }
+
+  /* Main area */
+  .res-main {
+    padding: 28px var(--cl-gutter) 0; min-height: 400px;
+  }
+
+  /* Loading */
+  #state-loading {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 20px; padding: 80px 0; text-align: center;
+  }
+  .res-spinner {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 3px solid var(--cl-border); border-top-color: var(--cl-cobalt);
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .res-loading-text { font-size: 15px; color: var(--cl-muted); }
+
+  /* Error */
+  #state-error {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 16px; padding: 80px 0; text-align: center;
+  }
+  .res-error-icon { font-size: 32px; color: var(--cl-amber); }
+  .res-error-msg  { font-size: 15px; color: var(--cl-text); max-width: 44ch; }
+  .res-error-back {
+    color: var(--cl-cobalt); text-decoration: none; font-size: 14px; font-weight: 500;
+  }
+  .res-error-back:hover { text-decoration: underline; }
+
+  /* Result cards */
+  #state-result { display: flex; flex-direction: column; gap: 16px; }
+  .res-product { display: flex; flex-direction: column; gap: 6px; }
+  .res-product-name {
+    font-family: var(--cl-display); font-weight: 700; font-size: 26px; margin: 0;
+  }
+  .res-product-meta { font-size: 12px; color: var(--cl-subtle); font-variant-numeric: tabular-nums; }
+
+  .res-card {
+    background: #fff; border: 1px solid var(--cl-border);
+    border-radius: 6px; padding: 24px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .res-card-eyebrow {
+    font-family: var(--cl-mono); font-size: 11.5px; color: var(--cl-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+  .res-verdict-headline {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 22px; line-height: 1.3;
+  }
+  .res-verdict-detail {
+    font-size: 14px; color: var(--cl-muted); line-height: 1.6; max-width: 70ch;
+  }
+  .res-verdict-action { font-size: 15px; font-weight: 600; margin-top: 4px; }
+
+  /* Scale */
+  .res-scale {
+    position: relative; height: 84px; margin: 0 20px 16px;
+  }
+  .res-scale-track {
+    position: absolute; left: 0; right: 0; top: 30px; height: 1px; background: var(--cl-border);
+  }
+  .res-scale-zone {
+    position: absolute; top: 23px; height: 15px;
+    background: rgba(47,82,214,.14); border-radius: 3px;
+  }
+  .res-scale-zone-lbl {
+    position: absolute; top: 44px; text-align: center;
+    font-size: 11.5px; color: var(--cl-cobalt); font-weight: 600;
+    font-family: var(--cl-body); overflow: hidden; white-space: nowrap;
+  }
+  .res-scale-mk {
+    position: absolute; display: flex; flex-direction: column; align-items: center;
+    transform: translateX(-50%);
+  }
+  .res-scale-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--cl-subtle); margin-top: 26px;
+    transform: translateX(0);
+  }
+  .res-scale-dot.you {
+    background: var(--cl-cobalt); width: 14px; height: 14px; margin-top: 23px;
+  }
+  .res-scale-price {
+    font-size: 12.5px; color: var(--cl-text); font-variant-numeric: tabular-nums;
+    position: absolute; top: 2px; white-space: nowrap;
+  }
+  .res-scale-price.you { color: var(--cl-cobalt); font-size: 14px; font-weight: 500; }
+  .res-scale-lbl {
+    font-size: 11.5px; color: var(--cl-muted); position: absolute; top: 48px;
+    white-space: nowrap;
+  }
+
+  /* Table */
+  .res-table-card { padding: 22px 24px 10px; }
+  .res-table-head {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.6fr; gap: 16px;
+    padding: 0 4px 10px; font-size: 11.5px; color: var(--cl-subtle);
+    font-family: var(--cl-mono); font-variant-numeric: tabular-nums;
+  }
+  .res-table-row {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.6fr; gap: 16px;
+    align-items: center; padding: 13px 4px; border-top: 1px solid #E7E9EE;
+    font-size: 13.5px;
+  }
+  .res-row-name  { font-family: var(--cl-display); font-weight: 600; }
+  .res-row-change { color: var(--cl-muted); font-size: 13px; }
+  .res-table-empty { padding: 20px 4px; font-size: 13.5px; color: var(--cl-muted); }
+
+  /* CTA */
+  .res-cta {
+    margin: 28px var(--cl-gutter) 0;
+    background: var(--cl-dk-bg); border: 1px solid var(--cl-dk-border);
+    border-radius: 8px; padding: 28px 32px;
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center;
+    font-family: var(--cl-body);
+  }
+  .res-cta-title { font-family: var(--cl-display); font-weight: 700; font-size: 19px; color: var(--cl-dk-text); }
+  .res-cta-sub   { font-size: 13.5px; color: var(--cl-dk-muted); line-height: 1.6; display: block; margin-top: 8px; }
+  .res-cta-right { display: flex; flex-direction: column; gap: 8px; }
+  .res-cta-form  { display: flex; gap: 8px; }
+  .res-cta-input {
+    flex: 1; padding: 12px 14px; border-radius: 7px;
+    border: 1px solid var(--cl-dk-border); background: var(--cl-dk-card);
+    color: var(--cl-dk-text); font-size: 14px; font-family: var(--cl-body); outline: none;
+    transition: border-color .15s;
+  }
+  .res-cta-input::placeholder { color: var(--cl-dk-muted2); }
+  .res-cta-input:focus { border-color: var(--cl-dk-accent); }
+  .res-cta-btn {
+    padding: 12px 18px; border-radius: 7px; border: none;
+    background: var(--cl-dk-accent); color: #fff;
+    font-size: 13.5px; font-weight: 600; font-family: var(--cl-body);
+    cursor: pointer; white-space: nowrap; transition: opacity .15s;
+  }
+  .res-cta-btn:hover { opacity: .88; }
+  .res-cta-note { font-size: 12px; color: var(--cl-dk-muted2); margin: 0; }
+
+  /* Responsive */
+  @media (max-width: 680px) {
+    .res-header, .res-bar, .res-main { padding-left: var(--cl-gutter-sm); padding-right: var(--cl-gutter-sm); }
+    .res-cta { grid-template-columns: 1fr; gap: 24px; margin: 28px var(--cl-gutter-sm) 0; padding: 24px; }
+    .res-table-head, .res-table-row { grid-template-columns: 1.4fr 1fr 1fr; }
+    .res-table-head span:last-child,
+    .res-table-row .res-row-change { display: none; }
+    .res-header-note { display: none; }
+  }
+</style>
