@@ -1,3 +1,45 @@
 ---
 ---
-<!-- Contrast -->
+
+<section class="contrast" aria-label="Por qué Talon es diferente">
+  <div class="contrast-col contrast-col--other">
+    <span class="contrast-label">la mayoría de herramientas</span>
+    <p class="contrast-text">Te muestran una tabla con los precios de tus competidores y te dejan a ti hacer las cuentas.</p>
+  </div>
+  <div class="contrast-col contrast-col--talon">
+    <span class="contrast-label accent">talon</span>
+    <p class="contrast-text">Cruza esos precios con tu margen y te dice: sube, baja, o no toques nada — con la razón detrás.</p>
+  </div>
+</section>
+
+<style>
+  .contrast {
+    background: var(--cl-dk-bg); color: var(--cl-dk-text);
+    padding: 72px var(--cl-gutter);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+    border-top: 1px solid var(--cl-dk-border);
+    font-family: var(--cl-body);
+  }
+  .contrast-label {
+    font-family: var(--cl-mono); font-size: 12px; color: var(--cl-dk-muted2);
+    font-variant-numeric: tabular-nums;
+  }
+  .contrast-label.accent { color: var(--cl-dk-accent); }
+  .contrast-col { display: flex; flex-direction: column; gap: 14px; }
+  .contrast-col--talon {
+    border-left: 2px solid var(--cl-dk-accent);
+    padding-left: 24px;
+  }
+  .contrast-text {
+    margin: 0; font-family: var(--cl-display); font-weight: 600;
+    font-size: 22px; line-height: 1.4; color: var(--cl-dk-text);
+  }
+
+  @media (max-width: 680px) {
+    .contrast {
+      grid-template-columns: 1fr; gap: 32px;
+      padding: 56px var(--cl-gutter-sm);
+    }
+    .contrast-text { font-size: 18px; }
+  }
+</style>

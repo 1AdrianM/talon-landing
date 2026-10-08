@@ -1,11 +1,40 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Landing from '../components/Landing.astro';
+import Hero from '../components/landing/Hero.astro';
+import Contrast from '../components/landing/Contrast.astro';
+import HowItWorks from '../components/landing/HowItWorks.astro';
+import Control from '../components/landing/Control.astro';
+import Pricing from '../components/landing/Pricing.astro';
+import FAQ from '../components/landing/FAQ.astro';
+import Waitlist from '../components/landing/Waitlist.astro';
 ---
 
 <Layout
-  title="Talon — Is your Shopify price right?"
-  description="Paste a product URL and see if your price is competitive against real competitors. Free, no signup. Built for Shopify store owners."
+  title="Talon — Monitor de precios para Shopify"
+  description="Pega el link de un producto y mira en segundos si tu precio está bien puesto. Talon cruza los precios de tu competencia con tu margen y te dice: sube, baja o mantén."
 >
-  <Landing />
+  <Hero />
+  <main>
+    <Contrast />
+    <HowItWorks />
+    <Control />
+    <Pricing />
+    <FAQ />
+    <Waitlist />
+  </main>
 </Layout>
+
+<style is:global>
+  body {
+    background: var(--cl-bg);
+    color: var(--cl-text);
+    font-family: var(--cl-body);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    margin: 0; padding: 0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+</style>

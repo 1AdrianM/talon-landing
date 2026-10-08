@@ -1,3 +1,76 @@
 ---
+import { PROVISIONAL } from '../../config/provisional';
+
+const features = [
+  `Hasta ${PROVISIONAL.plan.products} productos rastreados`,
+  'Revisión diaria, configurable por ti',
+  'Shopify hoy, Amazon Seller Central pronto',
+  'Reglas de pricing automático, siempre opcionales',
+];
 ---
-<!-- Pricing -->
+
+<section id="precio" class="pricing" aria-labelledby="precio-title">
+  <div class="pricing-left">
+    <h2 id="precio-title" class="pricing-title">Un precio simple</h2>
+    <p class="pricing-sub">Un solo plan mientras validamos. Si Talon no te hace recuperar más margen de lo que cuesta, no deberías pagarlo.</p>
+  </div>
+  <div class="pricing-card">
+    <div class="pricing-price">
+      <span class="mono pricing-amount">$49</span>
+      <span class="pricing-period">/mes</span>
+    </div>
+    <ul class="pricing-features">
+      {features.map((f) => <li>{f}</li>)}
+    </ul>
+    <a href="/resultado" class="pricing-cta">Revisar mi precio gratis</a>
+  </div>
+</section>
+
+<style>
+  .pricing {
+    background: var(--cl-bg); color: var(--cl-text);
+    padding: 72px var(--cl-gutter);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
+    font-family: var(--cl-body);
+  }
+  .pricing-left { display: flex; flex-direction: column; gap: 14px; }
+  .pricing-title {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 26px; margin: 0;
+  }
+  .pricing-sub {
+    margin: 0; font-size: 14.5px; color: var(--cl-muted);
+    line-height: 1.65; max-width: 44ch;
+  }
+  .pricing-card {
+    background: #fff; border: 1px solid var(--cl-border);
+    border-radius: 8px; padding: 28px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .pricing-price { display: flex; align-items: baseline; gap: 8px; }
+  .pricing-amount {
+    font-family: var(--cl-mono); font-size: 34px; font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .pricing-period { font-size: 13.5px; color: var(--cl-subtle); }
+  .pricing-features {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 10px;
+    font-size: 14px; color: #3a4150;
+  }
+  .pricing-features li::before {
+    content: '—'; margin-right: 8px; color: var(--cl-cobalt); opacity: .6;
+  }
+  .pricing-cta {
+    display: block; text-align: center; text-decoration: none;
+    padding: 13px 20px; border-radius: 8px; border: none;
+    background: var(--cl-cobalt); color: #fff;
+    font-size: 14px; font-weight: 600; font-family: var(--cl-body);
+    transition: opacity .15s;
+  }
+  .pricing-cta:hover { opacity: .9; }
+
+  @media (max-width: 680px) {
+    .pricing { grid-template-columns: 1fr; gap: 28px; padding: 56px var(--cl-gutter-sm); }
+  }
+</style>

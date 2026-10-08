@@ -1,3 +1,511 @@
 ---
+import { PROVISIONAL } from '../../config/provisional';
 ---
-<!-- Hero -->
+
+<section class="hero" aria-label="Monitor de precios para Shopify">
+  <!-- Background layers -->
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+  <div class="hero-bg-glow" aria-hidden="true"></div>
+  <svg class="hero-grain" aria-hidden="true" role="presentation">
+    <filter id="grain-f">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain-f)"/>
+  </svg>
+
+  <!-- Nav -->
+  <nav class="hero-nav" aria-label="Navegación principal">
+    <a href="/" class="hero-logo">Talon</a>
+    <div class="hero-nav-right">
+      <a href="#como" class="hero-nav-link">Cómo funciona</a>
+      <a href="#control" class="hero-nav-link">Control</a>
+      <a href="#precio" class="hero-nav-link">Precio</a>
+      <a href="#preguntas" class="hero-nav-link">Preguntas</a>
+      <a href="/resultado" class="hero-nav-cta">Revisar mi precio</a>
+    </div>
+  </nav>
+
+  <!-- Left column: headline + CTA -->
+  <div class="hero-content">
+    <span class="mono hero-tag">MONITOR DE PRECIOS PARA SHOPIFY</span>
+    <h1 class="hero-h1">Tu competencia cambia precios todo el día. Talon te dice cuál mover.</h1>
+    <p class="hero-sub">Pega el link de un producto y mira en segundos si tu precio está bien puesto. Sin registrarte.</p>
+    <form class="hero-form" id="hero-form">
+      <input
+        id="hero-url"
+        type="url"
+        name="url"
+        placeholder="https://mitienda.com/products/court-classic"
+        aria-label="URL de tu producto"
+        autocomplete="url"
+        inputmode="url"
+        class="hero-url-input"
+      />
+      <button type="submit" class="hero-submit-btn">Revisar mi precio</button>
+    </form>
+    <span class="hero-hint">Shopify y Amazon Seller Central · Plan desde {PROVISIONAL.plan.price}</span>
+  </div>
+
+  <!-- Giant price — drop half (pa) -->
+  <div class="hero-price pa" aria-hidden="true">
+    <div class="hero-status">
+      <span class="pulse" aria-hidden="true"></span>
+      <span class="mono hero-status-text">court classic · SneakerHub bajó 12% hace 4 segundos</span>
+    </div>
+    <div class="mono hero-price-num">
+      <span class="hero-old"><span>$125</span><span class="strike"></span></span>
+      <span class="newp hero-new">$109</span>
+    </div>
+  </div>
+
+  <!-- Giant price — rise half (pb) -->
+  <div class="hero-price pb" aria-hidden="true">
+    <div class="hero-status">
+      <span class="pulse pulseg" aria-hidden="true"></span>
+      <span class="mono hero-status-text">trek boot · KickStop subió 8% hace 2 minutos</span>
+    </div>
+    <div class="mono hero-price-num">
+      <span class="hero-old"><span>$98</span><span class="strike2"></span></span>
+      <span class="newp2 hero-new">$104</span>
+    </div>
+  </div>
+
+  <!-- Market scale — desktop only -->
+  <div class="hero-scale" aria-hidden="true">
+    <div class="scale-line"></div>
+    <!-- PA half: price drop -->
+    <div class="pa">
+      <div class="zoneA scale-zone" style="top:171px;height:28px"></div>
+      <span class="mono scale-lbl cobalt" style="top:43px">$125</span>
+      <span class="scale-tick cobalt" style="top:47px"></span>
+      <span class="mono scale-lbl-r cobalt" style="top:43px">tú</span>
+      <span class="mono scale-lbl muted" style="top:110px">$118</span>
+      <span class="scale-tick muted" style="top:114px"></span>
+      <span class="mono scale-lbl muted" style="top:167px">$112</span>
+      <span class="scale-tick muted" style="top:171px"></span>
+      <div class="trail scale-trail" style="top:104px;height:133px"></div>
+      <span class="scale-tick sneak red-tick" style="top:104px"></span>
+      <span class="mono scale-lbl-r sneak" style="top:98px;color:var(--cl-red-lt)">SneakerHub</span>
+      <span class="mono l105 scale-lbl red" style="top:228px">$105</span>
+    </div>
+    <!-- PB half: price rise -->
+    <div class="pb">
+      <div class="zoneB scale-zone" style="top:95px;height:31px"></div>
+      <span class="mono scale-lbl muted" style="top:43px">$107</span>
+      <span class="scale-tick muted" style="top:47px"></span>
+      <span class="mono scale-lbl cobalt" style="top:185px">tú $98</span>
+      <span class="scale-tick cobalt" style="top:189px"></span>
+      <div class="trailB scale-trail-b" style="top:95px;height:126px"></div>
+      <span class="scale-tick sneakB grn-tick" style="top:220px"></span>
+      <span class="mono scale-lbl-r sneakB" style="top:214px;color:var(--cl-grn-lt)">KickStop</span>
+      <span class="mono l104 scale-lbl grn" style="top:91px">$104</span>
+    </div>
+    <span class="mono scale-bottom">MERCADO</span>
+  </div>
+
+  <!-- Alert cards -->
+  <div class="hero-cards" aria-label="Ejemplos ilustrativos">
+    <div class="r1 hero-card">
+      <div class="hero-card-body">
+        <div class="hero-card-head">
+          <span class="pulse" aria-hidden="true"></span>
+          <b class="hero-card-name">Court Classic</b>
+          <span class="hero-card-time">hace 4 segundos</span>
+        </div>
+        <div class="mono hero-card-price">
+          <span class="hero-old sm"><span>$125</span><span class="strike card-strike"></span></span>
+          <span class="newp hero-card-new">
+            <span class="hero-arrow red" aria-hidden="true">↓</span>$109
+          </span>
+        </div>
+        <span class="hero-card-reason">SneakerHub bajó 12%. Bajar a $109 si el margen lo permite.</span>
+      </div>
+      <button class="hero-card-btn primary" type="button">Aplicar</button>
+    </div>
+
+    <div class="r2 hero-card hero-card--i1">
+      <div class="hero-card-body">
+        <div class="hero-card-head">
+          <span class="dot grn" aria-hidden="true"></span>
+          <b class="hero-card-name">Trek Boot</b>
+          <span class="hero-card-time">hace 2 minutos</span>
+        </div>
+        <div class="mono hero-card-price sm">
+          <span style="color:var(--cl-dk-muted2)">$98</span>
+          <span class="hero-arrow grn sm" aria-hidden="true">↑</span>
+          <span style="color:var(--cl-dk-text)">$104</span>
+        </div>
+        <span class="hero-card-reason">KickStop subió 8%. Puedes subir y mantener margen.</span>
+      </div>
+      <button class="hero-card-btn outline" type="button">Aplicar</button>
+    </div>
+
+    <div class="r3 hero-card hero-card--i2 hero-card--row">
+      <span class="dot grn" aria-hidden="true"></span>
+      <b class="hero-card-name">Everyday Slip-on</b>
+      <span class="hero-card-reason hero-card-reason--inline">+5 ventas tras tu cambio</span>
+    </div>
+
+    <span class="mono hero-cards-note">ejemplo ilustrativo · tienda de 47 productos</span>
+  </div>
+
+  <!-- Bottom process track -->
+  <div class="hero-track" aria-hidden="true">
+    <span class="mono hero-track-lbl">01 DETECTAMOS</span>
+    <div class="track"><span class="travel t1"></span></div>
+    <span class="mono hero-track-lbl">02 DECIDIMOS</span>
+    <div class="track"><span class="travel t2"></span></div>
+    <span class="mono hero-track-lbl accent">03 DECIDES TÚ</span>
+  </div>
+</section>
+
+<style is:global>
+  @keyframes pulse   { 0%  { transform:scale(.6);opacity:.8  } 100% { transform:scale(2.4);opacity:0 } }
+  @keyframes pa      { 0%  { opacity:0 } 2%,45% { opacity:1 } 48%,100% { opacity:0 } }
+  @keyframes pb      { 0%,50% { opacity:0 } 52%,95% { opacity:1 } 98%,100% { opacity:0 } }
+  @keyframes strike  { 0%,4%  { transform:scaleX(0) } 10%,100% { transform:scaleX(1) } }
+  @keyframes strike2 { 0%,54% { transform:scaleX(0) } 60%,100% { transform:scaleX(1) } }
+  @keyframes newp    { 0%,5%  { opacity:0;transform:translateY(16px) } 11%,95% { opacity:1;transform:translateY(0) } 98%,100% { opacity:0;transform:translateY(0) } }
+  @keyframes newp2   { 0%,55% { opacity:0;transform:translateY(16px) } 61%,95% { opacity:1;transform:translateY(0) } 98%,100% { opacity:0;transform:translateY(0) } }
+  @keyframes sneak   { 0%,4%  { transform:translateY(0) }    10%,100% { transform:translateY(133px) } }
+  @keyframes trail   { 0%,4%  { transform:scaleY(0) }        10%,100% { transform:scaleY(1) } }
+  @keyframes sneakB  { 0%,54% { transform:translateY(0) }    64%,100% { transform:translateY(-126px) } }
+  @keyframes trailB  { 0%,54% { transform:scaleY(0) }        64%,100% { transform:scaleY(1) } }
+  @keyframes l105    { 0%,9%  { opacity:0 } 14%,100% { opacity:1 } }
+  @keyframes l104    { 0%,62% { opacity:0 } 67%,100% { opacity:1 } }
+  @keyframes zoneA   { 0%,9%  { opacity:0 } 14%,100% { opacity:1 } }
+  @keyframes zoneB   { 0%,62% { opacity:0 } 67%,100% { opacity:1 } }
+  @keyframes t1      { 0% { left:0;opacity:0 } 3% { opacity:1 } 44% { left:calc(100% - 8px);opacity:1 } 48%,100% { left:calc(100% - 8px);opacity:0 } }
+  @keyframes t2      { 0%,50% { left:0;opacity:0 } 53% { opacity:1 } 94% { left:calc(100% - 8px);opacity:1 } 98%,100% { left:calc(100% - 8px);opacity:0 } }
+  @keyframes r1 {
+    0%,2%    { opacity:0;transform:translateY(12px);box-shadow:0 34px 64px rgba(16,14,26,.4),0 0 0 6px rgba(255,255,255,.35) }
+    7%,46%   { opacity:1;transform:translateY(0);  box-shadow:0 34px 64px rgba(16,14,26,.4),0 0 0 6px rgba(255,255,255,.35) }
+    49%      { opacity:0;transform:translateY(0);  box-shadow:0 34px 64px rgba(16,14,26,.4),0 0 0 6px rgba(255,255,255,.35) }
+    49.1%,57%{ opacity:0;transform:translateY(12px);box-shadow:0 24px 48px rgba(16,14,26,.32),0 0 0 6px rgba(255,255,255,0) }
+    63%,95%  { opacity:1;transform:translateY(0);  box-shadow:0 24px 48px rgba(16,14,26,.32),0 0 0 6px rgba(255,255,255,0) }
+    98%,100% { opacity:0;transform:translateY(0);  box-shadow:0 24px 48px rgba(16,14,26,.32),0 0 0 6px rgba(255,255,255,0) }
+  }
+  @keyframes r2 {
+    0%,7%    { opacity:0;transform:translateY(12px);box-shadow:0 24px 48px rgba(16,14,26,.32),0 0 0 6px rgba(255,255,255,0) }
+    13%,46%  { opacity:1;transform:translateY(0);  box-shadow:0 24px 48px rgba(16,14,26,.32),0 0 0 6px rgba(255,255,255,0) }
+    49%      { opacity:0;transform:translateY(0);  box-shadow:0 24px 48px rgba(16,14,26,.32),0 0 0 6px rgba(255,255,255,0) }
+    49.1%,52%{ opacity:0;transform:translateY(12px);box-shadow:0 24px 48px rgba(16,14,26,.32),0 0 0 6px rgba(255,255,255,0) }
+    57%,95%  { opacity:1;transform:translateY(0);  box-shadow:0 34px 64px rgba(16,14,26,.4),0 0 0 6px rgba(255,255,255,.35) }
+    98%,100% { opacity:0;transform:translateY(0);  box-shadow:0 34px 64px rgba(16,14,26,.4),0 0 0 6px rgba(255,255,255,.35) }
+  }
+  @keyframes r3 {
+    0%,13%   { opacity:0;transform:translateY(12px) }
+    19%,46%  { opacity:1;transform:translateY(0) }
+    49%      { opacity:0;transform:translateY(0) }
+    49.1%,63%{ opacity:0;transform:translateY(12px) }
+    69%,95%  { opacity:1;transform:translateY(0) }
+    98%,100% { opacity:0;transform:translateY(0) }
+  }
+</style>
+
+<style>
+  .hero {
+    background: var(--cl-bg); color: var(--cl-text);
+    position: relative; overflow: hidden; font-family: var(--cl-body);
+  }
+
+  /* Background */
+  .hero-bg-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(to right,  rgba(22,26,34,.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(22,26,34,.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+    -webkit-mask-image: radial-gradient(ellipse at 55% 45%, #000 20%, transparent 72%);
+    mask-image: radial-gradient(ellipse at 55% 45%, #000 20%, transparent 72%);
+  }
+  .hero-bg-glow {
+    position: absolute; pointer-events: none;
+    right: -40px; top: 250px; width: 760px; height: 620px;
+    background: radial-gradient(closest-side, rgba(47,82,214,.38), rgba(47,82,214,.12) 55%, transparent 100%);
+    filter: blur(24px);
+  }
+  .hero-grain {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: .08; pointer-events: none;
+  }
+
+  /* Nav */
+  .hero-nav {
+    position: relative; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px var(--cl-gutter-sm);
+  }
+  .hero-logo {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 20px; letter-spacing: -0.01em;
+    color: var(--cl-text); text-decoration: none;
+  }
+  .hero-nav-right { display: flex; align-items: center; gap: 24px; font-size: 13.5px; }
+  .hero-nav-link  { color: var(--cl-muted); text-decoration: none; transition: color .15s; }
+  .hero-nav-link:hover { color: var(--cl-text); }
+  .hero-nav-cta {
+    padding: 9px 16px; border-radius: 7px;
+    border: 1px solid var(--cl-border); background: rgba(255,255,255,.6);
+    color: var(--cl-text); text-decoration: none;
+    font-size: 13px; font-weight: 500; font-family: var(--cl-body);
+    transition: background .15s;
+  }
+  .hero-nav-cta:hover { background: #fff; }
+  @media (max-width: 680px) {
+    .hero-nav-link { display: none; }
+    .hero-nav { padding: 20px var(--cl-gutter-sm); }
+  }
+
+  /* Shared micro elements */
+  .mono { font-family: var(--cl-mono); font-variant-numeric: tabular-nums; }
+  .pulse {
+    position: relative; display: inline-block;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cl-red-lt); flex-shrink: 0;
+  }
+  .pulse::after {
+    content: ''; position: absolute; inset: -4px; border-radius: 50%;
+    border: 1.5px solid var(--cl-red-lt); animation: pulse 1.8s ease-out infinite;
+  }
+  .pulseg { background: var(--cl-grn-lt); }
+  .pulseg::after { border-color: var(--cl-grn-lt); }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot.grn { background: var(--cl-grn-dk); }
+
+  /* Hero content */
+  .hero-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; gap: 20px;
+    padding: 40px var(--cl-gutter-sm) 0;
+    max-width: 620px;
+  }
+  .hero-tag { font-size: 12px; color: var(--cl-cobalt); letter-spacing: .04em; }
+  .hero-h1 {
+    font-family: var(--cl-display); font-weight: 700; margin: 0;
+    font-size: clamp(30px, 7vw, 56px); line-height: 1.06; letter-spacing: -0.025em;
+  }
+  .hero-sub { margin: 0; font-size: 17px; color: var(--cl-muted); line-height: 1.55; max-width: 46ch; }
+  .hero-form { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2px; }
+  .hero-url-input {
+    flex: 1; min-width: 0; padding: 15px 16px;
+    border-radius: 9px; border: 1px solid var(--cl-border);
+    background: #fff; font-size: 14px; font-family: var(--cl-body);
+    color: var(--cl-text); box-shadow: 0 1px 0 rgba(22,26,34,.04); outline: none;
+  }
+  .hero-url-input::placeholder { color: var(--cl-subtle); }
+  .hero-url-input:focus { border-color: var(--cl-cobalt); box-shadow: 0 0 0 3px rgba(47,82,214,.15); }
+  .hero-submit-btn {
+    padding: 15px 24px; border-radius: 9px; border: none;
+    background: var(--cl-cobalt); color: #fff;
+    font-size: 14px; font-weight: 600; font-family: var(--cl-body);
+    white-space: nowrap; cursor: pointer;
+    box-shadow: 0 8px 22px rgba(47,82,214,.35); transition: opacity .15s;
+  }
+  .hero-submit-btn:hover { opacity: .9; }
+  .hero-hint { font-size: 12.5px; color: var(--cl-subtle); }
+
+  /* Giant price */
+  .hero-price {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; gap: 14px;
+    padding: 24px var(--cl-gutter-sm) 0;
+  }
+  .hero-status { display: flex; align-items: center; gap: 9px; }
+  .hero-status-text { font-size: 12.5px; color: var(--cl-muted); }
+  .hero-price-num {
+    display: flex; align-items: baseline; gap: 20px;
+    font-size: 60px; line-height: 1; font-weight: 500; letter-spacing: -0.04em;
+  }
+  .hero-old { position: relative; display: inline-block; color: var(--cl-subtle); }
+  .hero-new { color: var(--cl-text); }
+  .strike {
+    position: absolute; left: -10px; right: -10px; top: 54%;
+    height: 7px; background: var(--cl-cobalt); border-radius: 2px;
+    transform-origin: left center; transform: scaleX(1);
+  }
+  .strike2 {
+    position: absolute; left: -10px; right: -10px; top: 54%;
+    height: 7px; background: var(--cl-cobalt); border-radius: 2px;
+    transform-origin: left center; transform: scaleX(1);
+  }
+  .card-strike { height: 4px; top: 56%; background: var(--cl-dk-accent); }
+
+  /* Default (non-animated / mobile) state */
+  .pa { opacity: 1; }
+  .pb { display: none; }
+  .newp  { opacity: 1; transform: translateY(0); }
+  .newp2 { opacity: 1; transform: translateY(0); }
+  .l105 { opacity: 1; }
+  .l104 { opacity: 1; }
+  .zoneA { opacity: 1; }
+  .zoneB { opacity: 1; }
+  .sneak  { transform: translateY(133px); }
+  .trail  { transform: scaleY(1); opacity: .7; transform-origin: top center; }
+  .sneakB { transform: translateY(-126px); }
+  .trailB { transform: scaleY(1); opacity: .7; transform-origin: bottom center; }
+  .r1,.r2,.r3 { opacity: 1; transform: translateY(0); }
+
+  /* Alert cards */
+  .hero-cards {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 24px var(--cl-gutter-sm) 40px;
+  }
+  .hero-card {
+    background: var(--cl-dk-bg); border: 1px solid var(--cl-dk-border);
+    border-radius: 10px; padding: 18px 20px;
+    display: flex; justify-content: space-between; align-items: center; gap: 14px;
+    box-shadow: 0 24px 48px rgba(16,14,26,.32);
+  }
+  .hero-card--row { justify-content: flex-start; gap: 10px; padding: 14px 20px; }
+  .hero-card-body { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .hero-card-head { display: flex; align-items: center; gap: 8px; }
+  .hero-card-name { font-family: var(--cl-display); font-weight: 600; font-size: 14.5px; color: var(--cl-dk-text); }
+  .hero-card-time { font-size: 11.5px; color: #5c5878; }
+  .hero-card-price {
+    display: flex; align-items: baseline; gap: 16px; margin-left: 16px;
+    font-size: 40px; font-weight: 500; line-height: 1.1; letter-spacing: -0.03em;
+  }
+  .hero-card-price.sm { font-size: 22px; gap: 12px; letter-spacing: -0.02em; }
+  .hero-old.sm { font-size: inherit; }
+  .hero-card-new { color: var(--cl-dk-text); }
+  .hero-card-reason { font-size: 12px; color: var(--cl-dk-muted2); margin-left: 16px; line-height: 1.5; }
+  .hero-card-reason--inline { margin-left: 0; }
+  .hero-card-btn {
+    font-size: 12px; padding: 7px 13px; border-radius: 6px;
+    font-family: var(--cl-body); font-weight: 600; cursor: pointer;
+    white-space: nowrap; transition: opacity .15s; flex-shrink: 0;
+  }
+  .hero-card-btn.primary { background: var(--cl-cobalt); color: #fff; border: none; }
+  .hero-card-btn.outline { background: none; border: 1px solid #3a3358; color: var(--cl-dk-text); }
+  .hero-card-btn:hover { opacity: .82; }
+  .hero-arrow { font-style: normal; font-family: var(--cl-body); }
+  .hero-arrow.red  { color: var(--cl-red-dk); font-size: 24px; margin-right: 6px; }
+  .hero-arrow.grn  { color: var(--cl-grn-dk); }
+  .hero-arrow.sm   { font-size: 16px; margin-right: 4px; }
+  .hero-cards-note { font-size: 11px; color: var(--cl-subtle); margin-top: 4px; }
+
+  /* Track (hidden on mobile) */
+  .hero-track { display: none; }
+  .track { position: relative; height: 1px; background: var(--cl-border); flex: 1; }
+  .travel {
+    position: absolute; top: -3.5px; left: 0;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cl-cobalt); box-shadow: 0 0 0 4px rgba(47,82,214,.18); opacity: 0;
+  }
+  .hero-track-lbl { font-size: 11.5px; color: var(--cl-muted); letter-spacing: .04em; }
+  .hero-track-lbl.accent { color: var(--cl-cobalt); font-weight: 500; }
+
+  /* Scale (hidden on mobile) */
+  .hero-scale { display: none; }
+
+  /* ── Desktop ── */
+  @media (min-width: 900px) {
+    .hero { min-height: 900px; }
+    .hero-nav { padding: 24px var(--cl-gutter); }
+
+    .hero-content {
+      position: absolute; left: var(--cl-gutter); top: 112px;
+      width: 620px; padding: 0; max-width: none;
+    }
+    .hero-price {
+      position: absolute; left: var(--cl-gutter); top: 560px; padding: 0;
+    }
+    .hero-price-num { font-size: 112px; }
+
+    .hero-cards {
+      position: absolute; left: 776px; top: 290px;
+      width: 384px; padding: 0;
+    }
+    .hero-card--i1 { margin-left: 24px; }
+    .hero-card--i2 { margin-left: 48px; }
+    .r1.hero-card { box-shadow: 0 34px 64px rgba(16,14,26,.4), 0 0 0 6px rgba(255,255,255,.35); }
+
+    .hero-track {
+      display: flex; align-items: center; gap: 16px;
+      position: absolute; left: var(--cl-gutter); right: var(--cl-gutter); bottom: 44px;
+    }
+
+    /* Scale */
+    .hero-scale {
+      display: block; position: absolute;
+      left: 644px; top: 330px; width: 120px; height: 285px;
+    }
+    .scale-line {
+      position: absolute; left: 46px; top: 0; bottom: 0; width: 1px; background: #C9CED8;
+    }
+    .scale-zone { position: absolute; left: 42px; width: 9px; background: rgba(47,82,214,.2); border-radius: 2px; }
+    .scale-lbl   { position: absolute; right: 74px; width: 34px; font-size: 10.5px; text-align: right; font-weight: 500; }
+    .scale-lbl.cobalt { color: var(--cl-cobalt); }
+    .scale-lbl.muted  { color: var(--cl-muted); font-weight: 400; }
+    .scale-lbl.red    { color: var(--cl-red-lt); }
+    .scale-lbl.grn    { color: var(--cl-grn-lt); }
+    .scale-lbl-r { position: absolute; left: 62px; font-size: 10px; font-weight: 500; }
+    .scale-tick  { position: absolute; left: 36px; width: 20px; height: 2px; }
+    .scale-tick.cobalt  { background: var(--cl-cobalt); }
+    .scale-tick.muted   { background: var(--cl-subtle); height: 1px; }
+    .scale-tick.red-tick { background: var(--cl-red-lt); }
+    .scale-tick.grn-tick { background: var(--cl-grn-lt); }
+    .scale-trail {
+      position: absolute; left: 45px; width: 3px;
+      background: var(--cl-red-lt); border-radius: 2px;
+      transform-origin: top center;
+    }
+    .scale-trail-b {
+      position: absolute; left: 45px; width: 3px;
+      background: var(--cl-grn-lt); border-radius: 2px;
+      transform-origin: bottom center;
+    }
+    .scale-bottom {
+      position: absolute; bottom: -22px; left: 0; right: 0;
+      text-align: center; font-size: 10px; color: var(--cl-subtle); letter-spacing: .04em;
+    }
+
+    /* Enable animations */
+    .pa  { animation: pa  16s linear    infinite; }
+    .pb  { display: flex; animation: pb 16s linear infinite; }
+    .strike  { animation: strike  16s ease-in-out infinite; }
+    .strike2 { animation: strike2 16s ease-in-out infinite; }
+    .newp    { animation: newp    16s ease-out   infinite; }
+    .newp2   { animation: newp2   16s ease-out   infinite; }
+    .sneak   { animation: sneak   16s ease-in-out infinite; }
+    .trail   { animation: trail   16s ease-in-out infinite; }
+    .sneakB  { animation: sneakB  16s ease-in-out infinite; }
+    .trailB  { animation: trailB  16s ease-in-out infinite; }
+    .l105    { animation: l105    16s ease-out   infinite; }
+    .l104    { animation: l104    16s ease-out   infinite; }
+    .zoneA   { animation: zoneA   16s ease-out   infinite; }
+    .zoneB   { animation: zoneB   16s ease-out   infinite; }
+    .r1      { animation: r1      16s ease-out   infinite; }
+    .r2      { animation: r2      16s ease-out   infinite; }
+    .r3      { animation: r3      16s ease-out   infinite; }
+    .t1      { animation: t1 8s linear infinite; }
+    .t2      { animation: t2 8s linear infinite; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .pa, .newp, .r1, .r2, .r3, .l105, .zoneA { animation: none; opacity: 1; transform: none; }
+    .pb, .pb * { display: none; }
+    .strike, .strike2 { animation: none; transform: scaleX(1); }
+    .sneak  { animation: none; transform: translateY(133px); }
+    .trail  { animation: none; transform: scaleY(1); }
+    .sneakB { animation: none; }
+    .trailB { animation: none; }
+    .t1, .t2 { animation: none; }
+    .pulse::after { animation: none; }
+  }
+</style>
+
+<script>
+  const form  = document.getElementById('hero-form')  as HTMLFormElement | null;
+  const input = document.getElementById('hero-url')   as HTMLInputElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const url = input?.value.trim() ?? '';
+    window.location.href = url
+      ? '/resultado?url=' + encodeURIComponent(url)
+      : '/resultado';
+  });
+</script>
