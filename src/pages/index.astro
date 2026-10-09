@@ -6,7 +6,11 @@ import HowItWorks from '../components/landing/HowItWorks.astro';
 import Control from '../components/landing/Control.astro';
 import Pricing from '../components/landing/Pricing.astro';
 import FAQ from '../components/landing/FAQ.astro';
+import Senales from '../components/landing/Senales.astro';
+import Detecta from '../components/landing/Detecta.astro';
 import Waitlist from '../components/landing/Waitlist.astro';
+import StickyBar from '../components/landing/StickyBar.astro';
+import Footer from '../components/landing/Footer.astro';
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -40,10 +44,14 @@ const structuredData = {
   <main id="main-content">
     <Contrast />
     <HowItWorks />
+    <Senales />
+    <Detecta />
     <Control />
     <Pricing />
     <FAQ />
     <Waitlist />
+    <Footer />
+    <StickyBar />
   </main>
 </Layout>
 
@@ -60,4 +68,6 @@ const structuredData = {
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  /* Space so sticky bar doesn't cover Waitlist content */
+  .sticky-bar { margin-top: 0; }
 </style>

@@ -1,0 +1,49 @@
+---
+---
+
+<footer class="footer" aria-label="Pie de página">
+  <div class="footer-inner">
+    <span class="footer-brand">Talon</span>
+    <span class="footer-tagline">Monitor de precios para Shopify</span>
+    <nav class="footer-nav" aria-label="Links legales">
+      <a href="/privacidad" class="footer-link">Privacidad</a>
+    </nav>
+    <span class="mono footer-copy">© 2026 Talon</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--cl-dk-bg);
+    border-top: 1px solid var(--cl-dk-border);
+    font-family: var(--cl-body);
+  }
+  .footer-inner {
+    padding: 28px var(--cl-gutter);
+    display: flex; align-items: center; gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-brand {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 15px; color: var(--cl-dk-text);
+  }
+  .footer-tagline {
+    font-size: 13px; color: var(--cl-dk-muted2);
+    flex: 1;
+  }
+  .footer-nav { display: flex; gap: 16px; }
+  .footer-link {
+    font-size: 12.5px; color: var(--cl-dk-muted2);
+    text-decoration: none; transition: color .15s;
+  }
+  .footer-link:hover { color: var(--cl-dk-text); }
+  .footer-copy {
+    font-size: 12px; color: var(--cl-dk-muted2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 480px) {
+    .footer-inner { padding: 24px var(--cl-gutter-sm); gap: 12px; }
+    .footer-tagline { display: none; }
+  }
+</style>

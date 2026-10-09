@@ -1,0 +1,260 @@
+---
+// Price scale: range $90–$135 ($45 span). pct(v) = (v-90)/45*100
+// Competitors: SneakerHub $105, RunZone DR $112, KickStop $118, PasoFirme $129
+// Your price: $125 (ahora) → $109 (nuevo)
+// Floor: $95, Zone: $107–$112
+---
+
+<section id="detecta" class="detecta" aria-labelledby="detecta-title">
+  <span class="mono detecta-eyebrow">DETECTA Y SUGIERE</span>
+  <h2 id="detecta-title" class="detecta-title">Cada señal viene con el porqué y con dónde quedas.</h2>
+
+  <div class="detecta-grid">
+    <!-- Left: 3 points -->
+    <div class="detecta-points">
+      <div class="detecta-point detecta-point--accent">
+        <b class="detecta-point-title">Qué pasó</b>
+        <span class="detecta-point-body">Un competidor bajó, el mercado subió o alguien se quedó sin stock. Talon lo ve en la siguiente revisión.</span>
+      </div>
+      <div class="detecta-point">
+        <b class="detecta-point-title">Qué hacer</b>
+        <span class="detecta-point-body">Un precio concreto que respeta tu margen y la posición que tú elegiste, no un "revisa tus precios".</span>
+      </div>
+      <div class="detecta-point">
+        <b class="detecta-point-title">Dónde quedas</b>
+        <span class="detecta-point-body">Ves a todos los vendedores en una escala y mueves la marca para probar otro precio antes de aplicarlo.</span>
+      </div>
+    </div>
+
+    <!-- Right: dark product card -->
+    <div class="detecta-card" aria-label="Ejemplo ilustrativo de Court Classic">
+      <div class="detecta-card-header">
+        <b class="detecta-card-name">Court Classic</b>
+        <span class="mono detecta-card-meta">revisado hace 2 h</span>
+      </div>
+
+      <!-- Recommendation -->
+      <div class="detecta-rec">
+        <div class="detecta-rec-action">
+          <span class="detecta-rec-arrow">↓</span>
+          Bajar a $109 · dentro de tu objetivo
+        </div>
+        <p class="detecta-rec-detail">SneakerHub bajó su precio 12% hace 2 horas. Estás $20 por encima del más barato entre 4 vendedores. $109 queda a +4% del más barato, dentro de tu objetivo (hasta +5%), y deja 32% de margen.</p>
+      </div>
+
+      <!-- Price scale -->
+      <div class="detecta-scale-wrap">
+        <span class="mono detecta-scale-label">dónde estás parado</span>
+        <div class="detecta-scale" aria-hidden="true">
+          <div class="ds-track"></div>
+
+          <!-- Floor $95 at 11.1% -->
+          <div class="ds-floor" style="left:11.1%">
+            <div class="ds-floor-line"></div>
+            <span class="mono ds-floor-lbl">piso $95</span>
+          </div>
+
+          <!-- Zone $107–$112: 37.8%–48.9%, width 11.1% -->
+          <div class="ds-zone" style="left:37.8%;width:11.1%"></div>
+
+          <!-- SneakerHub $105 at 33.3% — red (cheapest) -->
+          <div class="ds-mk" style="left:33.3%">
+            <span class="mono ds-mk-price ds-red">$105</span>
+            <span class="ds-mk-dot ds-red"></span>
+            <span class="ds-mk-lbl">SneakerHub</span>
+          </div>
+
+          <!-- RunZone DR $112 at 48.9% -->
+          <div class="ds-mk" style="left:48.9%">
+            <span class="mono ds-mk-price ds-muted">$112</span>
+            <span class="ds-mk-dot ds-muted"></span>
+            <span class="ds-mk-lbl">RunZone DR</span>
+          </div>
+
+          <!-- KickStop $118 at 62.2% -->
+          <div class="ds-mk" style="left:62.2%">
+            <span class="mono ds-mk-price ds-muted">$118</span>
+            <span class="ds-mk-dot ds-muted"></span>
+            <span class="ds-mk-lbl">KickStop</span>
+          </div>
+
+          <!-- PasoFirme $129 at 86.7% -->
+          <div class="ds-mk" style="left:86.7%">
+            <span class="mono ds-mk-price ds-muted">$129</span>
+            <span class="ds-mk-dot ds-muted"></span>
+            <span class="ds-mk-lbl">PasoFirme</span>
+          </div>
+
+          <!-- Nuevo $109 at 42.2% — cobalt glow -->
+          <div class="ds-mk ds-mk--nuevo" style="left:42.2%">
+            <span class="mono ds-mk-price ds-cobalt ds-above">$109 · nuevo</span>
+            <span class="ds-mk-dot ds-cobalt ds-glow"></span>
+          </div>
+
+          <!-- Ahora $125 at 77.8% — outlined -->
+          <div class="ds-mk ds-mk--ahora" style="left:77.8%">
+            <span class="mono ds-mk-price ds-dim ds-above">$125 · ahora</span>
+            <span class="ds-mk-dot ds-outlined"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="detecta-note">Captura del producto con datos ilustrativos de tiendas inventadas. Talon revisa una vez al día por defecto, y tú eliges la frecuencia.</p>
+</section>
+
+<style>
+  /* ── Section shell ── */
+  .detecta {
+    background: var(--cl-bg); color: var(--cl-text);
+    padding: 40px var(--cl-gutter) 72px;
+    display: flex; flex-direction: column; gap: 18px;
+    font-family: var(--cl-body);
+  }
+  .detecta-eyebrow { font-size: 11.5px; color: var(--cl-cobalt); letter-spacing: .06em; }
+  .detecta-title {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 30px; line-height: 1.15; margin: 0 0 8px; max-width: 640px;
+  }
+  .detecta-note { font-size: 12.5px; color: var(--cl-subtle); margin: 0; }
+
+  /* ── 2-col grid ── */
+  .detecta-grid {
+    display: grid; grid-template-columns: 1fr 1.5fr; gap: 48px; align-items: start;
+  }
+
+  /* ── Left: points ── */
+  .detecta-points { display: flex; flex-direction: column; gap: 22px; }
+  .detecta-point {
+    display: flex; flex-direction: column; gap: 6px;
+    border-top: 2px solid var(--cl-border); padding-top: 14px;
+  }
+  .detecta-point--accent { border-top-color: var(--cl-cobalt); }
+  .detecta-point-title {
+    font-family: var(--cl-display); font-size: 16px; font-weight: 600;
+  }
+  .detecta-point-body { font-size: 14.5px; color: var(--cl-muted); line-height: 1.6; }
+
+  /* ── Right: dark product card ── */
+  .detecta-card {
+    background: var(--cl-dk-bg); border: 1px solid var(--cl-dk-border);
+    border-radius: 10px; padding: 22px;
+    display: flex; flex-direction: column; gap: 14px;
+    color: var(--cl-dk-text);
+    box-shadow: 0 24px 48px rgba(16,14,26,.18);
+  }
+  .detecta-card-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .detecta-card-name {
+    font-family: var(--cl-display); font-size: 17px; font-weight: 700;
+    color: var(--cl-dk-text);
+  }
+  .detecta-card-meta { font-size: 11px; color: var(--cl-dk-muted2); }
+
+  /* Recommendation inner card */
+  .detecta-rec {
+    background: var(--cl-dk-card); border: 1px solid var(--cl-dk-border);
+    border-radius: 6px; padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .detecta-rec-action {
+    font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 7px;
+    color: var(--cl-dk-text);
+  }
+  .detecta-rec-arrow { color: var(--cl-red-lt); font-weight: 700; font-size: 16px; }
+  .detecta-rec-detail {
+    font-size: 12.5px; color: var(--cl-dk-muted2); line-height: 1.6; margin: 0;
+  }
+
+  /* Scale wrapper */
+  .detecta-scale-wrap {
+    background: var(--cl-dk-card); border: 1px solid var(--cl-dk-border);
+    border-radius: 6px; padding: 16px 18px 14px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .detecta-scale-label {
+    font-size: 11px; color: #5c5878; text-transform: uppercase; letter-spacing: .03em;
+  }
+
+  /* ── Price scale ── */
+  .detecta-scale {
+    position: relative; height: 110px; margin: 6px 0 0;
+  }
+  .ds-track {
+    position: absolute; left: 0; right: 0; top: 52px;
+    height: 1px; background: #3a3560;
+  }
+
+  /* Zone highlight */
+  .ds-zone {
+    position: absolute; top: 44px; height: 17px;
+    background: rgba(91,124,255,.25); border-radius: 3px;
+  }
+
+  /* Floor price */
+  .ds-floor { position: absolute; }
+  .ds-floor-line {
+    position: absolute; top: 36px; width: 1px; height: 36px;
+    background: #E2A03D; border-left: 1px dashed #E2A03D;
+  }
+  .ds-floor-lbl {
+    position: absolute; top: 76px; font-size: 11px; color: #E2A03D;
+    transform: translateX(-50%); white-space: nowrap;
+  }
+
+  /* Markers — base */
+  .ds-mk {
+    position: absolute;
+    display: flex; flex-direction: column; align-items: center;
+    transform: translateX(-50%);
+  }
+  .ds-mk-price {
+    position: absolute; top: 18px;
+    font-size: 11.5px; white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .ds-mk-dot {
+    position: absolute; top: 47px;
+    width: 10px; height: 10px; border-radius: 50%;
+    transform: translateX(-50%); left: 50%;
+  }
+  .ds-mk-lbl {
+    position: absolute; top: 64px;
+    font-size: 11px; color: var(--cl-dk-muted2); white-space: nowrap;
+  }
+
+  /* Colors */
+  .ds-red    { color: #E5556B; }
+  .ds-muted  { color: var(--cl-dk-muted2); }
+  .ds-cobalt { color: #5B7CFF; }
+  .ds-dim    { color: var(--cl-dk-muted2); }
+  .ds-mk-dot.ds-red     { background: #E5556B; }
+  .ds-mk-dot.ds-muted   { background: #5c5878; }
+
+  /* Nuevo (cobalt glow) */
+  .ds-mk--nuevo .ds-mk-price { top: 14px; font-size: 13px; font-weight: 500; }
+  .ds-mk-dot.ds-cobalt {
+    background: #5B7CFF; width: 14px; height: 14px; top: 45px;
+    box-shadow: 0 0 0 4px rgba(91,124,255,.25), 0 0 18px rgba(91,124,255,.5);
+  }
+
+  /* Ahora (outlined) */
+  .ds-mk--ahora .ds-mk-price { top: 16px; }
+  .ds-mk-dot.ds-outlined {
+    background: var(--cl-dk-bg);
+    border: 2px solid #5B7CFF;
+    box-sizing: border-box;
+    width: 12px; height: 12px; top: 47px;
+  }
+
+  /* Label placement for nuevo/ahora — above track, not below */
+  .ds-above { top: 14px !important; }
+
+  @media (max-width: 880px) {
+    .detecta-grid { grid-template-columns: 1fr; gap: 32px; }
+    .detecta { padding: 40px var(--cl-gutter-sm) 56px; }
+    .detecta-title { font-size: 24px; }
+  }
+</style>

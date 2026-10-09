@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Footer from '../components/landing/Footer.astro';
 
 const apiUrl    = import.meta.env.PUBLIC_API_URL    ?? '';
 const demoKey   = import.meta.env.PUBLIC_DEMO_KEY   ?? '';
@@ -110,6 +111,9 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
       <p class="res-cta-note" id="res-cta-status" aria-live="polite">Talon está en validación: entras a la lista de espera.</p>
     </div>
   </section>
+
+  <div style="height: 60px;"></div>
+  <Footer />
 </Layout>
 
 <!-- Pass env vars to client script -->
@@ -194,8 +198,10 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
     const name = d.product_name || 'Tu producto';
     setText('res-product-name', name);
     const analyzed = d.competitors_analyzed ?? 0;
+    let hostname = '';
+    try { hostname = new URL(productUrl).hostname; } catch {}
     setText('res-product-meta', [
-      new URL(productUrl).hostname,
+      hostname,
       'revisado hace unos segundos',
       analyzed > 0 ? analyzed + ' vendedores encontrados' : '',
     ].filter(Boolean).join(' · '));
@@ -211,12 +217,12 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
     let action   = '';
 
     if (isOver) {
-      const diffAbs = Math.abs(parseFloat(diff));
-      headline = 'Estás ' + fmt(diffAbs) + ' por encima del más barato.';
+      const diffPct = diff.replace('-', '');           // "12%" (remove leading minus)
+      headline = 'Tu precio está ' + diffPct + ' sobre el más barato del mercado.';
       detail   = d.insight ?? d.reason ?? '';
       action   = d.action ?? ('Bajar hacia ' + fmt(d.recommended_price));
     } else if (isUnder) {
-      headline = 'Estás por debajo del precio de mercado.';
+      headline = 'Tu precio está ' + diff + ' por debajo del mercado.';
       detail   = d.insight ?? d.reason ?? '';
       action   = d.action ?? ('Subir hacia ' + fmt(d.recommended_price));
     } else {
