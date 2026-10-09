@@ -103,6 +103,14 @@ import { PROVISIONAL } from '../../config/provisional';
     <span class="mono scale-bottom">MERCADO</span>
   </div>
 
+  <!-- Sonar pulse — desktop only -->
+  <div class="hero-sonar" aria-hidden="true">
+    <span class="sonar-ring sr1"></span>
+    <span class="sonar-ring sr2"></span>
+    <span class="sonar-ring sr3"></span>
+    <span class="sonar-dot"></span>
+  </div>
+
   <!-- Alert cards -->
   <div class="hero-cards" aria-label="Ejemplos ilustrativos">
     <div class="r1 hero-card">
@@ -201,6 +209,12 @@ import { PROVISIONAL } from '../../config/provisional';
     69%,95%  { opacity:1;transform:translateY(0) }
     98%,100% { opacity:0;transform:translateY(0) }
   }
+  @keyframes sonar-beat {
+    0%    { transform:scale(0);    opacity:0    }
+    0.3%  { transform:scale(0.02); opacity:0.85 }
+    36%   { transform:scale(1);    opacity:0    }
+    100%  { transform:scale(1);    opacity:0    }
+  }
 </style>
 
 <style>
@@ -221,9 +235,10 @@ import { PROVISIONAL } from '../../config/provisional';
   }
   .hero-bg-glow {
     position: absolute; pointer-events: none;
-    right: -40px; top: 250px; width: 760px; height: 620px;
-    background: radial-gradient(closest-side, rgba(47,82,214,.38), rgba(47,82,214,.12) 55%, transparent 100%);
-    filter: blur(24px);
+    /* Always behind the right-side cards regardless of viewport width */
+    right: 0; top: 160px; width: 55%; max-width: 760px; height: 680px;
+    background: radial-gradient(closest-side, rgba(47,82,214,.36), rgba(47,82,214,.11) 55%, transparent 100%);
+    filter: blur(28px);
   }
   .hero-grain {
     position: absolute; inset: 0; width: 100%; height: 100%;
@@ -400,26 +415,32 @@ import { PROVISIONAL } from '../../config/provisional';
   /* Scale (hidden on mobile) */
   .hero-scale { display: none; }
 
+  /* Sonar (hidden on mobile) */
+  .hero-sonar { display: none; }
+
   /* ── Desktop ── */
   @media (min-width: 900px) {
-    .hero { min-height: 900px; }
+    /* Taller hero to avoid content/price collision on smaller laptops */
+    .hero { min-height: 980px; }
     .hero-nav { padding: 24px var(--cl-gutter); }
 
     .hero-content {
       position: absolute; left: var(--cl-gutter); top: 112px;
-      width: 620px; padding: 0; max-width: none;
+      width: 580px; padding: 0; max-width: none;
     }
+    /* Price drops to 640px to clear the taller h1 wrap on ~1366px screens */
     .hero-price {
-      position: absolute; left: var(--cl-gutter); top: 560px; padding: 0;
+      position: absolute; left: var(--cl-gutter); top: 640px; padding: 0;
     }
     .hero-price-num { font-size: 112px; }
 
+    /* Anchor cards to the RIGHT so the glow fills behind them on any width */
     .hero-cards {
-      position: absolute; left: 776px; top: 290px;
-      width: 384px; padding: 0;
+      position: absolute; right: 80px; top: 290px;
+      width: 480px; padding: 0; z-index: 2;
     }
-    .hero-card--i1 { margin-left: 24px; }
-    .hero-card--i2 { margin-left: 48px; }
+    .hero-card--i1 { margin-left: 32px; }
+    .hero-card--i2 { margin-left: 64px; }
     .r1.hero-card { box-shadow: 0 34px 64px rgba(16,14,26,.4), 0 0 0 6px rgba(255,255,255,.35); }
 
     .hero-track {
@@ -427,11 +448,33 @@ import { PROVISIONAL } from '../../config/provisional';
       position: absolute; left: var(--cl-gutter); right: var(--cl-gutter); bottom: 44px;
     }
 
-    /* Scale */
+    /* Scale: right-anchored flush against the left edge of the cards (cards right + cards width + gap) */
     .hero-scale {
-      display: block; position: absolute;
-      left: 644px; top: 330px; width: 120px; height: 285px;
+      display: none; /* hidden until viewport is wide enough */
+      position: absolute;
+      right: calc(80px + 480px + 16px); /* cards_right + cards_width + gap = 576px */
+      top: 330px; width: 120px; height: 285px;
     }
+
+    /* Sonar: background pulse behind the cards column */
+    .hero-sonar {
+      display: block;
+      position: absolute;
+      /* cards center from right: 80 + 240 = 320px; container 480px → right: 320-240 = 80px */
+      right: 80px; top: 250px;
+      width: 480px; height: 480px;
+      z-index: 1; /* behind cards (z-index: 2) */
+      pointer-events: none;
+    }
+    .sonar-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      border: 1px solid rgba(47,82,214,.4);
+      transform: scale(0); opacity: 0;
+      animation: sonar-beat 10s ease-out infinite;
+    }
+    .sr2 { animation-delay: .7s; }
+    .sr3 { animation-delay: 1.4s; }
+    .sonar-dot { display: none; }
     .scale-line {
       position: absolute; left: 46px; top: 0; bottom: 0; width: 1px; background: #C9CED8;
     }
@@ -484,6 +527,13 @@ import { PROVISIONAL } from '../../config/provisional';
     .t2      { animation: t2 8s linear infinite; }
   }
 
+  /* Scale visible when content col doesn't collide with scale:
+     scale right = viewport - 576; content right = 644; need viewport - 576 >= 644 → 1220px
+     but add buffer for clean gap: 1344px */
+  @media (min-width: 1344px) {
+    .hero-scale { display: block; }
+  }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .pa, .newp, .r1, .r2, .r3, .l105, .zoneA { animation: none; opacity: 1; transform: none; }
@@ -495,6 +545,7 @@ import { PROVISIONAL } from '../../config/provisional';
     .trailB { animation: none; }
     .t1, .t2 { animation: none; }
     .pulse::after { animation: none; }
+    .sonar-ring { animation: none; opacity: 0; }
   }
 </style>
 
