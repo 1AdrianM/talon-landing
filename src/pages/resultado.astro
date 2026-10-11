@@ -318,21 +318,24 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
 
     // Verdict — use real current price when available
     const yourPrice = d.current_price ?? d.suggested_price ?? d.recommended_price;
-    const diff      = d.price_diff ?? '';          // e.g. "-12%"
-    const isOver    = diff.startsWith('-');         // negative diff = overpriced vs cheapest
-    const isUnder   = diff.startsWith('+');
+    // Backend: price_diff = (tuPrecio - mercado) / mercado × 100
+    // → '+12%' = estás 12% SOBRE el mercado (bajar), '-8%' = BAJO el mercado (subir)
+    const diff    = d.price_diff ?? '';
+    const isOver  = diff.startsWith('+');   // tu precio está sobre el mercado
+    const isUnder = diff.startsWith('-');   // tu precio está bajo el mercado
 
     let headline = '';
     let detail   = '';
     let action   = '';
 
     if (isOver) {
-      const diffPct = diff.replace('-', '');           // "12%" (remove leading minus)
-      headline = 'Tu precio está ' + diffPct + ' sobre el más barato del mercado.';
+      const diffPct = diff.replace('+', '');
+      headline = 'Tu precio está ' + diffPct + ' sobre el mercado.';
       detail   = d.insight ?? d.reason ?? '';
       action   = d.action ?? ('Bajar hacia ' + fmt(d.recommended_price));
     } else if (isUnder) {
-      headline = 'Tu precio está ' + diff + ' por debajo del mercado.';
+      const diffPct = diff.replace('-', '');
+      headline = 'Tu precio está ' + diffPct + ' por debajo del mercado.';
       detail   = d.insight ?? d.reason ?? '';
       action   = d.action ?? ('Subir hacia ' + fmt(d.recommended_price));
     } else {
@@ -343,8 +346,8 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
 
     setText('res-verdict-headline', headline);
     setText('res-verdict-detail', detail);
-    const arrowColor = isUnder ? '#2F9E66' : (isOver ? '#C1432E' : '#5b6270');
-    const arrow = isUnder ? '↑' : (isOver ? '↓' : '→');
+    const arrowColor = isOver ? '#C1432E' : (isUnder ? '#2F9E66' : '#5b6270');
+    const arrow      = isOver ? '↓'       : (isUnder ? '↑'       : '→');
     setHTML('res-verdict-action',
       `<span style="color:${arrowColor};font-weight:700">${arrow}</span> ${action}`
     );
