@@ -22,7 +22,7 @@ import { PROVISIONAL } from '../../config/provisional';
       <a href="#control" class="hero-nav-link">Control</a>
       <a href="#precio" class="hero-nav-link">Precio</a>
       <a href="#preguntas" class="hero-nav-link">Preguntas</a>
-      <a href="/resultado" class="hero-nav-cta">Revisar mi precio</a>
+      <a href="/analizar" class="hero-nav-cta">Revisar mi precio</a>
     </div>
   </nav>
 
@@ -429,9 +429,9 @@ import { PROVISIONAL } from '../../config/provisional';
       position: absolute; left: var(--cl-gutter); top: 112px;
       width: 580px; padding: 0; max-width: none;
     }
-    /* Price drops to 640px to clear the taller h1 wrap on ~1366px screens */
+    /* Price drops to 612px to clear the taller h1 wrap on ~1366px screens */
     .hero-price {
-      position: absolute; left: var(--cl-gutter); top: 640px; padding: 0;
+      position: absolute; left: var(--cl-gutter); top: 612px; padding: 0;
     }
     .hero-price-num { font-size: 112px; }
 
@@ -557,7 +557,7 @@ import { PROVISIONAL } from '../../config/provisional';
     e.preventDefault();
     const url = input?.value.trim() ?? '';
     window.location.href = url
-      ? '/resultado?url=' + encodeURIComponent(url)
-      : '/resultado';
+      ? '/analizar?url=' + encodeURIComponent(url)
+      : '/analizar';
   });
 </script>

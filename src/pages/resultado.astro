@@ -43,11 +43,60 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
       <p class="res-loading-text">Analizando tu precio…</p>
     </div>
 
-    <!-- Error -->
+    <!-- Error: not readable -->
+    <div class="res-state hidden" id="state-error-not-readable">
+      <div class="res-card res-error-card">
+        <b class="res-error-title">No pudimos leer el precio de esa página.</b>
+        <span class="res-error-body">Puede pasar por una de estas razones:</span>
+        <ul class="res-error-list">
+          <li>La tienda no es Shopify (por ahora solo leemos Shopify).</li>
+          <li>La tienda tiene contraseña o bloquea lectores automáticos.</li>
+          <li>El link no es de un producto.</li>
+        </ul>
+        <a href="/analizar" class="res-retry-btn">Probar con otro link</a>
+      </div>
+    </div>
+
+    <!-- Error: rate limit -->
+    <div class="res-state hidden" id="state-error-rate-limit">
+      <div class="res-card res-error-card">
+        <b class="res-error-title">Hiciste varios análisis en poco tiempo.</b>
+        <span class="res-error-body">Para no sobrecargar las tiendas, espera un minuto y vuelve a intentar. Si prefieres, déjanos tu correo y te avisamos cuando abramos cupo.</span>
+        <form class="res-rl-form" id="res-rl-form" novalidate>
+          <input type="email" id="res-rl-email" name="email" placeholder="tu@email.com" class="res-rl-input" autocomplete="email" required />
+          <button type="submit" class="af-btn-sm">Avisarme</button>
+        </form>
+        <span class="res-rl-note" id="res-rl-status" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <!-- Error: generic / timeout -->
     <div class="res-state hidden" id="state-error">
       <div class="res-error-icon" aria-hidden="true">⚠</div>
       <p class="res-error-msg" id="error-msg">No pudimos analizar este producto.</p>
-      <a href="/" class="res-error-back">Volver al inicio</a>
+      <a href="/analizar" class="res-error-back">Intentar de nuevo</a>
+    </div>
+
+    <!-- No competitors -->
+    <div class="res-state hidden" id="state-no-competitors">
+      <div class="res-product">
+        <h1 class="res-product-name" id="nc-product-name">—</h1>
+        <span class="mono res-product-meta">leído de tu tienda · precio real</span>
+      </div>
+      <div class="res-card nc-price-card">
+        <span class="mono res-card-eyebrow">tu precio actual</span>
+        <div class="nc-price" id="nc-current-price">—</div>
+        <p class="nc-hint">Añade las URLs de los competidores para ver dónde estás parado en el mercado.</p>
+      </div>
+      <div class="res-card">
+        <span class="mono res-card-eyebrow">competidores — hasta 3 URLs de Shopify</span>
+        <form id="nc-form" class="nc-form">
+          <input id="nc-c1" type="url" placeholder="https://competidor1.com/products/…" class="nc-input" autocomplete="off" />
+          <input id="nc-c2" type="url" placeholder="https://competidor2.com/products/…" class="nc-input" autocomplete="off" />
+          <input id="nc-c3" type="url" placeholder="https://competidor3.com/products/…" class="nc-input" autocomplete="off" />
+          <button type="submit" class="nc-submit">Comparar precios →</button>
+        </form>
+      </div>
     </div>
 
     <!-- Result -->
@@ -56,6 +105,15 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
       <div class="res-product">
         <h1 class="res-product-name" id="res-product-name">—</h1>
         <span class="mono res-product-meta" id="res-product-meta">revisado hace unos segundos</span>
+      </div>
+
+      <!-- Partial warning (hidden when not partial) -->
+      <div class="res-partial-banner hidden" id="res-partial-banner" role="status">
+        <span class="res-partial-icon" aria-hidden="true">!</span>
+        <div>
+          <b id="res-partial-title">Solo pudimos comparar algunos competidores.</b>
+          <span id="res-partial-detail" class="res-partial-detail">Los demás no se pudieron leer o están en otra moneda. El veredicto usa solo los comparables.</span>
+        </div>
       </div>
 
       <!-- Verdict card -->
@@ -77,11 +135,11 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
 
       <!-- Competitor table -->
       <div class="res-card res-table-card">
-        <div class="res-table-head">
+        <div class="res-table-head" id="res-table-head">
           <span>vendedor</span>
           <span>precio</span>
           <span>vs. tú</span>
-          <span>último cambio</span>
+          <span id="res-table-col4">último cambio</span>
         </div>
         <div id="res-table-body"></div>
       </div>
@@ -119,8 +177,9 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
 <!-- Pass env vars to client script -->
 <script define:vars={{ apiUrl, demoKey, mode }}>
   // ── Helpers ──────────────────────────────────────────
+  const STATE_IDS = ['state-loading','state-error','state-error-not-readable','state-error-rate-limit','state-no-competitors','state-result'];
   function show(id) {
-    document.querySelectorAll('.res-state').forEach(el => el.classList.add('hidden'));
+    STATE_IDS.forEach(sid => document.getElementById(sid)?.classList.add('hidden'));
     document.getElementById(id)?.classList.remove('hidden');
   }
   function setText(id, text) {
@@ -135,9 +194,10 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
     return '$' + Number(n).toFixed(2).replace(/\.00$/, '');
   }
 
-  // ── Read URL from query string ────────────────────────
+  // ── Read URL + competitor params ─────────────────────
   const params     = new URLSearchParams(window.location.search);
   const productUrl = params.get('url') ?? '';
+  const competitorUrls = [params.get('c1'), params.get('c2'), params.get('c3')].filter(Boolean);
   const urlInput   = document.getElementById('res-url');
   if (urlInput) urlInput.value = productUrl;
 
@@ -148,6 +208,19 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
     window.location.href = val
       ? '/resultado?url=' + encodeURIComponent(val)
       : '/resultado';
+  });
+
+  // ── No-competitors form ───────────────────────────────
+  document.getElementById('nc-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const c1 = (document.getElementById('nc-c1'))?.value.trim();
+    const c2 = (document.getElementById('nc-c2'))?.value.trim();
+    const c3 = (document.getElementById('nc-c3'))?.value.trim();
+    const p = new URLSearchParams({ url: productUrl });
+    if (c1) p.set('c1', c1);
+    if (c2) p.set('c2', c2);
+    if (c3) p.set('c3', c3);
+    window.location.href = '/resultado?' + p.toString();
   });
 
   // ── Main analysis flow ────────────────────────────────
@@ -162,38 +235,75 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
 
     try {
       const endpoint = (apiUrl || '') + '/api/v2/analyze';
+      const body = { url: productUrl, ...(competitorUrls.length ? { competitors: competitorUrls } : {}) };
       const res = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + (demoKey || ''),
         },
-        body: JSON.stringify({ url: productUrl }),
+        body: JSON.stringify(body),
       });
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        throw new Error(err.message ?? ('HTTP ' + res.status));
+        const status = res.status;
+        if (status === 429) { show('state-error-rate-limit'); return; }
+        if (status === 422 || (err.message ?? '').toLowerCase().includes('leer')) { show('state-error-not-readable'); return; }
+        throw new Error(err.message ?? ('HTTP ' + status));
       }
 
       const data = await res.json();
       renderResult(data);
 
     } catch (err) {
-      show('state-error');
       const msg = String(err?.message ?? err);
-      if (msg.includes('401') || msg.includes('403')) {
-        setText('error-msg', 'Error de autenticación. Recarga la página e inténtalo de nuevo.');
-      } else if (msg.includes('400')) {
-        setText('error-msg', 'Esta URL no parece ser de un producto Shopify. Revisa el link.');
+      if (msg.includes('not_readable') || msg.includes('422')) {
+        show('state-error-not-readable');
+      } else if (msg.includes('429') || msg.includes('rate')) {
+        show('state-error-rate-limit');
       } else {
-        setText('error-msg', 'No pudimos analizar este producto. Inténtalo de nuevo más tarde.');
+        show('state-error');
+        if (msg.includes('401') || msg.includes('403')) {
+          setText('error-msg', 'Error de autenticación. Recarga la página e inténtalo de nuevo.');
+        } else if (msg.includes('400')) {
+          setText('error-msg', 'Esta URL no parece ser de un producto Shopify. Revisa el link.');
+        } else if (msg.includes('timeout') || msg.includes('408')) {
+          setText('error-msg', 'Una de las páginas no respondió a tiempo. Inténtalo de nuevo.');
+        } else {
+          setText('error-msg', 'No pudimos analizar este producto. Inténtalo de nuevo más tarde.');
+        }
       }
     }
   }
 
   // ── Render result ─────────────────────────────────────
   function renderResult(d) {
+    // No competitors: show product + competitor input form
+    if (d.no_competitors) {
+      setText('nc-product-name', d.product_name || 'Tu producto');
+      setText('nc-current-price', d.current_price ? fmt(d.current_price) : '—');
+      show('state-no-competitors');
+      return;
+    }
+
+    // Detect partial: some competitors have non-ok status
+    const feed = d.feed_preview ?? [];
+    const badStatuses = ['no_legible','moneda_distinta','timeout'];
+    const hasPartial = feed.some(item => badStatuses.includes(item.status));
+    const comparableCount = feed.filter(item => !item.status || item.status === 'ok').length;
+    const totalCount = feed.length;
+    const banner = document.getElementById('res-partial-banner');
+    if (hasPartial && banner) {
+      banner.classList.remove('hidden');
+      setText('res-partial-title', `Solo pudimos comparar ${comparableCount} de ${totalCount} competidor${totalCount !== 1 ? 'es' : ''}.`);
+      setText('res-partial-detail', 'Los demás no se pudieron leer o están en otra moneda. El veredicto usa solo los comparables.');
+      const col4 = document.getElementById('res-table-col4');
+      if (col4) col4.textContent = 'estado';
+    } else if (banner) {
+      banner.classList.add('hidden');
+    }
+
     // Product name + meta
     const name = d.product_name || 'Tu producto';
     setText('res-product-name', name);
@@ -206,8 +316,8 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
       analyzed > 0 ? analyzed + ' vendedores encontrados' : '',
     ].filter(Boolean).join(' · '));
 
-    // Verdict
-    const yourPrice = d.suggested_price ?? d.recommended_price;
+    // Verdict — use real current price when available
+    const yourPrice = d.current_price ?? d.suggested_price ?? d.recommended_price;
     const diff      = d.price_diff ?? '';          // e.g. "-12%"
     const isOver    = diff.startsWith('-');         // negative diff = overpriced vs cheapest
     const isUnder   = diff.startsWith('+');
@@ -254,7 +364,7 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
 
     const min   = d.price_range?.min ?? d.recommended_price * 0.9;
     const max   = d.price_range?.max ?? d.recommended_price * 1.1;
-    const yours = d.suggested_price ?? d.recommended_price;
+    const yours = d.current_price ?? d.suggested_price ?? d.recommended_price;
     const rec   = d.recommended_price;
     const prices = [min, rec, max, yours].filter(Boolean);
     const allMin  = Math.min(...prices) * 0.95;
@@ -301,36 +411,81 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
     scale.innerHTML = html;
   }
 
+  const STATUS_LABELS = {
+    no_legible:      { text: 'No pudimos leer el precio', color: '#8a5a0b' },
+    moneda_distinta: { text: 'Otra moneda, no comparable', color: '#8a5a0b' },
+    timeout:         { text: 'No respondió a tiempo',     color: '#8a5a0b' },
+  };
+
   function renderTable(d) {
     const tbody = document.getElementById('res-table-body');
     if (!tbody) return;
-    const feed  = d.feed_preview ?? [];
-    const yours = d.suggested_price ?? d.recommended_price;
+    const feedAll = d.feed_preview ?? [];
+    const yours   = d.suggested_price ?? d.recommended_price;
+    const isPartial = feedAll.some(item => ['no_legible','moneda_distinta','timeout'].includes(item.status));
 
-    if (feed.length === 0) {
+    if (feedAll.length === 0) {
       tbody.innerHTML = '<div class="res-table-empty">No hay datos de competidores disponibles.</div>';
       return;
     }
 
-    tbody.innerHTML = feed.slice(0, 5).map((item) => {
-      const price = item.suggested_price ?? item.current_price ?? 0;
-      const diff  = price - yours;
-      const diffStr = (diff > 0 ? '+' : '') + fmt(diff);
+    tbody.innerHTML = feedAll.slice(0, 5).map((item) => {
+      const name  = item.competitor_name ?? item.store ?? item.product_name ?? 'Competidor';
+      const bad   = STATUS_LABELS[item.status];
+
+      if (bad) {
+        return `
+          <div class="res-table-row">
+            <b class="res-row-name">${name}</b>
+            <span class="mono" style="color:#8a93a3">—</span>
+            <span class="mono" style="color:#8a93a3">—</span>
+            <span class="res-row-change" style="color:${bad.color}">${bad.text}</span>
+          </div>`;
+      }
+
+      const price    = item.current_price ?? item.competitor_price ?? item.suggested_price ?? 0;
+      const diff     = price - yours;
+      const diffStr  = (diff > 0 ? '+' : '') + fmt(diff);
       const diffColor = diff < 0 ? '#C1432E' : diff > 0 ? '#2F9E66' : '#5b6270';
-      const change = item.insight ?? '—';
-      const name   = item.product_name ?? 'Competidor';
+      const col4     = isPartial ? 'ok' : (item.insight ?? item.reason ?? '—');
+      const col4Html = isPartial
+        ? `<span style="color:#2F9E66;font-weight:500;font-size:13px">leído hoy</span>`
+        : `<span class="res-row-change">${col4}</span>`;
+
       return `
         <div class="res-table-row">
           <b class="res-row-name">${name}</b>
           <span class="mono">${fmt(price)}</span>
           <span class="mono" style="color:${diffColor}">${diffStr}</span>
-          <span class="res-row-change">${change}</span>
+          ${col4Html}
         </div>`;
     }).join('');
   }
 
   // Start analysis
   analyze();
+
+  // ── Rate-limit email form ─────────────────────────────
+  document.getElementById('res-rl-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email    = (document.getElementById('res-rl-email'))?.value.trim() ?? '';
+    const statusEl = document.getElementById('res-rl-status');
+    if (!statusEl) return;
+    statusEl.textContent = 'Enviando…';
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'resultado' }),
+      });
+      statusEl.textContent = res.ok
+        ? '¡Listo! Te avisamos cuando abramos.'
+        : 'Algo salió mal. Inténtalo de nuevo.';
+      if (res.ok) statusEl.style.color = 'var(--cl-grn-dk)';
+    } catch {
+      statusEl.textContent = 'Error de red. Inténtalo de nuevo.';
+    }
+  });
 
   // ── Waitlist CTA form ──────────────────────────────────
   document.getElementById('res-cta-form')?.addEventListener('submit', async (e) => {
@@ -544,6 +699,79 @@ const mode      = import.meta.env.PUBLIC_ANALYZER_MODE ?? 'mock';
   }
   .res-cta-btn:hover { opacity: .88; }
   .res-cta-note { font-size: 12px; color: var(--cl-dk-muted2); margin: 0; }
+
+  /* Error cards */
+  #state-error-not-readable,
+  #state-error-rate-limit { display: flex; flex-direction: column; gap: 16px; padding: 40px 0 0; }
+  .res-error-card { display: flex; flex-direction: column; gap: 14px; max-width: 620px; }
+  .res-error-title { font-family: var(--cl-display); font-weight: 700; font-size: 18px; }
+  .res-error-body  { font-size: 13.5px; color: var(--cl-muted); line-height: 1.6; }
+  .res-error-list  {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 6px;
+    font-size: 13.5px; color: var(--cl-muted); line-height: 1.55;
+  }
+  .res-error-list li::before { content: '· '; }
+  .res-retry-btn {
+    align-self: flex-start; padding: 12px 22px; border-radius: 8px; border: none;
+    background: var(--cl-cobalt); color: #fff;
+    font-size: 14px; font-weight: 600; font-family: var(--cl-body);
+    text-decoration: none; cursor: pointer; transition: opacity .15s; display: inline-block;
+  }
+  .res-retry-btn:hover { opacity: .9; }
+  .res-rl-form {
+    display: flex; gap: 8px; max-width: 460px;
+  }
+  .res-rl-input {
+    flex: 1; padding: 12px 14px; border-radius: 8px;
+    border: 1px solid var(--cl-border); background: #fff;
+    font-size: 14px; font-family: var(--cl-body); color: var(--cl-text); outline: none;
+  }
+  .res-rl-input:focus { border-color: var(--cl-cobalt); box-shadow: 0 0 0 3px rgba(47,82,214,.12); }
+  .af-btn-sm {
+    padding: 12px 18px; border-radius: 8px; border: none;
+    background: var(--cl-cobalt); color: #fff;
+    font-size: 13.5px; font-weight: 600; font-family: var(--cl-body);
+    white-space: nowrap; cursor: pointer; transition: opacity .15s;
+  }
+  .af-btn-sm:hover { opacity: .9; }
+  .res-rl-note { font-size: 12px; color: var(--cl-subtle); }
+
+  /* Partial banner */
+  .res-partial-banner {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px 18px; border-radius: 6px;
+    background: rgba(226,160,61,.12); border: 1px solid #E2A03D;
+  }
+  .res-partial-icon {
+    color: #E2A03D; font-weight: 700; font-size: 15px; line-height: 1.3; flex-shrink: 0;
+  }
+  .res-partial-banner b { font-size: 13.5px; display: block; margin-bottom: 3px; }
+  .res-partial-detail { font-size: 13px; color: var(--cl-muted); line-height: 1.55; }
+
+  /* No-competitors state */
+  #state-no-competitors { display: flex; flex-direction: column; gap: 16px; }
+  .nc-price {
+    font-family: var(--cl-mono); font-size: 40px; font-weight: 500;
+    color: var(--cl-cobalt); letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
+  }
+  .nc-hint { font-size: 14px; color: var(--cl-muted); line-height: 1.6; margin: 0; }
+  .nc-form { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+  .nc-input {
+    width: 100%; padding: 12px 14px; border-radius: 8px;
+    border: 1px solid var(--cl-border); background: #fff;
+    font-size: 13.5px; color: var(--cl-text); outline: none;
+    font-family: var(--cl-body);
+  }
+  .nc-input::placeholder { color: var(--cl-subtle); }
+  .nc-input:focus { border-color: var(--cl-cobalt); box-shadow: 0 0 0 3px rgba(47,82,214,.12); }
+  .nc-submit {
+    align-self: flex-start; padding: 12px 22px; border-radius: 8px; border: none;
+    background: var(--cl-cobalt); color: #fff;
+    font-size: 14px; font-weight: 600; font-family: var(--cl-body);
+    cursor: pointer; transition: opacity .15s;
+  }
+  .nc-submit:hover { opacity: .9; }
 
   /* Responsive */
   @media (max-width: 680px) {
