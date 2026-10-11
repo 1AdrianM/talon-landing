@@ -9,6 +9,7 @@ import Footer from '../components/landing/Footer.astro';
   noindex={true}
   lang="es"
 >
+  <div class="af-shell">
   <header class="af-header">
     <a href="/" class="af-logo" aria-label="Volver a inicio">Talon</a>
     <span class="af-header-note">Análisis gratis · sin registro</span>
@@ -67,6 +68,7 @@ import Footer from '../components/landing/Footer.astro';
   </main>
 
   <Footer />
+  </div>
 </Layout>
 
 <script>
@@ -134,6 +136,11 @@ import Footer from '../components/landing/Footer.astro';
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Full-height shell so footer sticks to bottom */
+  :global(.af-shell) {
+    display: flex; flex-direction: column; min-height: 100dvh;
+  }
+
   /* Header */
   .af-header {
     display: flex; justify-content: space-between; align-items: center;
@@ -147,6 +154,7 @@ import Footer from '../components/landing/Footer.astro';
 
   /* Main grid */
   .af-main {
+    flex: 1;
     padding: 48px var(--cl-gutter) 60px;
     max-width: 1100px;
   }
