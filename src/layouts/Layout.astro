@@ -1,45 +1,99 @@
 ---
 import Analytics from '@vercel/analytics/astro';
+import '../styles/tokens.css';
 
 interface Props {
   title: string;
+  description?: string;
+  noindex?: boolean;
+  canonical?: string;
+  ogImage?: string;
+  lang?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = 'Talon — Pricing Decision Engine. Paste a product URL and see if your price is competitive — and what to do next.',
+  noindex = false,
+  canonical,
+  ogImage,
+  lang = 'en',
+} = Astro.props;
+
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Talon — Pricing Intelligence Engine. Know exactly why your competitors change prices — and what to do about it." />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
     <title>{title}</title>
+
+    <slot name="head" />
     <Analytics />
     <link rel="icon" type="image/svg+xml" href="/talon_logo.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <slot />
   </body>
 </html>
 
 <style is:global>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root{
-    --bg0:#09090B;--bg1:#0F0F12;--bg2:#16161A;--bg3:#1C1C21;--bg4:#242429;
-    --border:rgba(255,255,255,0.05);--border-md:rgba(255,255,255,0.09);--border-hi:rgba(255,255,255,0.14);
-    --t1:#EDECEA;--t2:#72727A;--t3:#3F3F46;
-    --red:#B83232;--red-lo:rgba(184,50,50,0.11);--red-bd:rgba(184,50,50,0.26);--red-glow:rgba(184,50,50,0.3);
-    --grn:#1A9E68;--grn-lo:rgba(26,158,104,0.10);--grn-bd:rgba(26,158,104,0.24);--grn-glow:rgba(26,158,104,0.28);
-    --amb:#B87A1B;--amb-lo:rgba(184,122,26,0.11);--amb-bd:rgba(184,122,26,0.26);
-    --sans:'Instrument Sans',system-ui,sans-serif;
-    --mono:'DM Mono','Courier New',monospace;
-    --display:'Syne',sans-serif;
-    --radius:8px;
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  html{scroll-behavior:smooth}
-  body{background:var(--bg0);color:var(--t1);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute; top: -100px; left: 16px;
+    background: var(--cl-cobalt, #2F52D6); color: #fff;
+    padding: 8px 16px; border-radius: 4px; font-size: 14px;
+    z-index: 9999; text-decoration: none; transition: top .15s;
+  }
+  .skip-link:focus { top: 16px; }
+
+  /* Global focus ring (AA compliant) */
+  :focus-visible {
+    outline: 2px solid var(--cl-cobalt, #2F52D6);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
 </style>

@@ -1,0 +1,246 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/landing/Footer.astro';
+---
+
+<Layout
+  title="Revisar mi precio · Talon"
+  description="Pega el link de tu producto y de hasta 3 competidores. Talon lee los precios y te dice dónde estás parado."
+  noindex={true}
+  lang="es"
+>
+  <div class="af-shell">
+  <header class="af-header">
+    <a href="/" class="af-logo" aria-label="Volver a inicio">Talon</a>
+    <span class="af-header-note">Análisis gratis · sin registro</span>
+  </header>
+
+  <main class="af-main">
+    <div class="af-grid">
+      <!-- Left: form -->
+      <div class="af-form-col">
+        <div class="af-intro">
+          <h1 class="af-title">Revisa tu precio</h1>
+          <p class="af-sub">Dinos qué producto vendes y contra quién compites. Talon lee el precio de cada página y te dice dónde estás parado.</p>
+        </div>
+
+        <form id="af-form" novalidate>
+          <div class="af-field-group">
+            <label class="af-lbl" for="af-product">1 · TU PRODUCTO</label>
+            <input
+              id="af-product"
+              type="url"
+              name="url"
+              class="af-input"
+              placeholder="https://mitienda.com/products/nombre-del-producto"
+              autocomplete="url"
+              inputmode="url"
+              required
+            />
+            <span class="af-field-error hidden" id="af-product-error"></span>
+          </div>
+
+          <div class="af-field-group">
+            <div class="af-lbl-row">
+              <label class="af-lbl">2 · TUS COMPETIDORES</label>
+              <span class="af-lbl-hint">hasta 3</span>
+            </div>
+            <input id="af-c1" type="url" name="c1" class="af-input" placeholder="https://competidor1.com/products/…" autocomplete="off" />
+            <input id="af-c2" type="url" name="c2" class="af-input" placeholder="https://competidor2.com/products/…" autocomplete="off" />
+            <input id="af-c3" type="url" name="c3" class="af-input" placeholder="https://competidor3.com/products/…" autocomplete="off" />
+            <span class="af-field-hint">Pega el link directo al producto de cada competidor, no la página principal de su tienda.</span>
+          </div>
+
+          <div class="af-actions">
+            <button type="submit" class="af-btn" id="af-submit">Revisar mi precio →</button>
+            <span class="af-actions-note">Sin registro. El primer análisis es gratis.</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right: sidebar -->
+      <aside class="af-sidebar" aria-label="Cómo funciona">
+        <b class="af-sidebar-title">Qué hace Talon con esto</b>
+        <p class="af-sidebar-text">Lee solo las páginas públicas de los links que pegas. No necesitas conectar tu tienda ni darnos acceso a nada.</p>
+        <p class="af-sidebar-text">Hoy funciona con tiendas Shopify. Si un link no se puede leer, te lo decimos y no inventamos el resultado.</p>
+      </aside>
+    </div>
+  </main>
+
+  <Footer />
+  </div>
+</Layout>
+
+<script>
+  // Pre-populate product URL from query param (coming from landing)
+  const params = new URLSearchParams(window.location.search);
+  const preUrl = params.get('url') ?? '';
+  const productInput = document.getElementById('af-product') as HTMLInputElement | null;
+  if (productInput && preUrl) productInput.value = preUrl;
+
+  const form    = document.getElementById('af-form') as HTMLFormElement | null;
+  const errEl   = document.getElementById('af-product-error') as HTMLElement | null;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const url = productInput?.value.trim() ?? '';
+
+    if (!url) {
+      errEl?.classList.remove('hidden');
+      if (errEl) errEl.textContent = 'Ingresa el link de tu producto para continuar.';
+      productInput?.focus();
+      return;
+    }
+
+    // Basic homepage guard (no /products/ path)
+    try {
+      const u = new URL(url.startsWith('http') ? url : 'https://' + url);
+      if (!u.pathname.includes('/products/') && !u.pathname.includes('/collections/')) {
+        errEl?.classList.remove('hidden');
+        if (errEl) errEl.textContent = 'Esto parece la página principal de una tienda. Pega el link de un producto, por ejemplo https://mitienda.com/products/…';
+        productInput?.focus();
+        return;
+      }
+    } catch {
+      errEl?.classList.remove('hidden');
+      if (errEl) errEl.textContent = 'El link no parece una URL válida.';
+      productInput?.focus();
+      return;
+    }
+
+    errEl?.classList.add('hidden');
+
+    const c1 = (document.getElementById('af-c1') as HTMLInputElement | null)?.value.trim() ?? '';
+    const c2 = (document.getElementById('af-c2') as HTMLInputElement | null)?.value.trim() ?? '';
+    const c3 = (document.getElementById('af-c3') as HTMLInputElement | null)?.value.trim() ?? '';
+
+    const p = new URLSearchParams({ url });
+    if (c1) p.set('c1', c1);
+    if (c2) p.set('c2', c2);
+    if (c3) p.set('c3', c3);
+
+    window.location.href = '/resultado?' + p.toString();
+  });
+</script>
+
+<style is:global>
+  .hidden { display: none !important; }
+</style>
+
+<style>
+  :global(body) {
+    background: var(--cl-bg);
+    color: var(--cl-text);
+    font-family: var(--cl-body);
+    margin: 0; padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Full-height shell so footer sticks to bottom */
+  :global(.af-shell) {
+    display: flex; flex-direction: column; min-height: 100dvh;
+  }
+
+  /* Header */
+  .af-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px var(--cl-gutter); border-bottom: 1px solid var(--cl-border);
+  }
+  .af-logo {
+    font-family: var(--cl-display); font-weight: 700; font-size: 18px;
+    color: var(--cl-text); text-decoration: none; letter-spacing: -0.01em;
+  }
+  .af-header-note { font-size: 13px; color: var(--cl-subtle); }
+
+  /* Main grid */
+  .af-main {
+    flex: 1;
+    padding: 48px var(--cl-gutter) 60px;
+    max-width: 1100px;
+  }
+  .af-grid {
+    display: grid;
+    grid-template-columns: 640px 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  /* Form column */
+  .af-form-col { display: flex; flex-direction: column; gap: 30px; }
+
+  .af-intro { display: flex; flex-direction: column; gap: 12px; }
+  .af-title {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 36px; margin: 0; line-height: 1.15; letter-spacing: -0.01em;
+  }
+  .af-sub { margin: 0; font-size: 15.5px; color: var(--cl-muted); line-height: 1.6; }
+
+  /* Fields */
+  .af-field-group { display: flex; flex-direction: column; gap: 10px; }
+  .af-lbl {
+    font-family: var(--cl-mono); font-size: 11.5px;
+    color: var(--cl-subtle); letter-spacing: .04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .af-lbl-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .af-lbl-hint { font-size: 12.5px; color: var(--cl-subtle); }
+
+  .af-input {
+    width: 100%; padding: 13px 14px; border-radius: 8px;
+    border: 1px solid var(--cl-border); background: #fff;
+    font-size: 13.5px; font-family: var(--cl-mono); color: var(--cl-text);
+    outline: none; box-sizing: border-box;
+    font-variant-numeric: tabular-nums;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .af-input::placeholder { color: var(--cl-subtle); }
+  .af-input:focus {
+    border-color: var(--cl-cobalt);
+    box-shadow: 0 0 0 3px rgba(47,82,214,.12);
+  }
+
+  .af-field-error {
+    font-size: 13px; color: var(--cl-red-dk); line-height: 1.5;
+  }
+  .af-field-hint {
+    font-size: 12.5px; color: var(--cl-subtle); line-height: 1.5;
+  }
+
+  /* Actions */
+  .af-actions { display: flex; align-items: center; gap: 16px; }
+  .af-btn {
+    padding: 13px 22px; border-radius: 8px; border: none;
+    background: var(--cl-cobalt); color: #fff;
+    font-size: 14px; font-weight: 600; font-family: var(--cl-body);
+    white-space: nowrap; cursor: pointer;
+    box-shadow: 0 8px 22px rgba(47,82,214,.28);
+    transition: opacity .15s;
+  }
+  .af-btn:hover { opacity: .9; }
+  .af-actions-note { font-size: 12.5px; color: var(--cl-subtle); }
+
+  /* Sidebar */
+  .af-sidebar {
+    margin-top: 96px;
+    display: flex; flex-direction: column; gap: 14px;
+    border-left: 2px solid var(--cl-border); padding-left: 22px;
+  }
+  .af-sidebar-title {
+    font-family: var(--cl-display); font-size: 15.5px; font-weight: 700;
+  }
+  .af-sidebar-text {
+    font-size: 13.5px; color: var(--cl-muted); line-height: 1.65; margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .af-grid { grid-template-columns: 1fr; gap: 40px; }
+    .af-sidebar { margin-top: 0; }
+    .af-main { padding: 36px var(--cl-gutter-sm) 48px; }
+  }
+  @media (max-width: 480px) {
+    .af-title { font-size: 28px; }
+    .af-actions { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .af-btn { width: 100%; text-align: center; }
+  }
+</style>

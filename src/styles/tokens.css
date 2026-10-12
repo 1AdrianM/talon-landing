@@ -1,0 +1,97 @@
+:root {
+  /* ── Surfaces ── */
+  --bg: #FBF7F0;
+  --surface: #FFFFFF;
+  --line: #E6DDD0;
+
+  /* ── Text ── */
+  --ink: #1F1A17;
+  --ink-2: #6E645B;
+
+  /* ── Accent: marigold — NOT for state colors ── */
+  --accent: #F2A900;
+  --accent-ink: #1F1A17;
+
+  /* ── Semantic: alert / drop / act ── */
+  --alert: #B8352B;
+  --alert-bg: #FBEAE7;
+  --alert-bd: rgba(184, 53, 43, 0.28);
+
+  /* ── Semantic: opportunity / raise ── */
+  --opp: #2E7D4F;
+  --opp-bg: #E7F3EB;
+  --opp-bd: rgba(46, 125, 79, 0.28);
+
+  /* ── Semantic: hold / maintain ── */
+  --hold: #6E645B;
+  --hold-bg: #F1ECE4;
+  --hold-bd: rgba(110, 100, 91, 0.28);
+
+  /* ── Radius ── */
+  --radius: 12px;
+
+  /* ── Typography ── */
+  --display: 'Plus Jakarta Sans', sans-serif;
+  --sans: 'Instrument Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', 'Courier New', monospace;
+
+  /* ── Legacy aliases (SEO pages migrated from dark theme) ── */
+  --t1: var(--ink);
+  --t2: var(--ink-2);
+  --t3: var(--hold);
+  --bg0: var(--bg);
+  --bg1: var(--surface);
+  --bg2: var(--hold-bg);
+  --bg3: #EDE8E0;
+  --border: var(--line);
+  --border-md: #D4C9BC;
+  --red-lo: var(--alert-bg);
+  --red-txt: var(--alert);
+  --red-bd: var(--alert-bd);
+  --grn-lo: var(--opp-bg);
+  --grn-txt: var(--opp);
+  --grn-bd: var(--opp-bd);
+  --amb-lo: #FEF3CD;
+  --amb-txt: #A06B00;
+  --amb-bd: rgba(160, 107, 0, 0.28);
+  --body-size: 15px;
+  --body-lh: 1.7;
+
+  /* ── Cobalt landing ─────────────────────────────── */
+  /* Light surfaces */
+  --cl-bg:        #EEF0F3;
+  --cl-text:      #161A22;
+  --cl-cobalt:    #2F52D6;
+  --cl-border:    #D7DAE0;
+  --cl-muted:     #5b6270;
+  --cl-subtle:    #8a93a3;
+
+  /* Dark sections (contrast · control · footer) */
+  --cl-dk-bg:     #100E1A;
+  --cl-dk-card:   #17142A;
+  --cl-dk-border: #262040;
+  --cl-dk-accent: #5B7CFF;
+  --cl-dk-text:   #EDEBF7;
+  --cl-dk-muted:  #a29dc0;
+  --cl-dk-muted2: #8b87a3;
+
+  /* Semantic — price drop */
+  --cl-red-dk:    #E5556B;   /* on dark bg */
+  --cl-red-lt:    #C1432E;   /* on light bg */
+
+  /* Semantic — price rise */
+  --cl-grn-dk:    #57C98A;
+  --cl-grn-lt:    #2F9E66;
+
+  /* Semantic — floor / warning */
+  --cl-amber:     #E2A03D;
+
+  /* Typography */
+  --cl-display:   'Space Grotesk', sans-serif;
+  --cl-body:      'Inter', sans-serif;
+  --cl-mono:      'JetBrains Mono', monospace;
+
+  /* Layout */
+  --cl-gutter:    64px;   /* desktop horizontal padding */
+  --cl-section:   120px;  /* vertical section gap desktop */
+}

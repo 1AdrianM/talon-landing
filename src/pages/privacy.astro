@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Privacy Policy — Talon"
+  description="How Talon uses the data you submit. We keep it simple: we only use your URL and email to run your analysis and contact you."
+>
+  <nav class="topnav">
+    <a href="/" class="nav-logo">
+      <img src="/talon_logo.svg" alt="Talon" width="22" height="22" />
+      <span class="logo-name">Talon</span>
+    </a>
+    <a href="/" class="nav-link">← Back to home</a>
+  </nav>
+
+  <main class="page">
+    <header class="page-header">
+      <div class="page-tag">Legal</div>
+      <h1>Privacy Policy</h1>
+      <p class="page-meta">Effective: September 2026 · Last updated: September 2026</p>
+    </header>
+
+    <article class="prose">
+      <h2>What we collect</h2>
+      <p>When you use Talon's free price check:</p>
+      <ul>
+        <li><strong>Product URL</strong> — to run the analysis. We read the public product page.</li>
+        <li><strong>Competitor URLs</strong> (if you add them) — same purpose.</li>
+        <li><strong>Email address</strong> — only if you choose to leave it, to send you the analysis result or early-access updates.</li>
+      </ul>
+      <p>We do not collect your name, payment information, or any other personal data unless you explicitly provide it.</p>
+
+      <h2>How we use it</h2>
+      <ul>
+        <li>To run the price analysis and return a result.</li>
+        <li>To contact you if you left your email (analysis results, early-access updates).</li>
+      </ul>
+      <p>We do not sell your data. We do not share it with third parties for marketing purposes.</p>
+
+      <!-- TODO: confirm with backend exactly which fields are stored in Supabase and for how long -->
+      <h2>Data retention</h2>
+      <p>Analysis results are cached for a short period (1–6 hours) to avoid repeated scraping. Email addresses are retained until you ask us to remove them.</p>
+
+      <h2>Third-party services</h2>
+      <ul>
+        <li><strong>Supabase</strong> — database for storing analyses and email addresses.</li>
+        <li><strong>Fly.io</strong> — hosts the API server.</li>
+        <li><strong>Vercel</strong> — hosts this landing page.</li>
+      </ul>
+
+      <h2>Your rights</h2>
+      <p>
+        You can ask us to delete any data we hold about you at any time.
+        Email <a href="mailto:hello@trytalon.com">hello@trytalon.com</a> and we'll handle it within 30 days.
+      </p>
+
+      <h2>Contact</h2>
+      <p>Questions? <a href="mailto:hello@trytalon.com">hello@trytalon.com</a></p>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <span class="footer-brand">Talon</span>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/privacy" aria-current="page">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:hello@trytalon.com">Contact</a>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.topnav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 54px; border-bottom: 1px solid var(--line);
+  background: rgba(251,247,240,0.92); position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.nav-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.logo-name { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--ink); }
+.nav-link { font-family: var(--mono); font-size: 12px; color: var(--ink-2); text-decoration: none; }
+.nav-link:hover { color: var(--ink); }
+.page { max-width: 720px; margin: 0 auto; padding: 48px 32px 80px; }
+.page-header { margin-bottom: 40px; }
+.page-tag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--hold); margin-bottom: 10px; }
+h1 { font-family: var(--display); font-size: clamp(28px, 3.5vw, 38px); font-weight: 800; letter-spacing: -0.7px; color: var(--ink); margin-bottom: 8px; }
+.page-meta { font-family: var(--mono); font-size: 11px; color: var(--hold); }
+.prose { display: flex; flex-direction: column; gap: 24px; }
+.prose h2 { font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--ink); margin-top: 8px; }
+.prose p { font-size: 15px; color: var(--ink-2); line-height: 1.75; }
+.prose ul { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.prose li { font-size: 15px; color: var(--ink-2); line-height: 1.7; }
+.prose a { color: var(--ink); text-underline-offset: 3px; }
+.footer {
+  border-top: 1px solid var(--line); padding: 22px 32px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px; background: var(--bg);
+}
+.footer-brand { font-family: var(--display); font-size: 14px; font-weight: 700; color: var(--ink); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-family: var(--mono); font-size: 11px; color: var(--hold); text-decoration: none; }
+.footer-links a:hover { color: var(--ink); }
+@media (max-width: 640px) {
+  .topnav, .page, .footer { padding-left: 20px; padding-right: 20px; }
+  .footer { flex-direction: column; gap: 10px; }
+}
+</style>

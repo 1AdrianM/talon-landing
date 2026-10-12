@@ -1,0 +1,66 @@
+---
+import { PROVISIONAL } from '../../config/provisional';
+
+const faqs = [
+  {
+    q: '¿Talon cambia mis precios sin avisarme?',
+    a: 'No. Por defecto solo recomienda y tú aplicas con un clic. Si activas reglas, actúa únicamente dentro de los límites que tú definiste.',
+  },
+  {
+    q: '¿Con qué tiendas funciona?',
+    a: 'Shopify hoy. Amazon Seller Central viene después.',
+  },
+  {
+    q: '¿Cuánto tarda conectar mi tienda?',
+    a: `${PROVISIONAL.setup.time}, y no tocas código.`,
+  },
+  {
+    q: '¿Necesito tarjeta o registro para el primer análisis?',
+    a: 'No. Pegas el link de un producto y ves el resultado.',
+  },
+];
+---
+
+<section id="preguntas" class="faq" aria-labelledby="preguntas-title">
+  <h2 id="preguntas-title" class="faq-title">Preguntas que haría yo antes de pagar</h2>
+  <dl class="faq-list">
+    {faqs.map((f) => (
+      <div class="faq-item">
+        <dt class="faq-q">{f.q}</dt>
+        <dd class="faq-a">{f.a}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
+
+<style>
+  .faq {
+    background: var(--cl-bg); color: var(--cl-text);
+    padding: 0 var(--cl-gutter) 72px;
+    display: flex; flex-direction: column; gap: 24px;
+    font-family: var(--cl-body);
+  }
+  .faq-title {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 26px; margin: 0;
+  }
+  .faq-list {
+    display: flex; flex-direction: column;
+    max-width: 820px; margin: 0; padding: 0;
+  }
+  .faq-item {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 20px 0; border-top: 1px solid var(--cl-border);
+  }
+  .faq-q {
+    font-family: var(--cl-display); font-size: 15.5px; font-weight: 600;
+  }
+  .faq-a {
+    font-size: 14px; color: var(--cl-muted); line-height: 1.6; margin: 0;
+  }
+
+  @media (max-width: 680px) {
+    .faq { padding: 0 var(--cl-gutter-sm) 56px; }
+    .faq-q { font-size: 15px; }
+  }
+</style>

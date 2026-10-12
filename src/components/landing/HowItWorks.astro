@@ -1,0 +1,76 @@
+---
+import { PROVISIONAL } from '../../config/provisional';
+
+const steps = [
+  {
+    num: '01',
+    title: 'Conecta tu tienda',
+    body: 'Shopify hoy, Amazon pronto. Un solo clic, sin tocar código.',
+    accent: false,
+  },
+  {
+    num: '02',
+    title: 'Rastreamos a tu competencia',
+    body: `Talon revisa los precios de tus competidores ${PROVISIONAL.frequency.default}, automáticamente. Tú decides cada cuánto.`,
+    accent: true,
+  },
+  {
+    num: '03',
+    title: 'Recibes la decisión',
+    body: 'No un reporte: un feed de qué hacer con cada producto, hoy.',
+    accent: false,
+  },
+];
+---
+
+<section id="como" class="how" aria-labelledby="como-title">
+  <h2 id="como-title" class="how-title">Cómo funciona</h2>
+  <div class="how-steps">
+    {steps.map((s) => (
+      <div class={`how-step ${s.accent ? 'how-step--accent' : ''}`}>
+        <span class="mono how-num">{s.num}</span>
+        <b class="how-step-title">{s.title}</b>
+        <span class="how-step-body">{s.body}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .how {
+    background: var(--cl-bg); color: var(--cl-text);
+    padding: 72px var(--cl-gutter);
+    display: flex; flex-direction: column; gap: 40px;
+    font-family: var(--cl-body);
+  }
+  .how-title {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 26px; margin: 0;
+  }
+  .how-steps {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  .how-step {
+    display: flex; flex-direction: column; gap: 10px;
+    border-top: 2px solid var(--cl-border); padding-top: 16px;
+  }
+  .how-step--accent { border-top-color: var(--cl-cobalt); }
+  .how-num {
+    font-family: var(--cl-mono); font-size: 13px;
+    color: var(--cl-cobalt); font-weight: 500; font-variant-numeric: tabular-nums;
+  }
+  .how-step-title { font-family: var(--cl-display); font-size: 15.5px; font-weight: 600; }
+  .how-step-body  { font-size: 13.5px; color: var(--cl-muted); line-height: 1.6; }
+
+  @media (max-width: 680px) {
+    .how { padding: 56px var(--cl-gutter-sm); }
+    .how-steps { grid-template-columns: 1fr; gap: 0; }
+    .how-step {
+      border-top: none; padding-top: 0; padding-bottom: 0;
+      border-left: 2px solid var(--cl-border); padding-left: 20px;
+      margin-left: 0; gap: 6px; padding-bottom: 28px;
+    }
+    .how-step:last-child { padding-bottom: 0; }
+    .how-step--accent { border-left-color: var(--cl-cobalt); }
+  }
+</style>

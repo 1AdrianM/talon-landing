@@ -1,0 +1,74 @@
+---
+const signals = [
+  {
+    name: 'Bajada de precio',
+    means: 'Un competidor baja y tú quedas por encima.',
+    does:  'Propone un precio que respeta tu margen y tu posición.',
+  },
+  {
+    name: 'Subida del mercado',
+    means: 'Los competidores suben y tú te quedas atrás.',
+    does:  'Te muestra cuánto margen estás dejando sobre la mesa.',
+  },
+  {
+    name: 'Sin stock en el mercado',
+    means: 'Vendedores que se quedan sin stock.',
+    does:  'Sugiere subir mientras dure. Si el sitio muestra disponibilidad.',
+  },
+  {
+    name: 'Resultado de tu cambio',
+    means: 'Aplicaste un precio nuevo.',
+    does:  'Te muestra si tus ventas subieron o bajaron después.',
+  },
+];
+---
+
+<section id="senales" class="signals" aria-labelledby="senales-title">
+  <span class="mono signals-eyebrow">SEÑALES</span>
+  <h2 id="senales-title" class="signals-title">Talon no solo mira bajadas. Mira todo lo que mueve tu precio.</h2>
+  <div class="signals-table" role="table" aria-label="Señales de mercado">
+    {signals.map((s) => (
+      <div class="signals-row" role="row">
+        <span class="mono signals-name" role="rowheader">{s.name}</span>
+        <span class="signals-means" role="cell">{s.means}</span>
+        <span class="signals-does"  role="cell">{s.does}</span>
+      </div>
+    ))}
+    <div class="signals-row-end" aria-hidden="true"></div>
+  </div>
+</section>
+
+<style>
+  .signals {
+    background: var(--cl-bg); color: var(--cl-text);
+    padding: 72px var(--cl-gutter) 40px;
+    display: flex; flex-direction: column; gap: 22px;
+    font-family: var(--cl-body);
+  }
+  .signals-eyebrow {
+    font-size: 11.5px; color: var(--cl-cobalt); letter-spacing: .06em;
+  }
+  .signals-title {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 30px; line-height: 1.15; margin: 0; max-width: 640px;
+  }
+  .signals-table { margin-top: 8px; }
+  .signals-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr;
+    gap: 24px; align-items: baseline;
+    padding: 18px 0; border-top: 1px solid var(--cl-border);
+  }
+  .signals-row-end { border-top: 1px solid var(--cl-border); }
+  .signals-name  { font-size: 12px; color: var(--cl-cobalt); font-weight: 500; }
+  .signals-means { font-size: 14.5px; color: var(--cl-text); }
+  .signals-does  { font-size: 14.5px; color: var(--cl-muted); }
+
+  @media (max-width: 800px) {
+    .signals { padding: 56px var(--cl-gutter-sm) 32px; }
+    .signals-title { font-size: 24px; }
+    .signals-row { grid-template-columns: 1fr; gap: 8px; padding: 16px 0; }
+    .signals-row-end { display: none; }
+    .signals-means { color: var(--cl-text); }
+  }
+</style>

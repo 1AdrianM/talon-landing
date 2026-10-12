@@ -1,122 +1,110 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const urlParam = Astro.url.searchParams.get('url') || '';
-const decodedUrl = urlParam ? decodeURIComponent(urlParam) : '';
+// searchParams.get already decodes — no manual decodeURIComponent needed
+const urlParam = Astro.url.searchParams.get('url') ?? '';
 ---
 
-<Layout title="Analyzing... — Talon">
-  <div class="analyze-loading">
-    <div class="loader-wrap">
-      <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
-      <div class="loader-steps">
-        <span class="loader-step active" id="ls1">Fetching prices…</span>
-        <span class="loader-step" id="ls2">Detecting changes…</span>
-        <span class="loader-step" id="ls3">Generating recommendation…</span>
+<Layout
+  title="Sample Analysis — Talon"
+  description="Example of a Talon price analysis. This is sample data — not a real analysis of the URL provided."
+  noindex={true}
+>
+  <div class="sample-wrap">
+    <div class="sample-badge">Sample · not a real analysis</div>
+    <h1 class="sample-h1">Example price analysis</h1>
+    <p class="sample-sub">
+      This page shows what a Talon analysis looks like. The data below is fictional.
+      To analyze your own product, go back to the home page.
+    </p>
+
+    {urlParam && (
+      <p class="sample-url">
+        URL received: <code>{urlParam}</code>
+      </p>
+    )}
+
+    <div class="sample-card">
+      <div class="sample-card-badge">Example · sample data</div>
+      <div class="sample-header">
+        <span class="sample-verdict-tag">⚠ Alert</span>
+        <span class="sample-conf">88% confidence</span>
+      </div>
+      <p class="sample-headline">SneakerHub dropped Court Classic by 12%</p>
+      <p class="sample-prices">
+        <span class="price-old">$125</span> → <span class="price-new">$109</span>
+        <span class="price-note">, still $4 above cheapest of 3</span>
+      </p>
+      <div class="sample-action">
+        <span class="action-label">Suggested action</span>
+        <p>Drop to $109 (if your margin allows)</p>
       </div>
     </div>
-    <p class="analyze-url">{decodedUrl || 'No product URL provided'}</p>
-  </div>
 
-  <script define:vars={{ urlParam }}>
-    // This page acts as a bridge to the React app
-    // In production, this would load the React analyzer
-    // For now, show the loading state as a demo
-    
-    const steps = ['ls1', 'ls2', 'ls3'];
-    let currentStep = 0;
-    
-    if (urlParam) {
-      // Simulate analysis steps
-      const interval = setInterval(() => {
-        if (currentStep < steps.length) {
-          document.getElementById(steps[currentStep]).classList.remove('active');
-          document.getElementById(steps[currentStep]).classList.add('done');
-        }
-        currentStep++;
-        if (currentStep < steps.length) {
-          document.getElementById(steps[currentStep]).classList.add('active');
-          document.getElementById('loader-fill').style.width = (currentStep * 33) + '%';
-        } else {
-          clearInterval(interval);
-          // In production: window.location.href = '/app?url=' + urlParam
-          // For demo: show completion
-          setTimeout(() => {
-            document.querySelector('.loader-steps').innerHTML = 
-              '<span class="loader-step done">Analysis complete!</span>';
-            document.getElementById('loader-fill').style.width = '100%';
-            document.querySelector('.analyze-url').textContent = 
-              'Product: ' + decodeURIComponent(urlParam);
-            document.querySelector('.analyze-url').style.color = 'var(--grn)';
-          }, 800);
-        }
-      }, 1200);
-    }
-  </script>
+    <a href="/" class="back-btn">← Analyze your own product</a>
+  </div>
 </Layout>
 
 <style>
-.analyze-loading {
-  min-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  text-align: center;
-}
-.loader-wrap {
-  max-width: 400px;
-  width: 100%;
-}
-.loader-bar {
-  height: 4px;
-  background: var(--bg3);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 24px;
-}
-.loader-fill {
-  height: 100%;
-  background: var(--grn);
-  width: 0%;
-  transition: width 0.3s ease;
-}
-.loader-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.loader-step {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--t3);
-}
-.loader-step.active {
-  color: var(--t1);
-}
-.loader-step.done {
-  color: var(--grn);
-}
-.analyze-url {
-  margin-top: 32px;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--t3);
-  word-break: break-all;
-  max-width: 600px;
-}
-</style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<style is:global>
-:root{
-  --bg0:#09090B;--bg1:#0F0F12;--bg2:#16161A;--bg3:#1C1C21;
-  --border:rgba(255,255,255,0.05);
-  --t1:#EDECEA;--t2:#72727A;--t3:#3F3F46;
-  --grn:#1A9E68;
-  --sans:'Instrument Sans',system-ui,sans-serif;
-  --mono:'DM Mono','Courier New',monospace;
+.sample-wrap {
+  min-height: 80vh; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 60px 24px; text-align: center; gap: 20px;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg0);color:var(--t1);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.sample-badge {
+  font-family: var(--mono); font-size: 11px; color: var(--hold);
+  background: var(--hold-bg); border: 1px solid var(--hold-bd);
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 0.3px;
+}
+.sample-h1 {
+  font-family: var(--display); font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 800; letter-spacing: -0.6px; color: var(--ink);
+}
+.sample-sub { font-size: 15px; color: var(--ink-2); max-width: 480px; line-height: 1.65; }
+.sample-url {
+  font-family: var(--mono); font-size: 12px; color: var(--hold);
+  word-break: break-all; max-width: 500px;
+}
+.sample-url code { color: var(--ink-2); }
+
+.sample-card {
+  background: var(--surface); border: 1.5px solid var(--line);
+  border-top: 3px solid var(--alert); border-radius: var(--radius);
+  padding: 0; overflow: hidden; max-width: 400px; width: 100%; text-align: left;
+}
+.sample-card-badge {
+  padding: 8px 16px; background: var(--hold-bg); border-bottom: 1px solid var(--line);
+  font-family: var(--mono); font-size: 10px; color: var(--hold);
+}
+.sample-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px 0;
+}
+.sample-verdict-tag {
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  background: var(--alert-bg); color: var(--alert);
+  padding: 2px 8px; border-radius: 4px;
+}
+.sample-conf { font-family: var(--mono); font-size: 10px; color: var(--hold); }
+.sample-headline { padding: 8px 16px 0; font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.sample-prices { padding: 5px 16px 0; font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
+.price-old { text-decoration: line-through; color: var(--hold); }
+.price-new { color: var(--alert); font-weight: 600; }
+.price-note { color: var(--hold); }
+.sample-action {
+  margin: 12px 16px 16px; background: var(--bg); border: 1px solid var(--line);
+  border-radius: 8px; padding: 10px 14px;
+}
+.action-label {
+  display: block; font-family: var(--mono); font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink-2); margin-bottom: 4px;
+}
+.sample-action p { font-size: 13px; font-weight: 600; color: var(--ink); }
+
+.back-btn {
+  font-family: var(--mono); font-size: 12px; color: var(--ink-2);
+  text-decoration: underline; text-underline-offset: 3px; transition: color .15s;
+}
+.back-btn:hover { color: var(--ink); }
 </style>

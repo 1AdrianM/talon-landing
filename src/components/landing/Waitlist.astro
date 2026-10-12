@@ -1,0 +1,102 @@
+---
+---
+
+<section class="waitlist" aria-labelledby="waitlist-title">
+  <h2 id="waitlist-title" class="waitlist-title">Sé de los primeros en probarlo</h2>
+  <p class="waitlist-sub">Talon todavía está en validación. Si vendes en Shopify o Amazon, te avisamos apenas abramos cupo.</p>
+  <form class="waitlist-form" id="waitlist-form" novalidate>
+    <input
+      id="waitlist-email"
+      type="email"
+      name="email"
+      placeholder="tu@email.com"
+      aria-label="Tu email"
+      autocomplete="email"
+      class="waitlist-input"
+      required
+    />
+    <button type="submit" class="waitlist-btn">Unirme</button>
+  </form>
+  <p class="waitlist-status" id="waitlist-status" aria-live="polite"></p>
+</section>
+
+<style>
+  .waitlist {
+    background: var(--cl-dk-bg); color: var(--cl-dk-text);
+    padding: 80px var(--cl-gutter);
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: 18px;
+    border-top: 1px solid var(--cl-dk-border);
+    font-family: var(--cl-body);
+  }
+  .waitlist-title {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 24px; margin: 0; color: var(--cl-dk-text);
+  }
+  .waitlist-sub {
+    margin: 0; font-size: 14px; color: var(--cl-dk-muted); max-width: 44ch; line-height: 1.6;
+  }
+  .waitlist-form {
+    display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; justify-content: center;
+  }
+  .waitlist-input {
+    width: 260px; padding: 12px 14px; border-radius: 7px;
+    border: 1px solid var(--cl-dk-border); background: var(--cl-dk-card);
+    color: var(--cl-dk-text); font-size: 14px; font-family: var(--cl-body);
+    outline: none; transition: border-color .15s;
+  }
+  .waitlist-input::placeholder { color: var(--cl-dk-muted2); }
+  .waitlist-input:focus { border-color: var(--cl-dk-accent); }
+  .waitlist-btn {
+    padding: 12px 20px; border-radius: 7px; border: none;
+    background: var(--cl-dk-accent); color: #fff;
+    font-size: 13.5px; font-weight: 600; font-family: var(--cl-body);
+    cursor: pointer; transition: opacity .15s;
+  }
+  .waitlist-btn:hover { opacity: .88; }
+  .waitlist-status {
+    font-size: 13px; min-height: 1.4em; color: var(--cl-dk-muted); margin: 0;
+  }
+  .waitlist-status.ok  { color: var(--cl-grn-dk); }
+  .waitlist-status.err { color: var(--cl-red-dk); }
+
+  @media (max-width: 480px) {
+    .waitlist { padding: 56px var(--cl-gutter-sm); }
+    .waitlist-input { width: 100%; }
+    .waitlist-form { flex-direction: column; align-items: stretch; width: 100%; max-width: 320px; }
+  }
+</style>
+
+<script>
+  const form   = document.getElementById('waitlist-form')   as HTMLFormElement | null;
+  const input  = document.getElementById('waitlist-email')  as HTMLInputElement | null;
+  const status = document.getElementById('waitlist-status') as HTMLParagraphElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = input?.value.trim() ?? '';
+    if (!status) return;
+    status.textContent = 'Enviando…';
+    status.className = 'waitlist-status';
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'landing' }),
+      });
+      if (res.ok) {
+        status.textContent = '¡Listo! Te avisamos cuando abramos.';
+        status.classList.add('ok');
+        if (input) input.value = '';
+      } else {
+        const data = await res.json().catch(() => ({}));
+        status.textContent = (data as { error?: string }).error ?? 'Algo salió mal. Inténtalo de nuevo.';
+        status.classList.add('err');
+      }
+    } catch {
+      status.textContent = 'Error de red. Inténtalo de nuevo.';
+      status.classList.add('err');
+    }
+  });
+</script>

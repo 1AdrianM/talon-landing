@@ -1,0 +1,104 @@
+---
+const rules = [
+  {
+    title: 'Aprobar cada cambio',
+    desc: 'Talon recomienda, tú aplicas con un clic.',
+    right: 'toggle-on',
+  },
+  {
+    title: 'Aplicar solo dentro de tus reglas',
+    desc: 'Ej.: igualar quedando $1 por debajo, sin bajar de 20% de margen.',
+    right: 'toggle-off',
+  },
+  {
+    title: 'Piso de precio por producto',
+    desc: 'Court Classic: nunca por debajo de',
+    right: '$95',
+  },
+  {
+    title: 'Frecuencia de revisión',
+    desc: 'Una vez al día por defecto. Cámbiala por producto o para toda la tienda.',
+    right: '1×/día',
+  },
+];
+---
+
+<section id="control" class="control" aria-labelledby="control-title">
+  <div class="control-left">
+    <span class="mono control-eyebrow">control</span>
+    <h2 id="control-title" class="control-title">Talon recomienda. Tú decides cuánto lo dejas hacer.</h2>
+    <p class="control-sub">Cambiar un precio es tu decisión. Por defecto, Talon solo te dice qué mover y por qué. Si un día quieres que actúe solo, defines tú los límites.</p>
+  </div>
+  <div class="control-rules">
+    {rules.map((r) => (
+      <div class="control-rule">
+        <div class="control-rule-text">
+          <b class="control-rule-title">{r.title}</b>
+          <span class="control-rule-desc">{r.desc}</span>
+        </div>
+        {r.right === 'toggle-on'  && <span class="tog tog-on" aria-label="Activado" role="img"></span>}
+        {r.right === 'toggle-off' && <span class="tog"       aria-label="Desactivado" role="img"></span>}
+        {r.right !== 'toggle-on' && r.right !== 'toggle-off' && (
+          <span class="mono control-rule-val">{r.right}</span>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .control {
+    background: var(--cl-dk-bg); color: var(--cl-dk-text);
+    padding: 72px var(--cl-gutter);
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px;
+    border-top: 1px solid var(--cl-dk-border);
+    font-family: var(--cl-body);
+  }
+  .control-left { display: flex; flex-direction: column; gap: 16px; }
+  .control-eyebrow {
+    font-family: var(--cl-mono); font-size: 12px; color: var(--cl-dk-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .control-title {
+    font-family: var(--cl-display); font-weight: 700;
+    font-size: 28px; line-height: 1.2; margin: 0; color: var(--cl-dk-text);
+  }
+  .control-sub {
+    margin: 0; font-size: 14.5px; color: var(--cl-dk-muted); line-height: 1.65; max-width: 44ch;
+  }
+
+  .control-rules { display: flex; flex-direction: column; gap: 10px; }
+  .control-rule {
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    background: var(--cl-dk-card); border: 1px solid var(--cl-dk-border);
+    border-radius: 6px; padding: 16px 18px;
+  }
+  .control-rule-text { display: flex; flex-direction: column; gap: 4px; }
+  .control-rule-title {
+    font-family: var(--cl-display); font-size: 14.5px; font-weight: 600; color: var(--cl-dk-text);
+  }
+  .control-rule-desc  { font-size: 12.5px; color: var(--cl-dk-muted2); }
+  .control-rule-val   {
+    font-family: var(--cl-mono); font-size: 15px; color: var(--cl-dk-text);
+    white-space: nowrap; font-variant-numeric: tabular-nums; flex-shrink: 0;
+  }
+
+  /* Toggle */
+  .tog {
+    width: 34px; height: 18px; border-radius: 9px;
+    background: var(--cl-dk-border); position: relative; flex-shrink: 0;
+  }
+  .tog::after {
+    content: ''; position: absolute; top: 2px; left: 2px;
+    width: 14px; height: 14px; border-radius: 50%; background: var(--cl-dk-muted2);
+  }
+  .tog-on { background: var(--cl-dk-accent); }
+  .tog-on::after { left: 18px; background: #fff; }
+
+  @media (max-width: 880px) {
+    .control {
+      grid-template-columns: 1fr; gap: 32px;
+      padding: 56px var(--cl-gutter-sm);
+    }
+  }
+</style>
